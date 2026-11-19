@@ -17,12 +17,13 @@ POST_WORDS = ("채용공고", "직원채용", "직원 채용", "인재채용", "
 RESULT_WORDS = ("최종합격", "서류합격", "면접공지", "합격자", "전형결과", "결과발표", "서류전형")
 TARGET_WORDS = ("통합돌봄서비스", "최중증 발달장애인 통합돌봄", "최중증 통합돌봄", "발달장애인 통합돌봄")
 DATE_TOKEN = r"20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2}"
+SESSION = requests.Session()
 
 def clean(text):
     return re.sub(r"\s+", " ", text or "").strip()
 
 def fetch(url):
-    response = requests.get(url, headers=HEADERS, timeout=25)
+    response = SESSION.get(url, headers=HEADERS, timeout=25)
     response.raise_for_status()
     response.encoding = response.apparent_encoding or response.encoding
     return response.text
@@ -73,81 +74,112 @@ def extract_rows(soup, page_url, org):
     return rows
 
 def enrich(row):
-    try:
-        soup = BeautifulSoup(fetch(row["url"]), "html.parser")
-        text = clean(soup.get_text(" ", strip=True))
-        combined = row["title"] + " " + text
-        if not any(word in combined for word in TARGET_WORDS):
-            return None
-
-        # 접수기간의 시작일과 마감일이 원문에 명시된 경우에만 유효 공고로 인정
-        period = re.search(
-            r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")\s*[~〜～-]\s*(" + DATE_TOKEN + r")",
-            text
-        )
-        if not period:
-            return None
-        row["openDate"] = parse_date(period.group(1))
-        row["closeDate"] = parse_date(period.group(2))
-        if not row["openDate"] or not row["closeDate"]:
-            return None
-        if date.fromisoformat(row["closeDate"]) < date.today():
-            return None
-
-        row["position"] = "공고 원문 확인"
-        for word in ("사회복지사", "제공인력", "활동지원사", "생활재활교사", "작업치료사", "물리치료사", "언어재활사", "간호사", "조리사"):
-            if word in row["title"] or word in text[:1200]:
-                row["position"] = word
-                break
-    except Exception as exc:
-        row["detailCheck"] = "상세페이지 자동 확인 실패"
+    soup = BeautifulSoup(fetch(row["url"]), "html.parser")
+    text = clean(soup.get_text(" ", strip=True))
+    combined = row["title"] + " " + text
+    if not any(word in combined for word in TARGET_WORDS):
         return None
 
+    period = re.search(
+        r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")\s*[~〜～-]\s*(" + DATE_TOKEN + r")",
+        text
+    )
+    if not period:
+        return None
+    row["openDate"] = parse_date(period.group(1))
+    row["closeDate"] = parse_date(period.group(2))
+    if not row["openDate"] or not row["closeDate"]:
+        return None
+    if date.fromisoformat(row["closeDate"]) < date.today():
+        return None
+
+    row["position"] = "공고 원문 확인"
+    for word in ("사회복지사", "제공인력", "활동지원사", "생활재활교사", "작업치료사", "물리치료사", "언어재활사", "간호사", "조리사"):
+        if word in row["title"] or word in text[:1200]:
+            row["position"] = word
+            break
     row["id"] = hashlib.sha256((row["organization"] + "|" + row["url"]).encode("utf-8")).hexdigest()[:18]
     return row
 
 def main():
+    previous = {}
+    if OUTPUT.exists():
+        try:
+            previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            previous = {}
+
+    checked = previous.get("checkedCandidates", {})
+    old_jobs = {job.get("url"): job for job in previous.get("jobs", []) if job.get("url")}
     all_rows, source_status = [], []
+
+    # 매일 모든 기관의 게시판 목록만 확인하고, 신규·변경된 공고만 상세페이지를 내려받습니다.
     for source in CONFIG["sources"]:
         try:
             html = fetch(source["url"])
             soup = BeautifulSoup(html, "html.parser")
             listing_pages = [source["url"]]
             if source.get("mode") == "discover":
-                discovered = find_board_links(soup, source["url"])
-                listing_pages = discovered[:5]
+                listing_pages = find_board_links(soup, source["url"])[:5]
             count = 0
             for listing in listing_pages:
                 page_html = html if listing == source["url"] else fetch(listing)
                 rows = extract_rows(BeautifulSoup(page_html, "html.parser"), listing, source["organization"])
                 all_rows.extend(rows)
                 count += len(rows)
-                time.sleep(0.2)
+                time.sleep(0.1)
             source_status.append({
                 "organization": source["organization"], "url": source["url"],
                 "status": "ok" if listing_pages else "board_not_found", "itemsFound": count
             })
         except Exception as exc:
             source_status.append({"organization": source["organization"], "url": source["url"], "status": "error", "message": str(exc)[:180]})
-        time.sleep(0.2)
+        time.sleep(0.1)
 
-    unique = {}
-    for row in all_rows:
-        job = enrich(row)
-        if job:
-            unique[job["id"]] = job
+    unique_rows = {row["url"]: row for row in all_rows}
+    active_jobs, checked_count, skipped_count = {}, 0, 0
+    today = date.today()
 
-    jobs = sorted(unique.values(), key=lambda x: (x.get("postedAt", ""), x["organization"]), reverse=True)
+    for url, row in unique_rows.items():
+        fingerprint = hashlib.sha256((row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        cached_job = old_jobs.get(url)
+        if checked.get(url) == fingerprint:
+            skipped_count += 1
+            if cached_job:
+                try:
+                    if date.fromisoformat(cached_job["closeDate"]) >= today:
+                        active_jobs[cached_job["id"]] = cached_job
+                except (KeyError, ValueError):
+                    pass
+            continue
+
+        try:
+            job = enrich(row)
+            checked[url] = fingerprint
+            checked_count += 1
+            if job:
+                active_jobs[job["id"]] = job
+        except requests.RequestException as exc:
+            print("상세페이지 조회 실패:", url, str(exc)[:120])
+        time.sleep(0.1)
+
+    # 캐시가 과도하게 커지지 않도록 최근 2,000개 항목만 유지합니다.
+    if len(checked) > 2000:
+        checked = dict(list(checked.items())[-2000:])
+
+    jobs = sorted(active_jobs.values(), key=lambda x: (x.get("postedAt", ""), x["organization"]), reverse=True)
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sourcePolicy": CONFIG["policy"],
         "filterPolicy": "공식 홈페이지 원문에서 통합돌봄 관련 문구와 접수기간 시작일·마감일이 모두 확인되고, 마감일이 지나지 않은 채용공고만 표시",
         "sourceCount": len(CONFIG["sources"]),
         "sources": source_status,
+        "checkedCandidates": checked,
+        "stats": {"candidateCount": len(unique_rows), "detailPagesFetched": checked_count, "cachedCandidatesSkipped": skipped_count},
         "jobs": jobs
     }
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print("공식 홈페이지", len(CONFIG["sources"]), "곳 확인 / 접수 중 통합돌봄 채용공고", len(jobs), "건")
+    print("기관 홈페이지", len(CONFIG["sources"]), "곳 확인 / 신규·변경 상세페이지", checked_count, "건 / 캐시 활용", skipped_count, "건 / 유효 공고", len(jobs), "건")
     print("기관별 확인 결과:", json.dumps(source_status, ensure_ascii=False))
 
 if __name__ == "__main__":
