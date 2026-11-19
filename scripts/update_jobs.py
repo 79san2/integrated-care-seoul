@@ -118,6 +118,20 @@ def main():
         try:
             html = fetch(source["url"])
             soup = BeautifulSoup(html, "html.parser")
+            if source.get("mode") == "detail":
+                all_rows.append({
+                    "organization": source["organization"],
+                    "title": source.get("title", "채용공고"),
+                    "url": source["url"],
+                    "postedAt": "",
+                    "source": source["url"]
+                })
+                source_status.append({
+                    "organization": source["organization"], "url": source["url"],
+                    "status": "ok", "itemsFound": 1
+                })
+                continue
+
             listing_pages = [source["url"]]
             if source.get("mode") == "discover":
                 listing_pages = find_board_links(soup, source["url"])[:5]
