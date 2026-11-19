@@ -4,10 +4,9 @@
   "sources": [
     {
       "organization": "늘푸른나무복지관",
-      "url": "http://www.egreen.or.kr/hire/517",
-      "mode": "detail",
-      "title": "직원 채용 재공고(통합돌봄서비스)",
-      "note": "기관 공식 채용공고 상세주소를 직접 확인"
+      "url": "https://www.egreen.or.kr/hire",
+      "mode": "listing",
+      "note": "공식 채용공고 게시판 목록"
     },
     {
       "organization": "마포장애인종합복지관",
