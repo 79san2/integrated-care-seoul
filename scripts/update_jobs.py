@@ -1,151 +1,147 @@
 import hashlib
 import json
-import os
-import sys
+import re
 import time
-import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 import requests
+from bs4 import BeautifulSoup
 
-SERVICE_KEY = os.environ.get("DATA_GO_KR_SERVICE_KEY", "").strip()
-ENDPOINT = "https://apis.data.go.kr/B554287/sclWlfrFcltInfoInqirService2/getFcltByJoInfo2"
-OUTPUT = Path("jobs.json")
-SOURCE_PAGE = "https://www.data.go.kr/data/15001848/openapi.do"
-SEOUL_CODE = "11000"
+ROOT = Path(__file__).resolve().parents[1]
+CONFIG = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))
+OUTPUT = ROOT / "jobs.json"
+HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; IntegratedCareRecruitmentMonitor/1.0)"}
+POST_WORDS = ("채용공고", "직원채용", "직원 채용", "인재채용", "인재 채용", "채용 안내", "채용안내", "구인")
+RESULT_WORDS = ("최종합격", "서류합격", "면접공지", "합격자", "전형결과", "결과발표")
+DATE_RE = re.compile(r"(20\\d{2})[.년/-]\\s*(\\d{1,2})[.월/-]\\s*(\\d{1,2})")
 
-# 장애인복지시설의 모든 직종 + 그 밖의 사회복지시설 중 돌봄·복지 현장 핵심 직종
-RELEVANT_WORDS = (
-    "장애인", "발달장애", "최중증", "통합돌봄", "사회복지사", "생활재활교사",
-    "생활지도원", "제공인력", "활동지원", "돌봄", "특수교사", "언어재활",
-    "작업치료", "물리치료", "간호사", "요양보호사", "주간활동", "방과후"
-)
+def clean(text):
+    return re.sub(r"\\s+", " ", text or "").strip()
 
-def local_name(tag):
-    return tag.rsplit("}", 1)[-1]
-
-def read_items(root):
-    return [node for node in root.iter() if local_name(node.tag) == "item"]
-
-def value(node, name):
-    for child in node.iter():
-        if local_name(child.tag) == name:
-            return (child.text or "").strip()
-    return ""
-
-def request_page(page):
-    params = {
-        "serviceKey": SERVICE_KEY,
-        "numOfRows": 100,
-        "pageNo": page,
-    }
-    response = requests.get(ENDPOINT, params=params, timeout=40)
+def fetch(url):
+    response = requests.get(url, headers=HEADERS, timeout=25)
     response.raise_for_status()
-    root = ET.fromstring(response.content)
-    code = value(root, "resultCode")
-    if code and code not in ("00", "0000"):
-        msg = value(root, "resultMsg") or "공공데이터 API 오류"
-        raise RuntimeError(f"API 오류 {code}: {msg}")
-    total = value(root, "totalCount")
-    return root, int(total or 0)
+    response.encoding = response.apparent_encoding or response.encoding
+    return response.text
 
-def as_date(raw):
-    raw = (raw or "").strip()
-    if len(raw) >= 8 and raw[:8].isdigit():
-        return f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}"
-    return ""
+def is_same_site(base, link):
+    return urlparse(base).netloc.lower().lstrip("www.") == urlparse(link).netloc.lower().lstrip("www.")
 
-def safe_url(raw):
-    raw = (raw or "").strip()
-    if raw and not raw.startswith(("http://", "https://")):
-        raw = "https://" + raw
-    parsed = urlparse(raw)
-    return raw if parsed.scheme in ("http", "https") and parsed.netloc else ""
+def parse_date(text):
+    m = DATE_RE.search(text or "")
+    if not m:
+        return ""
+    try:
+        return date(int(m.group(1)), int(m.group(2)), int(m.group(3))).isoformat()
+    except ValueError:
+        return ""
+
+def looks_like_post(title):
+    return any(word in title for word in POST_WORDS) and not any(word in title for word in RESULT_WORDS)
+
+def find_board_links(soup, base):
+    found = []
+    for a in soup.find_all("a", href=True):
+        label = clean(a.get_text(" ", strip=True) or a.get("title", ""))
+        href = urljoin(base, a["href"])
+        if label and any(word in label for word in ("채용", "인재채용", "직원채용")) and is_same_site(base, href):
+            found.append(href)
+    return list(dict.fromkeys(found))
+
+def extract_rows(soup, page_url, org):
+    rows = []
+    seen = set()
+    for a in soup.find_all("a", href=True):
+        title = clean(a.get_text(" ", strip=True) or a.get("title", ""))
+        href = urljoin(page_url, a["href"])
+        if not title or len(title) < 5 or not looks_like_post(title):
+            continue
+        if not is_same_site(page_url, href) or href.rstrip("/") == page_url.rstrip("/"):
+            continue
+        if href in seen:
+            continue
+        seen.add(href)
+        parent = a
+        context = ""
+        for _ in range(4):
+            if parent.parent:
+                parent = parent.parent
+                context += " " + clean(parent.get_text(" ", strip=True))
+        posted = parse_date(context)
+        rows.append({"organization": org, "title": title, "url": href, "postedAt": posted, "source": page_url})
+    return rows
+
+def enrich(row):
+    try:
+        html = fetch(row["url"])
+        soup = BeautifulSoup(html, "html.parser")
+        text = clean(soup.get_text(" ", strip=True))
+        # 접수기간은 상세 본문에 명시된 날짜 범위가 확인될 때만 기재
+        dates = [parse_date(m.group(0)) for m in DATE_RE.finditer(text)]
+        dates = [d for d in dates if d]
+        if len(dates) >= 2:
+            row["openDate"], row["closeDate"] = dates[0], dates[1]
+        elif len(dates) == 1:
+            row["postedAt"] = row["postedAt"] or dates[0]
+        row["position"] = "공고 원문 확인"
+        for word in ("사회복지사", "제공인력", "활동지원사", "생활재활교사", "작업치료사", "물리치료사", "언어재활사", "간호사", "조리사"):
+            if word in row["title"]:
+                row["position"] = word
+                break
+    except Exception as exc:
+        row["detailCheck"] = "상세페이지 자동 확인 실패"
+    row["id"] = hashlib.sha256((row["organization"] + "|" + row["url"]).encode("utf-8")).hexdigest()[:18]
+    return row
 
 def main():
-    if not SERVICE_KEY:
-        raise RuntimeError("DATA_GO_KR_SERVICE_KEY GitHub Secret이 설정되지 않았습니다.")
-    first, total = request_page(1)
-    items = read_items(first)
-    page_count = max(1, (total + 99) // 100)
-    for page in range(2, page_count + 1):
-        root, _ = request_page(page)
-        items.extend(read_items(root))
-        time.sleep(0.15)
+    all_rows = []
+    source_status = []
+    for source in CONFIG["sources"]:
+        try:
+            html = fetch(source["url"])
+            soup = BeautifulSoup(html, "html.parser")
+            listing_pages = [source["url"]]
+            if source.get("mode") == "discover":
+                discovered = find_board_links(soup, source["url"])
+                listing_pages = discovered[:5] or [source["url"]]
+            count = 0
+            for listing in listing_pages:
+                page_html = html if listing == source["url"] else fetch(listing)
+                rows = extract_rows(BeautifulSoup(page_html, "html.parser"), listing, source["organization"])
+                all_rows.extend(rows)
+                count += len(rows)
+                time.sleep(0.2)
+            source_status.append({"organization":source["organization"],"url":source["url"],"status":"ok","itemsFound":count})
+        except Exception as exc:
+            source_status.append({"organization":source["organization"],"url":source["url"],"status":"error","message":str(exc)[:180]})
+        time.sleep(0.2)
 
-    today = date.today()
-    cutoff = today - timedelta(days=90)
-    jobs = []
-    seen = set()
-    for item in items:
-        get = lambda key: value(item, key)
-        title = get("title")
-        org = get("fcltNm")
-        position = get("relateJssfc") or get("rcrtFld")
-        duty = get("dtyCntn")
-        kind = get("fcltKindNm") + " " + get("fcltDtlKindNm")
-        region = " ".join((get("wrkPrargRegn"), get("fcltAddr"), get("wrkPrargRegnCd")))
-        searchable = " ".join((org, title, position, duty, kind))
-        is_seoul = "서울" in region or get("wrkPrargRegnCd") == SEOUL_CODE
-        is_relevant = "장애인" in kind or any(word in searchable for word in RELEVANT_WORDS)
-        if not (is_seoul and is_relevant and title and org):
-            continue
-
-        posted = as_date(get("regDt")) or as_date(get("chgDt"))
-        start = as_date(get("accpBgnDe"))
-        close = as_date(get("accpClseDe"))
+    cutoff = date.today() - timedelta(days=45)
+    unique = {}
+    for row in all_rows:
+        posted = row.get("postedAt")
         if posted:
             try:
-                if date.fromisoformat(posted) < cutoff and (not close or date.fromisoformat(close) < today):
+                if date.fromisoformat(posted) < cutoff:
                     continue
             except ValueError:
                 pass
-        if close:
-            try:
-                if date.fromisoformat(close) < today:
-                    continue
-            except ValueError:
-                pass
+        unique[row["id"]] = row
 
-        join_no = get("joinno")
-        stable = join_no or "|".join((org, title, posted, start, close))
-        job_id = hashlib.sha256(stable.encode("utf-8")).hexdigest()[:18]
-        if job_id in seen:
-            continue
-        seen.add(job_id)
-
-        original = safe_url(get("urllnk"))
-        homepage = safe_url(get("homepageAddr"))
-        jobs.append({
-            "id": job_id,
-            "organization": org,
-            "title": title,
-            "position": position or get("rcrtFld") or "공고 원문 확인",
-            "postedAt": posted,
-            "openDate": start,
-            "closeDate": close,
-            "url": original or SOURCE_PAGE,
-            "homepageUrl": homepage,
-            "source": "한국사회보장정보원 사회복지시설정보서비스",
-            "sourcePage": SOURCE_PAGE,
-            "location": get("wrkPrargRegn") or get("fcltAddr"),
-            "employmentType": get("emplStle"),
-            "recruitCount": get("recruitNops"),
-            "requirements": get("applyQlfc"),
-        })
-
-    jobs.sort(key=lambda j: (j.get("postedAt", ""), j.get("closeDate", "")), reverse=True)
+    jobs = [enrich(row) for row in unique.values()]
+    jobs.sort(key=lambda x:(x.get("postedAt",""), x["organization"]), reverse=True)
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
-        "source": SOURCE_PAGE,
-        "sourceName": "한국사회보장정보원 사회복지시설정보서비스",
-        "totalFetched": len(items),
-        "jobs": jobs,
+        "sourcePolicy": CONFIG["policy"],
+        "sourceCount": len(CONFIG["sources"]),
+        "sources": source_status,
+        "jobs": jobs
     }
-    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"전체 {len(items)}건 확인, 서울·관련 분야 공고 {len(jobs)}건 저장")
+    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    print("공식 홈페이지",len(CONFIG["sources"]),"곳 확인 / 공고 후보",len(jobs),"건")
+    print("기관별 확인 결과:",json.dumps(source_status,ensure_ascii=False))
 
 if __name__ == "__main__":
     main()
