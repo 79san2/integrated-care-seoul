@@ -19,10 +19,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install dependencies
-        run: python -m pip install requests
-      - name: Collect official recruitment data
-        env:
-          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+        run: python -m pip install requests beautifulsoup4
+      - name: Collect official institution recruitment pages
         run: python scripts/update_jobs.py
       - name: Commit updated job data
         run: |
@@ -32,6 +30,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No recruitment data changes."
           else
-            git commit -m "Update Seoul welfare recruitment notices"
+            git commit -m "Update official institution recruitment notices"
             git push
           fi
