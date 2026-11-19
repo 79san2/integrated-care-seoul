@@ -16,10 +16,10 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; IntegratedCareRecruitmentMoni
 POST_WORDS = ("채용공고", "직원채용", "직원 채용", "인재채용", "인재 채용", "채용 안내", "채용안내", "구인")
 RESULT_WORDS = ("최종합격", "서류합격", "면접공지", "합격자", "전형결과", "결과발표", "서류전형")
 TARGET_WORDS = ("통합돌봄서비스", "최중증 발달장애인 통합돌봄", "최중증 통합돌봄", "발달장애인 통합돌봄")
-DATE_TOKEN = r"20\\d{2}[.년/-]\\s*\\d{1,2}[.월/-]\\s*\\d{1,2}"
+DATE_TOKEN = r"20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2}"
 
 def clean(text):
-    return re.sub(r"\\s+", " ", text or "").strip()
+    return re.sub(r"\s+", " ", text or "").strip()
 
 def fetch(url):
     response = requests.get(url, headers=HEADERS, timeout=25)
@@ -34,7 +34,7 @@ def parse_date(text):
     m = re.search(DATE_TOKEN, text or "")
     if not m:
         return ""
-    parts = re.findall(r"20\\d{2}|\\d{1,2}", m.group())
+    parts = re.findall(r"20\d{2}|\d{1,2}", m.group())
     try:
         return date(int(parts[0]), int(parts[1]), int(parts[2])).isoformat()
     except (ValueError, IndexError):
@@ -82,7 +82,7 @@ def enrich(row):
 
         # 접수기간의 시작일과 마감일이 원문에 명시된 경우에만 유효 공고로 인정
         period = re.search(
-            r"접수(?:기간|일정)\\s*[:：]?\\s*(" + DATE_TOKEN + r")\\s*[~〜～-]\\s*(" + DATE_TOKEN + r")",
+            r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")\s*[~〜～-]\s*(" + DATE_TOKEN + r")",
             text
         )
         if not period:
@@ -146,7 +146,7 @@ def main():
         "sources": source_status,
         "jobs": jobs
     }
-    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("공식 홈페이지", len(CONFIG["sources"]), "곳 확인 / 접수 중 통합돌봄 채용공고", len(jobs), "건")
     print("기관별 확인 결과:", json.dumps(source_status, ensure_ascii=False))
 
