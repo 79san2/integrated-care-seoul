@@ -15,6 +15,7 @@ OUTPUT = ROOT / "jobs.json"
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; IntegratedCareRecruitmentMonitor/1.0)"}
 POST_WORDS = ("채용공고", "직원채용", "직원 채용", "인재채용", "인재 채용", "채용 안내", "채용안내", "구인")
 RESULT_WORDS = ("최종합격", "서류합격", "면접공지", "합격자", "전형결과", "결과발표")
+TARGET_WORDS = ("통합돌봄서비스", "최중증 발달장애인 통합돌봄", "최중증 통합돌봄", "발달장애인 통합돌봄")
 DATE_RE = re.compile(r"(20\d{2})[.년/-]\s*(\d{1,2})[.월/-]\s*(\d{1,2})")
 
 def clean(text):
@@ -78,6 +79,9 @@ def enrich(row):
         html = fetch(row["url"])
         soup = BeautifulSoup(html, "html.parser")
         text = clean(soup.get_text(" ", strip=True))
+        # 공고 제목 또는 상세 본문에 통합돌봄서비스 관련 내용이 명시된 경우만 수집
+        if not any(word in (row["title"] + " " + text) for word in TARGET_WORDS):
+            return None
         # 접수기간 표기 바로 뒤에서 시작일·마감일이 모두 확인될 때만 입력
         period = re.search(
             r"접수(?:기간|일정)\s*[:：]?\s*(20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2})\s*[~〜～-]\s*(20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2})",
@@ -131,7 +135,19 @@ def main():
                 pass
         unique[row["id"]] = row
 
-    jobs = [enrich(row) for row in unique.values()]
+    jobs = []
+    for row in unique.values():
+        job = enrich(row)
+        if not job:
+            continue
+        close_date = job.get("closeDate")
+        if close_date:
+            try:
+                if date.fromisoformat(close_date) < date.today():
+                    continue
+            except ValueError:
+                pass
+        jobs.append(job)
     jobs.sort(key=lambda x:(x.get("postedAt",""), x["organization"]), reverse=True)
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
