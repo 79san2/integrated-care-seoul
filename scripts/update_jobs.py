@@ -15,10 +15,10 @@ OUTPUT = ROOT / "jobs.json"
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; IntegratedCareRecruitmentMonitor/1.0)"}
 POST_WORDS = ("채용공고", "직원채용", "직원 채용", "인재채용", "인재 채용", "채용 안내", "채용안내", "구인")
 RESULT_WORDS = ("최종합격", "서류합격", "면접공지", "합격자", "전형결과", "결과발표")
-DATE_RE = re.compile(r"(20\\d{2})[.년/-]\\s*(\\d{1,2})[.월/-]\\s*(\\d{1,2})")
+DATE_RE = re.compile(r"(20\d{2})[.년/-]\s*(\d{1,2})[.월/-]\s*(\d{1,2})")
 
 def clean(text):
-    return re.sub(r"\\s+", " ", text or "").strip()
+    return re.sub(r"\s+", " ", text or "").strip()
 
 def fetch(url):
     response = requests.get(url, headers=HEADERS, timeout=25)
@@ -27,7 +27,7 @@ def fetch(url):
     return response.text
 
 def is_same_site(base, link):
-    return urlparse(base).netloc.lower().lstrip("www.") == urlparse(link).netloc.lower().lstrip("www.")
+    return urlparse(base).netloc.lower().removeprefix("www.") == urlparse(link).netloc.lower().removeprefix("www.")
 
 def parse_date(text):
     m = DATE_RE.search(text or "")
@@ -78,13 +78,14 @@ def enrich(row):
         html = fetch(row["url"])
         soup = BeautifulSoup(html, "html.parser")
         text = clean(soup.get_text(" ", strip=True))
-        # 접수기간은 상세 본문에 명시된 날짜 범위가 확인될 때만 기재
-        dates = [parse_date(m.group(0)) for m in DATE_RE.finditer(text)]
-        dates = [d for d in dates if d]
-        if len(dates) >= 2:
-            row["openDate"], row["closeDate"] = dates[0], dates[1]
-        elif len(dates) == 1:
-            row["postedAt"] = row["postedAt"] or dates[0]
+        # 접수기간 표기 바로 뒤에서 시작일·마감일이 모두 확인될 때만 입력
+        period = re.search(
+            r"접수(?:기간|일정)\s*[:：]?\s*(20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2})\s*[~〜～-]\s*(20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2})",
+            text
+        )
+        if period:
+            row["openDate"] = parse_date(period.group(1))
+            row["closeDate"] = parse_date(period.group(2))
         row["position"] = "공고 원문 확인"
         for word in ("사회복지사", "제공인력", "활동지원사", "생활재활교사", "작업치료사", "물리치료사", "언어재활사", "간호사", "조리사"):
             if word in row["title"]:
