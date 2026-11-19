@@ -1,0 +1,44 @@
+{
+  "updatedAt": "2026-11-20",
+  "policy": "기관 공식 홈페이지의 채용 게시판 또는 홈페이지에서 연결되는 채용 메뉴만 수집합니다. 외부 구인사이트는 기본 수집 대상에서 제외합니다.",
+  "sources": [
+    {
+      "organization": "늘푸른나무복지관",
+      "url": "https://www.egreen.or.kr/",
+      "mode": "discover",
+      "note": "기관 공식 홈페이지에서 채용 메뉴 탐색"
+    },
+    {
+      "organization": "마포장애인종합복지관",
+      "url": "https://mapowelfare.or.kr/recruitment",
+      "mode": "listing"
+    },
+    {
+      "organization": "성동장애인종합복지관",
+      "url": "https://www.omni.or.kr/",
+      "mode": "discover",
+      "note": "기관 공식 홈페이지에서 채용공고 메뉴 탐색"
+    },
+    {
+      "organization": "성민복지관",
+      "url": "https://www.sungminwelfare.or.kr/",
+      "mode": "discover",
+      "note": "기관 공식 홈페이지에서 채용 메뉴 탐색"
+    },
+    {
+      "organization": "서대문장애인종합복지관",
+      "url": "https://welfare-center.or.kr/recruitment",
+      "mode": "listing"
+    },
+    {
+      "organization": "서울특별시립 남부장애인종합복지관",
+      "url": "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402",
+      "mode": "listing"
+    },
+    {
+      "organization": "양천해누리복지관",
+      "url": "https://ycsupport.or.kr/recruitment",
+      "mode": "listing"
+    }
+  ]
+}
