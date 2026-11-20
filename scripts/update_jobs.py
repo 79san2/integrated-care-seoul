@@ -47,6 +47,14 @@ SESSION = requests.Session()
 def clean(text):
     return re.sub(r"\s+", " ", text or "").strip()
 
+def canonicalize_url(url):
+    """Remove listing sort/pagination parameters that do not identify a notice."""
+    from urllib.parse import parse_qsl, urlencode
+    parts = urlparse(url)
+    ignored = {"page", "sst", "sod", "sop"}
+    query = [(key, value) for key, value in parse_qsl(parts.query, keep_blank_values=True) if key.lower() not in ignored]
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query, doseq=True), ""))
+
 def fetch(url):
     response = SESSION.get(url, headers=HEADERS, timeout=25)
     response.raise_for_status()
@@ -98,7 +106,7 @@ def extract_rows(soup, page_url, org, allow_external=False):
     rows, seen = [], set()
     for a in soup.find_all("a", href=True):
         title = clean(a.get_text(" ", strip=True) or a.get("title", ""))
-        href = urljoin(page_url, a["href"])
+        href = canonicalize_url(urljoin(page_url, a["href"]))
         if not title or len(title) < 5 or not looks_like_post(title):
             continue
         if (not allow_external and not is_same_site(page_url, href)) or href.rstrip("/") == page_url.rstrip("/"):
