@@ -202,7 +202,18 @@ def main():
     for url, row in unique_rows.items():
         fingerprint = hashlib.sha256((row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
-        if checked.get(url) == fingerprint:
+        cache_entry = checked.get(url)
+        cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
+        cache_date = cache_entry.get("checkedAt", "") if isinstance(cache_entry, dict) else ""
+        cache_has_job = cache_entry.get("hasJob", False) if isinstance(cache_entry, dict) else bool(cached_job)
+        recent_negative_cache = False
+        if isinstance(cache_entry, dict) and cache_date and not cache_has_job:
+            try:
+                recent_negative_cache = (today - date.fromisoformat(cache_date)).days < 3
+            except ValueError:
+                recent_negative_cache = False
+        cache_hit = cache_fingerprint == fingerprint and (cache_has_job or recent_negative_cache)
+        if cache_hit:
             skipped_count += 1
             if cached_job:
                 try:
@@ -214,7 +225,11 @@ def main():
 
         try:
             job = enrich(row)
-            checked[url] = fingerprint
+            checked[url] = {
+                "fingerprint": fingerprint,
+                "checkedAt": today.isoformat(),
+                "hasJob": bool(job)
+            }
             checked_count += 1
             if job:
                 active_jobs[job["id"]] = job
