@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T08:38:21+09:00",
+  "checkedAt": "2026-11-21T08:51:11+09:00",
   "timezone": "Asia/Seoul",
   "totalRecords": 32,
   "reachable": 32,
@@ -28,13 +28,6 @@
       "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
     },
     {
-      "id": "seoul-028",
-      "name": "정립회관",
-      "type": "주간 개별 1:1",
-      "sourceUrl": "https://www.yna.co.kr/view/AKR20241018107200004",
-      "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
-    },
-    {
       "id": "seoul-032",
       "name": "사회복지법인 한국재활재단",
       "type": "24시간형",
@@ -42,7 +35,7 @@
       "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
     }
   ],
-  "changeCount": 4,
+  "changeCount": 3,
   "checks": [
     {
       "id": "seoul-001",
@@ -426,7 +419,7 @@
         "종사자 현원"
       ],
       "status": "reachable",
-      "contentHash": "fcd8c95e8e559be008fd1e2e4ccb6647f82a7d76be14687cb2b7766668f77a04",
+      "contentHash": "b31b16109d8b92b24a9d3dd87e8d8359934b20b664ebbf9acd200e057c5ed209",
       "pageTitle": "마포장애인종합복지관 최중증 발달장애인 주간개별 일대일 지원사업 기간제 계약일용직 공고 > 공지사항 | 마포장애인종합복지관",
       "mentionsOrganization": true
     },
@@ -477,7 +470,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "66652a70211a855a2890ac9550b3941dc6db9a108f9c63ed9a8e3cc8dbc8fbdc",
+      "contentHash": "c3fe4e24a8fb58723ce4881910c12cc3741d6f342ff4f6a7a2508aab20e86372",
       "pageTitle": "서일대학교",
       "mentionsOrganization": true
     },
@@ -577,7 +570,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "eaded4721a1a6d0410eed13ca63f5c06b8f48bcf8e2c8a449ac8f3c73d2163fd",
+      "contentHash": "9134669cf9a121a84749f8be7287179c026bf8c1005928257b523eb61198ad11",
       "pageTitle": "사회복지법인 한국재활재단",
       "mentionsOrganization": true
     }
