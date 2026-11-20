@@ -9,4 +9,4 @@ self.FIREBASE_CONFIG = {
   appId: "1:748152056334:web:26a6f1516b13a337f7aa5f",
   measurementId: "G-DD6YX0E9XC"
 };
-self.FCM_VAPID_KEY = "여기에_VAPID_공개키";
+self.FCM_VAPID_KEY = "BHtchCpLK_Pzwg4Zz6TLkQ8DWt8JtkKwhwRhev3qLajIYItaYLIhwhpECya-OEbRHGPV8peldrD4wVoFroD0kXI";
