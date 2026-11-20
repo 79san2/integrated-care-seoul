@@ -19,7 +19,8 @@ TARGET_WORDS = ("통합돌봄서비스", "최중증 발달장애인 통합돌봄
 
 def is_target_notice(text):
     compact = re.sub(r"[\s·ㆍ_\-]", "", text or "")
-    return any(re.sub(r"[\s·ㆍ_\-]", "", word) in compact for word in TARGET_WORDS)
+    # '통합돌봄'과 '최중증' 또는 '발달장애인'이 함께 확인되는 공고만 대상
+    return "통합돌봄" in compact and ("최중증" in compact or "발달장애인" in compact)
 
 def infer_organization(title, context, fallback):
     match = re.match(r"^[\[\(【]([^\]\)】]{2,40})[\]\)】]", title)
@@ -113,7 +114,7 @@ def enrich(row):
     row["organization"] = infer_organization(row["title"], text, row.get("organization", "기관명 확인 필요"))
 
     period = re.search(
-        r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")(?:\.?\s*\([^)]*\))?\.?\s*[~〜～-]\s*(" + DATE_TOKEN + r")(?:\s*\([^)]*\))?",
+        r"(?:접수|모집)(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")(?:\.?\s*\([^)]*\))?\.?\s*[~〜～-]\s*(" + DATE_TOKEN + r")(?:\.?\s*\([^)]*\))?\.?",
         text
     )
     if not period:
