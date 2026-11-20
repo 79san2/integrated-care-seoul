@@ -1085,5 +1085,33 @@
       }
     },
     "note": "2024-12-27 기준 과거 지정 현황. 2025년 이후 변동 및 2026년 현재 운영기관·정원으로 사용하지 않음. 기존 2025년 11월 서울시의회 업무보고의 24시간형 4개소·정원 20명과 기준일이 다르므로 별도 보관."
+  },
+  "historicalEvidence": {
+    "sourceTitle": "서울특별시의회 제출자료: 최중증 발달장애인 24시간 통합돌봄 추진내용",
+    "sourceUrl": "https://mas.smc.seoul.kr/attach/record/SEOUL/appendix/a11/A0069829.pdf?time=20260622113554",
+    "sourcePeriod": "2025년 사업 추진내용(문서에 제시된 당시 확보 정원)",
+    "warning": "과거 사업 추진자료이며 2026년 현재 정원·현원으로 사용하지 않음",
+    "providerCapacity": [
+      {
+        "id": "seoul-001",
+        "capacity": 4,
+        "serviceType": "24시간형"
+      },
+      {
+        "id": "seoul-003",
+        "capacity": 8,
+        "serviceType": "24시간형"
+      },
+      {
+        "id": "seoul-004",
+        "capacity": 4,
+        "serviceType": "24시간형"
+      },
+      {
+        "id": "seoul-032",
+        "capacity": 4,
+        "serviceType": "24시간형"
+      }
+    ]
   }
 }
