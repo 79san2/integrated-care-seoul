@@ -18,17 +18,17 @@ RESULT_WORDS = ("최종합격", "서류합격", "면접공지", "합격자", "�
 TARGET_WORDS = ("통합돌봄서비스", "최중증 발달장애인 통합돌봄", "최중증 통합돌봄", "발달장애인 통합돌봄")
 
 def is_target_notice(text):
-    compact = re.sub(r"[\\s·ㆍ_\\-]", "", text or "")
-    return any(re.sub(r"[\\s·ㆍ_\\-]", "", word) in compact for word in TARGET_WORDS)
+    compact = re.sub(r"[\s·ㆍ_\-]", "", text or "")
+    return any(re.sub(r"[\s·ㆍ_\-]", "", word) in compact for word in TARGET_WORDS)
 
 def infer_organization(title, context, fallback):
-    match = re.match(r"^[\\[(【]([^\\])】]{2,40})[\\])】]", title)
+    match = re.match(r"^[\[\(【]([^\]\)】]{2,40})[\]\)】]", title)
     if match:
         return clean(match.group(1))
     prefix = re.split(r"(?:직원)?(?:채용|모집|구인)", title, maxsplit=1)[0].strip(" []()【】-_:：")
     if 2 <= len(prefix) <= 35 and not any(x in prefix for x in ("공고", "긴급", "재공고", "직원")):
         return prefix
-    m = re.search(r"(?:기관명|시설명|복지관명)\\s*[:：]\\s*([^,|]{2,40})", context[:1800])
+    m = re.search(r"(?:기관명|시설명|복지관명)\s*[:：]\s*([^,|]{2,40})", context[:1800])
     return clean(m.group(1)) if m else fallback
 DATE_TOKEN = r"20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2}"
 SESSION = requests.Session()
