@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T06:46:58+09:00",
+  "checkedAt": "2026-11-21T08:38:21+09:00",
   "timezone": "Asia/Seoul",
   "totalRecords": 32,
   "reachable": 32,
@@ -426,7 +426,7 @@
         "종사자 현원"
       ],
       "status": "reachable",
-      "contentHash": "c8ec21b3745271740135cbc805d5bb0e4698a7f344eb0500fc2750a5985093bd",
+      "contentHash": "fcd8c95e8e559be008fd1e2e4ccb6647f82a7d76be14687cb2b7766668f77a04",
       "pageTitle": "마포장애인종합복지관 최중증 발달장애인 주간개별 일대일 지원사업 기간제 계약일용직 공고 > 공지사항 | 마포장애인종합복지관",
       "mentionsOrganization": true
     },
@@ -477,7 +477,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "71fe990968aaabbf01e33776514662291c79206e7b31d47befd4fc79fc357328",
+      "contentHash": "66652a70211a855a2890ac9550b3941dc6db9a108f9c63ed9a8e3cc8dbc8fbdc",
       "pageTitle": "서일대학교",
       "mentionsOrganization": true
     },
@@ -510,7 +510,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "62efe6547f8a3c358613d4cf6da460948ba4c812ace78ddda1e4f77d57f181be",
+      "contentHash": "10d745ce936a5c4e3dfdb5d013b4787db4ed5ae3a762d4cc725f2d520ecbae91",
       "pageTitle": "50년 역사 '정립회관', 장애인종합복지관으로 새출발 | 연합뉴스",
       "mentionsOrganization": true
     },
@@ -577,7 +577,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "a6fcb87fe8be735ec97bbb0a3f697e17399b81a795c1561fbb4186041a6b7880",
+      "contentHash": "eaded4721a1a6d0410eed13ca63f5c06b8f48bcf8e2c8a449ac8f3c73d2163fd",
       "pageTitle": "사회복지법인 한국재활재단",
       "mentionsOrganization": true
     }
