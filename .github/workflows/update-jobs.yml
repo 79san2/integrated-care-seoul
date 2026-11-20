@@ -1,6 +1,11 @@
 name: Update recruitment notices
 
 on:
+  push:
+    paths:
+      - 'sources.json'
+      - 'scripts/update_jobs.py'
+      - '.github/workflows/update-jobs.yml'
   workflow_dispatch:
   schedule:
     - cron: "0 1 * * 1-5"
