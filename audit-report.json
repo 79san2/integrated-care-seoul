@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-11-21T08:51:11+09:00",
+  "checkedAt": "2026-11-21T08:55:50+09:00",
   "timezone": "Asia/Seoul",
   "totalRecords": 32,
-  "reachable": 32,
-  "errors": 0,
+  "reachable": 29,
+  "errors": 3,
   "missingCounts": {
     "이용인 정원": 32,
     "이용인 현원": 32,
@@ -14,17 +14,17 @@
   "note": "공식 근거 링크 접속 및 누락 항목을 자동 점검했습니다. 숫자와 연락처는 원문에서 기관·기준일·항목을 확정 검증하기 전에는 자동 변경하지 않습니다.",
   "changes": [
     {
-      "id": "seoul-023",
-      "name": "마포장애인종합복지관",
-      "type": "주간 개별 1:1",
-      "sourceUrl": "https://mapowelfare.or.kr/bbs/board.php?bo_table=notice&wr_id=2910",
-      "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
-    },
-    {
       "id": "seoul-026",
       "name": "다운복지관",
       "type": "주간 개별 1:1",
       "sourceUrl": "https://www.seoil.ac.kr/bbs/sw/790/402063/artclView.do",
+      "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
+    },
+    {
+      "id": "seoul-028",
+      "name": "정립회관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.yna.co.kr/view/AKR20241018107200004",
       "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
     },
     {
@@ -418,10 +418,8 @@
         "종사자 정원",
         "종사자 현원"
       ],
-      "status": "reachable",
-      "contentHash": "b31b16109d8b92b24a9d3dd87e8d8359934b20b664ebbf9acd200e057c5ed209",
-      "pageTitle": "마포장애인종합복지관 최중증 발달장애인 주간개별 일대일 지원사업 기간제 계약일용직 공고 > 공지사항 | 마포장애인종합복지관",
-      "mentionsOrganization": true
+      "status": "fetch_error",
+      "error": "HTTPSConnectionPool(host='mapowelfare.or.kr', port=443): Max retries exceeded with url: /bbs/board.php?bo_table=notice&wr_id=2910 (Caused by NameResolutionError(\"HTTPSConnection(ho"
     },
     {
       "id": "seoul-024",
@@ -470,7 +468,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "c3fe4e24a8fb58723ce4881910c12cc3741d6f342ff4f6a7a2508aab20e86372",
+      "contentHash": "15c08749101dadc90417bd19f1892bd4903c346328a12f0c587e4da5013ee135",
       "pageTitle": "서일대학교",
       "mentionsOrganization": true
     },
@@ -485,10 +483,8 @@
         "종사자 정원",
         "종사자 현원"
       ],
-      "status": "reachable",
-      "contentHash": "da66b8aef89e1b970a56f0dc0a666159b7f1129503952bebf11ae06d552fd8bf",
-      "pageTitle": "복지관 소개 > 조직도 : 서대문장애인종합복지관",
-      "mentionsOrganization": true
+      "status": "fetch_error",
+      "error": "HTTPSConnectionPool(host='www.welfare-center.or.kr', port=443): Max retries exceeded with url: /organization (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.welfare-cente"
     },
     {
       "id": "seoul-028",
@@ -503,7 +499,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "10d745ce936a5c4e3dfdb5d013b4787db4ed5ae3a762d4cc725f2d520ecbae91",
+      "contentHash": "01e400b772b5941331a976819c7b6e860d287c18fcf9cf475ae273c45e3e0b64",
       "pageTitle": "50년 역사 '정립회관', 장애인종합복지관으로 새출발 | 연합뉴스",
       "mentionsOrganization": true
     },
@@ -552,10 +548,8 @@
         "종사자 정원",
         "종사자 현원"
       ],
-      "status": "reachable",
-      "contentHash": "b8b08b8645b03a135a540272f9e6cd2a4440bbe53d65a0331601a48c190dc012",
-      "pageTitle": "담당자 안내 1 페이지 | 양천해누리복지관",
-      "mentionsOrganization": true
+      "status": "fetch_error",
+      "error": "HTTPSConnectionPool(host='ycsupport.or.kr', port=443): Max retries exceeded with url: /organization (Caused by ConnectTimeoutError(<HTTPSConnection(host='ycsupport.or.kr', port=443"
     },
     {
       "id": "seoul-032",
@@ -570,7 +564,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "9134669cf9a121a84749f8be7287179c026bf8c1005928257b523eb61198ad11",
+      "contentHash": "cd2622739a351e1969e7a8acbb092c6497c1021e9c0d1994819ac2e22477f109",
       "pageTitle": "사회복지법인 한국재활재단",
       "mentionsOrganization": true
     }

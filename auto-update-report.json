@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T08:51:54+09:00",
+  "checkedAt": "2026-11-21T08:57:21+09:00",
   "updated": [],
   "candidates": [],
   "skipped": [
@@ -84,8 +84,16 @@
       "reason": "기관별 수치·직통번호를 증명하는 개별 자료 없음"
     },
     {
+      "id": "seoul-024",
+      "reason": "자료 접근 실패: HTTPSConnectionPool(host='www.omni.or.kr', port=443): Max retries exceeded with url: / (Caused by Co"
+    },
+    {
       "id": "seoul-025",
       "reason": "기관별 수치·직통번호를 증명하는 개별 자료 없음"
+    },
+    {
+      "id": "seoul-027",
+      "reason": "자료 접근 실패: HTTPSConnectionPool(host='www.welfare-center.or.kr', port=443): Max retries exceeded with url: /orga"
     },
     {
       "id": "candidate-sungmin",
