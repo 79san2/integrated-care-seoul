@@ -68,6 +68,21 @@ def find_board_links(soup, base):
             found.append(href)
     return list(dict.fromkeys(found))
 
+def find_pagination_links(soup, base, limit=5):
+    found = []
+    for a in soup.find_all("a", href=True):
+        href = urljoin(base, a["href"])
+        parsed = urlparse(href)
+        query = parsed.query.lower()
+        label = clean(a.get_text(" ", strip=True))
+        is_page_link = (
+            re.search(r"(?:^|[&?])(?:page|pageindex|pageno|page_no|pg)=\\d+", "?" + query) is not None
+            or label in ("다음", ">", "»", "2", "3", "4", "5")
+        )
+        if is_page_link and is_same_site(base, href) and href.rstrip("/") != base.rstrip("/"):
+            found.append(href)
+    return list(dict.fromkeys(found))[:limit]
+
 def extract_rows(soup, page_url, org, allow_external=False):
     rows, seen = [], set()
     for a in soup.find_all("a", href=True):
@@ -152,6 +167,15 @@ def main():
             listing_pages = [source["url"]]
             if source.get("mode") == "discover":
                 listing_pages = find_board_links(soup, source["url"])[:5]
+            # 게시판의 다음 페이지도 확인해 최근 공고 누락을 줄입니다.
+            page_limit = int(source.get("maxPages", 5))
+            expanded_pages = []
+            for listing in listing_pages:
+                expanded_pages.append(listing)
+                listing_html = html if listing == source["url"] else fetch(listing)
+                page_soup = BeautifulSoup(listing_html, "html.parser")
+                expanded_pages.extend(find_pagination_links(page_soup, listing, max(0, page_limit - 1)))
+            listing_pages = list(dict.fromkeys(expanded_pages))[:page_limit]
             count = 0
             for listing in listing_pages:
                 page_html = html if listing == source["url"] else fetch(listing)
