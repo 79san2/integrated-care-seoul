@@ -16,6 +16,20 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; IntegratedCareRecruitmentMoni
 POST_WORDS = ("채용", "모집", "구인")
 RESULT_WORDS = ("최종합격", "서류합격", "면접공지", "합격자", "전형결과", "결과발표", "서류전형")
 TARGET_WORDS = ("통합돌봄서비스", "최중증 발달장애인 통합돌봄", "최중증 통합돌봄", "발달장애인 통합돌봄")
+
+def is_target_notice(text):
+    compact = re.sub(r"[\\s·ㆍ_\\-]", "", text or "")
+    return any(re.sub(r"[\\s·ㆍ_\\-]", "", word) in compact for word in TARGET_WORDS)
+
+def infer_organization(title, context, fallback):
+    match = re.match(r"^[\\[(【]([^\\])】]{2,40})[\\])】]", title)
+    if match:
+        return clean(match.group(1))
+    prefix = re.split(r"(?:직원)?(?:채용|모집|구인)", title, maxsplit=1)[0].strip(" []()【】-_:：")
+    if 2 <= len(prefix) <= 35 and not any(x in prefix for x in ("공고", "긴급", "재공고", "직원")):
+        return prefix
+    m = re.search(r"(?:기관명|시설명|복지관명)\\s*[:：]\\s*([^,|]{2,40})", context[:1800])
+    return clean(m.group(1)) if m else fallback
 DATE_TOKEN = r"20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2}"
 SESSION = requests.Session()
 
@@ -53,14 +67,14 @@ def find_board_links(soup, base):
             found.append(href)
     return list(dict.fromkeys(found))
 
-def extract_rows(soup, page_url, org):
+def extract_rows(soup, page_url, org, allow_external=False):
     rows, seen = [], set()
     for a in soup.find_all("a", href=True):
         title = clean(a.get_text(" ", strip=True) or a.get("title", ""))
         href = urljoin(page_url, a["href"])
         if not title or len(title) < 5 or not looks_like_post(title):
             continue
-        if not is_same_site(page_url, href) or href.rstrip("/") == page_url.rstrip("/"):
+        if (not allow_external and not is_same_site(page_url, href)) or href.rstrip("/") == page_url.rstrip("/"):
             continue
         if href in seen:
             continue
@@ -70,18 +84,20 @@ def extract_rows(soup, page_url, org):
             if parent.parent:
                 parent = parent.parent
                 context += " " + clean(parent.get_text(" ", strip=True))
-        rows.append({"organization": org, "title": title, "url": href, "postedAt": parse_date(context), "source": page_url})
+        rows.append({"organization": infer_organization(title, context, org), "sourceOrganization": org,
+                     "title": title, "url": href, "postedAt": parse_date(context), "source": page_url})
     return rows
 
 def enrich(row):
     soup = BeautifulSoup(fetch(row["url"]), "html.parser")
     text = clean(soup.get_text(" ", strip=True))
     combined = row["title"] + " " + text
-    if not any(word in combined for word in TARGET_WORDS):
+    if not is_target_notice(combined):
         return None
+    row["organization"] = infer_organization(row["title"], text, row.get("organization", "기관명 확인 필요"))
 
     period = re.search(
-        r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")\s*[~〜～-]\s*(" + DATE_TOKEN + r")",
+        r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")(?:\s*\([^)]*\))?\s*[~〜～-]\s*(" + DATE_TOKEN + r")(?:\s*\([^)]*\))?",
         text
     )
     if not period:
@@ -138,7 +154,10 @@ def main():
             count = 0
             for listing in listing_pages:
                 page_html = html if listing == source["url"] else fetch(listing)
-                rows = extract_rows(BeautifulSoup(page_html, "html.parser"), listing, source["organization"])
+                rows = extract_rows(
+                    BeautifulSoup(page_html, "html.parser"), listing, source["organization"],
+                    allow_external=bool(source.get("allowExternalLinks", False))
+                )
                 all_rows.extend(rows)
                 count += len(rows)
                 time.sleep(0.1)
@@ -185,7 +204,7 @@ def main():
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sourcePolicy": CONFIG["policy"],
-        "filterPolicy": "공식 홈페이지 원문에서 통합돌봄 관련 문구와 접수기간 시작일·마감일이 모두 확인되고, 마감일이 지나지 않은 채용공고만 표시",
+        "filterPolicy": "공식 기관 홈페이지 및 등록된 사회복지 전문 채용게시판의 원문에서 통합돌봄 관련 문구와 접수기간 시작일·마감일이 모두 확인되고, 마감일이 지나지 않은 채용공고만 표시",
         "sourceCount": len(CONFIG["sources"]),
         "sources": source_status,
         "checkedCandidates": checked,
