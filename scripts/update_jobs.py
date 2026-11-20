@@ -23,6 +23,16 @@ def is_target_notice(text):
     return "통합돌봄" in compact and ("최중증" in compact or "발달장애인" in compact)
 
 def infer_organization(title, context, fallback):
+    combined = clean(title + " " + context[:5000])
+    compact = re.sub(r"\s+", "", combined).lower()
+    known = CONFIG.get("organizations", [])
+    # 앱에 등록된 서울 제공기관 명칭과 공고 원문을 대조해 실제 채용기관을 식별합니다.
+    matches = [
+        name for name in known
+        if re.sub(r"\s+", "", name).lower() in compact
+    ]
+    if matches:
+        return max(matches, key=len)
     match = re.match(r"^[\[\(【]([^\]\)】]{2,40})[\]\)】]", title)
     if match:
         return clean(match.group(1))
