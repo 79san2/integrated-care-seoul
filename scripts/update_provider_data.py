@@ -17,7 +17,7 @@ audit=json.loads(AUDIT.read_text(encoding="utf-8"))
 today=datetime.now(ZoneInfo("Asia/Seoul")).date()
 session=requests.Session()
 session.headers.update({"User-Agent":"Mozilla/5.0 (compatible; SeoulCareVerifiedUpdate/1.0)"})
-phone_pattern=r"(?:0[2-6][0-9]?|070)-?\\d{3,4}-?\\d{4}"
+phone_pattern=r"(?:0[2-6][0-9]?|070)-?\d{3,4}-?\d{4}"
 fields={"userCapacity":"이용인 정원","userCurrent":"이용인 현원",
         "staffCapacity":"종사자 정원","staffCurrent":"종사자 현원"}
 result={"checkedAt":datetime.now(ZoneInfo("Asia/Seoul")).isoformat(timespec="seconds"),
@@ -34,7 +34,7 @@ for record in data["records"]:
         response.raise_for_status()
         soup=BeautifulSoup(response.text,"html.parser")
         for t in soup(["script","style","nav","footer"]):t.decompose()
-        text=re.sub(r"\\s+"," ",soup.get_text(" ",strip=True))
+        text=re.sub(r"\s+"," ",soup.get_text(" ",strip=True))
     except requests.RequestException as exc:
         result["skipped"].append({"id":record["id"],"reason":"자료 접근 실패: "+str(exc)[:100]})
         continue
@@ -47,7 +47,7 @@ for record in data["records"]:
         continue
     # Only dates explicitly printed next to the data are accepted; historical figures never become current.
     for field,label in fields.items():
-        pattern=rf"(?:기준일|현황 기준|작성일)\\s*[:：]?\\s*(20\\d{{2}})[.\\-/년 ]+([01]?\\d)[.\\-/월 ]+([0-3]?\\d)[일]?[^\\n]{{0,140}}?{re.escape(label)}\\s*[:：]?\\s*(\\d{{1,3}})\\s*명"
+        pattern=rf"(?:기준일|현황 기준|작성일)\s*[:：]?\s*(20\d{{2}})[.\-/년 ]+([01]?\d)[.\-/월 ]+([0-3]?\d)[일]?[^\n]{{0,140}}?{re.escape(label)}\s*[:：]?\s*(\d{{1,3}})\s*명"
         for match in re.finditer(pattern,text):
             try:stamp=date(*map(int,match.group(1,2,3)))
             except ValueError:continue
@@ -60,7 +60,7 @@ for record in data["records"]:
     # Explicit team-labelled contact may be safely filled when previously missing,
     # only on a matching institution-specific page, never replacing existing contacts.
     if not record.get("teamPhone"):
-        matches=re.findall(r"(?:최중증.{0,16}|통합돌봄.{0,16})(?:팀|담당|문의|연락처)\\s*[:：]?\\s*("+phone_pattern+r")",text)
+        matches=re.findall(r"(?:최중증.{0,16}|통합돌봄.{0,16})(?:팀|담당|문의|연락처)\s*[:：]?\s*("+phone_pattern+r")",text)
         distinct=set(matches)
         if len(distinct)==1:
             number=distinct.pop()
@@ -70,6 +70,6 @@ for record in data["records"]:
             result["updated"].append({"id":record["id"],"name":record["name"],"field":"teamPhone","value":number,"sourceUrl":url})
 if result["updated"]:
     data["lastAutoUpdated"]=today.isoformat()
-    DATA.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
-OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    DATA.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 print(f"Applied {len(result['updated'])} verified contacts; {len(result['candidates'])} figures queued for verification.")
