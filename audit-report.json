@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T06:31:41+09:00",
+  "checkedAt": "2026-11-21T06:46:58+09:00",
   "timezone": "Asia/Seoul",
   "totalRecords": 32,
   "reachable": 32,
@@ -12,8 +12,37 @@
     "담당팀 연락처": 25
   },
   "note": "공식 근거 링크 접속 및 누락 항목을 자동 점검했습니다. 숫자와 연락처는 원문에서 기관·기준일·항목을 확정 검증하기 전에는 자동 변경하지 않습니다.",
-  "changes": [],
-  "changeCount": 0,
+  "changes": [
+    {
+      "id": "seoul-023",
+      "name": "마포장애인종합복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://mapowelfare.or.kr/bbs/board.php?bo_table=notice&wr_id=2910",
+      "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
+    },
+    {
+      "id": "seoul-026",
+      "name": "다운복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.seoil.ac.kr/bbs/sw/790/402063/artclView.do",
+      "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
+    },
+    {
+      "id": "seoul-028",
+      "name": "정립회관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.yna.co.kr/view/AKR20241018107200004",
+      "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
+    },
+    {
+      "id": "seoul-032",
+      "name": "사회복지법인 한국재활재단",
+      "type": "24시간형",
+      "sourceUrl": "https://www.krfund.or.kr/sub/notice.asp?URL=%2Fsub%2Fnotice.asp&idx=1&num=394&page=1&page_code=3",
+      "reason": "공식 출처 페이지 변경 감지; 기관별 항목 확인 필요"
+    }
+  ],
+  "changeCount": 4,
   "checks": [
     {
       "id": "seoul-001",
@@ -397,7 +426,7 @@
         "종사자 현원"
       ],
       "status": "reachable",
-      "contentHash": "db7efe34bfd2d8dfc6beb116f2f01969275689d264d50bca3c4733a984ae662c",
+      "contentHash": "c8ec21b3745271740135cbc805d5bb0e4698a7f344eb0500fc2750a5985093bd",
       "pageTitle": "마포장애인종합복지관 최중증 발달장애인 주간개별 일대일 지원사업 기간제 계약일용직 공고 > 공지사항 | 마포장애인종합복지관",
       "mentionsOrganization": true
     },
@@ -448,7 +477,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "1cc915aa115c90036a7a83b875b921f58efc8ec7504f63db328b8bab2e84e5c9",
+      "contentHash": "71fe990968aaabbf01e33776514662291c79206e7b31d47befd4fc79fc357328",
       "pageTitle": "서일대학교",
       "mentionsOrganization": true
     },
@@ -481,7 +510,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "1823b2a31d51926d2c46556ed9560379b039ef9da3e964cf653fa6c2eb92fa72",
+      "contentHash": "62efe6547f8a3c358613d4cf6da460948ba4c812ace78ddda1e4f77d57f181be",
       "pageTitle": "50년 역사 '정립회관', 장애인종합복지관으로 새출발 | 연합뉴스",
       "mentionsOrganization": true
     },
@@ -548,7 +577,7 @@
         "담당팀 연락처"
       ],
       "status": "reachable",
-      "contentHash": "ae1bb89c3a08fe02493549a044596b1aa02959710b2e2be679a723a74b7f376a",
+      "contentHash": "a6fcb87fe8be735ec97bbb0a3f697e17399b81a795c1561fbb4186041a6b7880",
       "pageTitle": "사회복지법인 한국재활재단",
       "mentionsOrganization": true
     }
