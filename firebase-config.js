@@ -1,11 +1,12 @@
-// Firebase Console의 웹 앱 설정과 FCM 웹 푸시 VAPID 공개 키를 입력합니다.
+// Firebase 웹 앱 설정
 // 서비스 계정 비공개 키는 이 파일에 절대 넣지 마세요.
 self.FIREBASE_CONFIG = {
-  apiKey: "여기에_apiKey",
-  authDomain: "여기에_authDomain",
-  projectId: "여기에_projectId",
-  storageBucket: "여기에_storageBucket",
-  messagingSenderId: "여기에_messagingSenderId",
-  appId: "여기에_appId"
+  apiKey: "AIzaSyBrgTaP7VMwmBysJ0o_bsbLtqdtwCmxoiA",
+  authDomain: "integrated-care-seoul.firebaseapp.com",
+  projectId: "integrated-care-seoul",
+  storageBucket: "integrated-care-seoul.firebasestorage.app",
+  messagingSenderId: "748152056334",
+  appId: "1:748152056334:web:26a6f1516b13a337f7aa5f",
+  measurementId: "G-DD6YX0E9XC"
 };
 self.FCM_VAPID_KEY = "여기에_VAPID_공개키";
