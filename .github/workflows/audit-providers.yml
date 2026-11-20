@@ -1,6 +1,13 @@
 name: Monthly provider evidence audit
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit_providers.py'
+      - 'scripts/update_provider_data.py'
+      - 'scripts/notify_provider_changes.py'
+      - '.github/workflows/audit-providers.yml'
   schedule:
     - cron: '0 0 1 * *'
 permissions:
