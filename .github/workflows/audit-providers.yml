@@ -33,5 +33,16 @@ jobs:
           git add audit-report.json
           if ! git diff --cached --quiet; then
             git commit -m "Update monthly provider evidence audit"
-            git push
+            for attempt in 1 2 3 4 5; do
+              if git push; then
+                echo 'Audit report saved successfully.'
+                exit 0
+              fi
+              echo "Concurrent update detected; retry $attempt/5"
+              git fetch origin main
+              git rebase origin/main
+              sleep 3
+            done
+            echo 'Failed to publish after five attempts.'
+            exit 1
           fi
