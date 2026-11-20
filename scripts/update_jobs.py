@@ -155,8 +155,21 @@ def enrich(row):
         row["closeDate"] = parse_date(found[1])
     if not row["openDate"] or not row["closeDate"]:
         return None
-    if date.fromisoformat(row["closeDate"]) < date.today():
+    start = date.fromisoformat(row["openDate"])
+    end = date.fromisoformat(row["closeDate"])
+    # Reject dates from unrelated annual schedules, archives or malformed notices.
+    # Recruitment periods should be plausible relative to the notice's posting date.
+    if end < start or (end - start).days > 120:
         return None
+    if end < date.today() or start > date.today():
+        return None
+    if row.get("postedAt"):
+        try:
+            posted = date.fromisoformat(row["postedAt"])
+            if start < posted.replace(year=posted.year - 1) or (start - posted).days > 90:
+                return None
+        except ValueError:
+            pass
 
     row["position"] = "공고 원문 확인"
     for word in ("사회복지사", "제공인력", "활동지원사", "생활재활교사", "작업치료사", "물리치료사", "언어재활사", "간호사", "조리사"):
@@ -232,7 +245,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v2|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v3|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
