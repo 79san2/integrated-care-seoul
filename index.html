@@ -59,7 +59,7 @@ input,select{width:100%;border:1px solid #dce5e1;background:white;border-radius:
  <div class="gridstats" id="typeStats"></div>
  <div class="section-head"><div><h2>자치구별 등록 현황</h2><p>기관 등록 수와 확인된 이용인 수치</p></div></div>
  <div class="gridstats" id="districtStats"></div>
- <div class="section-head"><div><h2>정기 정보점검</h2><p>매월 1일 공식 출처 연결 및 미확인 항목 자동 점검</p></div></div><div class="panel small" id="auditSummary">첫 자동 점검 결과를 기다리고 있습니다.</div>
+ <div class="section-head"><div><h2>정기 정보점검</h2><p>매월 1일 공식 출처 연결 및 미확인 항목 자동 점검</p></div></div><div class="panel small" id="autoUpdateSummary">자동 수집 결과는 첫 실행 후 표시됩니다.</div><div class="panel small" id="auditSummary">첫 자동 점검 결과를 기다리고 있습니다.</div>
  <div class="section-head"><div><h2>공식 참고자료</h2><p>기준일이 다른 자료는 별도로 확인하세요.</p></div></div>
  <div id="officialSources" class="panel small"></div>
  <div class="section-head"><div><h2>서울지역센터 담당 연락처</h2><p>서비스 문의 권역별 연락처</p></div></div>
@@ -103,6 +103,7 @@ function render(){
 ['#search','#type','#district','#sort'].forEach(s=>$(s).addEventListener('input',render));
 document.querySelectorAll('.type-chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.type-chip').forEach(x=>x.classList.toggle('active',x===b));$('#type').value=b.dataset.type;render()}));
 document.getElementById('quickFind').addEventListener('click',()=>{switchView('directory');document.getElementById('search').focus()});document.getElementById('quickStats').addEventListener('click',()=>switchView('statistics'));document.getElementById('quickJobs').addEventListener('click',()=>location.href='./jobs.html');
+fetch('./auto-update-report.json?ts='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(a=>{const d=document.getElementById('autoUpdateSummary');if(!d)return;const date=a.checkedAt?new Date(a.checkedAt).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}):'미확인';d.textContent='자동 수집 '+date+' · 확인 후 반영 '+(a.updated||[]).length+'건 · 수치 검증 대기 '+(a.candidates||[]).length+'건 · 출처 확인 보류 '+(a.skipped||[]).length+'건';}).catch(()=>{});
 fetch('./audit-report.json?ts='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(a=>{const d=document.getElementById('auditSummary');if(!d)return;d.textContent='최근 점검: '+new Date(a.checkedAt).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})+' · 점검 '+a.totalRecords+'건 · 공식 출처 접속 '+a.reachable+'건 · 접속 오류 '+a.errors+'건. 확인되지 않은 기관별 수치는 임의로 변경하지 않습니다.'}).catch(()=>{});
 setup();
 if(new URLSearchParams(window.location.search).get('view')==='statistics')switchView('statistics');
