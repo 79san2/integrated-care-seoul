@@ -31,6 +31,7 @@ jobs:
       - name: Apply verified institution contact updates and review figures
         run: python scripts/update_provider_data.py
       - name: Notify smartphone about changed official sources
+        continue-on-error: true
         env:
           FCM_SERVICE_ACCOUNT_JSON: ${{ secrets.FCM_SERVICE_ACCOUNT_JSON }}
           FCM_DEVICE_TOKEN: ${{ secrets.FCM_DEVICE_TOKEN }}
