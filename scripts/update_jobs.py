@@ -76,8 +76,8 @@ def find_pagination_links(soup, base, limit=5):
         query = parsed.query.lower()
         label = clean(a.get_text(" ", strip=True))
         is_page_link = (
-            re.search(r"(?:^|[&?])(?:page|pageindex|pageno|page_no|pg)=\\d+", "?" + query) is not None
-            or label in ("다음", ">", "»", "2", "3", "4", "5")
+            re.search(r"(?:^|[&?])(?:page|pageindex|pageno|page_no|pg)=\d+", "?" + query) is not None
+            or label in ("다음", ">", "»")
         )
         if is_page_link and is_same_site(base, href) and href.rstrip("/") != base.rstrip("/"):
             found.append(href)
@@ -100,7 +100,7 @@ def extract_rows(soup, page_url, org, allow_external=False):
             if parent.parent:
                 parent = parent.parent
                 context += " " + clean(parent.get_text(" ", strip=True))
-        rows.append({"organization": infer_organization(title, context, org), "sourceOrganization": org,
+        rows.append({"organization": infer_organization(title, context, "기관명 확인 필요" if allow_external else org), "sourceOrganization": org,
                      "title": title, "url": href, "postedAt": parse_date(context), "source": page_url})
     return rows
 
