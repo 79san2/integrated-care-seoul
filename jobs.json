@@ -1158,18 +1158,6 @@
     {
       "organization": "늘푸른나무복지관",
       "sourceOrganization": "늘푸른나무복지관",
-      "title": "사회복지사 채용 재공고 (통합돌봄서비스)",
-      "url": "http://www.egreen.or.kr/hire/517?sst=wr_datetime&sod=desc&sop=and&page=1",
-      "postedAt": "2026-11-12",
-      "source": "http://www.egreen.or.kr/bbs/board.php?bo_table=hire&sop=and&sst=wr_datetime&sod=desc&sfl=&stx=&sca=&page=1",
-      "openDate": "2027-01-04",
-      "closeDate": "2027-06-30",
-      "position": "사회복지사",
-      "id": "9165558e77079d536a"
-    },
-    {
-      "organization": "늘푸른나무복지관",
-      "sourceOrganization": "늘푸른나무복지관",
       "title": "사회복지사 채용 공고 (통합돌봄서비스)",
       "url": "http://www.egreen.or.kr/hire/514",
       "postedAt": "2026-10-27",
@@ -1178,18 +1166,6 @@
       "closeDate": "2027-06-30",
       "position": "사회복지사",
       "id": "b9918ec683ca0750b9"
-    },
-    {
-      "organization": "늘푸른나무복지관",
-      "sourceOrganization": "늘푸른나무복지관",
-      "title": "사회복지사 채용 공고 (통합돌봄서비스)",
-      "url": "http://www.egreen.or.kr/hire/514?sst=wr_datetime&sod=desc&sop=and&page=1",
-      "postedAt": "2026-10-27",
-      "source": "http://www.egreen.or.kr/bbs/board.php?bo_table=hire&sop=and&sst=wr_datetime&sod=desc&sfl=&stx=&sca=&page=1",
-      "openDate": "2027-01-04",
-      "closeDate": "2027-06-30",
-      "position": "사회복지사",
-      "id": "58438825d24fae71f3"
     }
   ]
 }
