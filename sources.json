@@ -4,9 +4,9 @@
   "sources": [
     {
       "organization": "늘푸른나무복지관",
-      "url": "https://egreen.or.kr/hire",
+      "url": "http://www.egreen.or.kr/hire",
       "mode": "listing",
-      "note": "기관 공식 채용공고 게시판. 비-www 도메인으로 접속"
+      "note": "기관 공식 채용공고 게시판. 기관에서 안내한 HTTP 게시판 주소"
     },
     {
       "organization": "마포장애인종합복지관",
