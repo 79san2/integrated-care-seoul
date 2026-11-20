@@ -1,0 +1,556 @@
+{
+  "checkedAt": "2026-11-21T06:31:41+09:00",
+  "timezone": "Asia/Seoul",
+  "totalRecords": 32,
+  "reachable": 32,
+  "errors": 0,
+  "missingCounts": {
+    "이용인 정원": 32,
+    "이용인 현원": 32,
+    "종사자 정원": 32,
+    "종사자 현원": 32,
+    "담당팀 연락처": 25
+  },
+  "note": "공식 근거 링크 접속 및 누락 항목을 자동 점검했습니다. 숫자와 연락처는 원문에서 기관·기준일·항목을 확정 검증하기 전에는 자동 변경하지 않습니다.",
+  "changes": [],
+  "changeCount": 0,
+  "checks": [
+    {
+      "id": "seoul-001",
+      "name": "서울시립발달장애인복지관",
+      "type": "24시간형",
+      "sourceUrl": "https://www.broso.or.kr/seoul/hp/svc/selectAgencySeach.do?pageIndex=30",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원"
+      ],
+      "status": "reachable",
+      "contentHash": "9a494c936297faa13eb99ba369861ddefb12f0a6249026ecc78cb6feb724b7d3",
+      "pageTitle": "지원 기관찾기 | 서울지역센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-002",
+      "name": "서울시립발달장애인복지관",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=219",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원"
+      ],
+      "status": "reachable",
+      "contentHash": "2382bfc942cedbc3a5c7cd56fb72188269cb39ae884e60168af424a4bcd75fb6",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-003",
+      "name": "사회복지법인 엔젤스헤이븐 최중증발달장애인통합돌봄센터",
+      "type": "24시간형",
+      "sourceUrl": "https://www.broso.or.kr/seoul/hp/svc/selectAgencySeach.do?pageIndex=30",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "9a494c936297faa13eb99ba369861ddefb12f0a6249026ecc78cb6feb724b7d3",
+      "pageTitle": "지원 기관찾기 | 서울지역센터",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-004",
+      "name": "도봉장애인종합복지관",
+      "type": "24시간형",
+      "sourceUrl": "https://www.broso.or.kr/seoul/hp/svc/selectAgencySeach.do?pageIndex=30",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "9a494c936297faa13eb99ba369861ddefb12f0a6249026ecc78cb6feb724b7d3",
+      "pageTitle": "지원 기관찾기 | 서울지역센터",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-005",
+      "name": "파랑새아동발달센터",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=219",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "2382bfc942cedbc3a5c7cd56fb72188269cb39ae884e60168af424a4bcd75fb6",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-006",
+      "name": "재활상담복지 사회적협동조합(영등포지점)",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=219",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "2382bfc942cedbc3a5c7cd56fb72188269cb39ae884e60168af424a4bcd75fb6",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-007",
+      "name": "정 심리발달센터(서대문점)",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=219",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "2382bfc942cedbc3a5c7cd56fb72188269cb39ae884e60168af424a4bcd75fb6",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-008",
+      "name": "서부장애인종합복지관",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=219",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "2382bfc942cedbc3a5c7cd56fb72188269cb39ae884e60168af424a4bcd75fb6",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-009",
+      "name": "두리언어발달재활센터(묵동본점)",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=219",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "2382bfc942cedbc3a5c7cd56fb72188269cb39ae884e60168af424a4bcd75fb6",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-010",
+      "name": "우리하나사회적협동조합",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=197",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "eb600b988da68e15d7ee3cf5bd89cec7c9f42f055d6451ec03b9005b253764c7",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-011",
+      "name": "금천장애인종합복지관",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=197",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "eb600b988da68e15d7ee3cf5bd89cec7c9f42f055d6451ec03b9005b253764c7",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-012",
+      "name": "관악구장애인종합복지관",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=200",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "6c33ce55c7f8e7a433f91eafc6413f08630fab367dc224cd8b1640c06ae2d199",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-013",
+      "name": "즐거운동행 사회적협동조합",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/seoul/hp/svc/selectAgencySeach.do?pageIndex=30",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "9a494c936297faa13eb99ba369861ddefb12f0a6249026ecc78cb6feb724b7d3",
+      "pageTitle": "지원 기관찾기 | 서울지역센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-014",
+      "name": "충현복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=212",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "020d1c963e2e086fbc7a39665ff554727cf3630cb2ca69792be8222d516e6835",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-015",
+      "name": "실로암시각장애인복지관(설리번학습지원센터)",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=212",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "020d1c963e2e086fbc7a39665ff554727cf3630cb2ca69792be8222d516e6835",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-016",
+      "name": "서울시립남부장애인종합복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=212",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원"
+      ],
+      "status": "reachable",
+      "contentHash": "020d1c963e2e086fbc7a39665ff554727cf3630cb2ca69792be8222d516e6835",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-017",
+      "name": "시립영등포장애인복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=212",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "020d1c963e2e086fbc7a39665ff554727cf3630cb2ca69792be8222d516e6835",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-018",
+      "name": "뛰어놀자사회서비스센터",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=200",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "6c33ce55c7f8e7a433f91eafc6413f08630fab367dc224cd8b1640c06ae2d199",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-019",
+      "name": "공감방과후센터",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=200",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "6c33ce55c7f8e7a433f91eafc6413f08630fab367dc224cd8b1640c06ae2d199",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-020",
+      "name": "정 심리발달센터(송파점)",
+      "type": "주간 그룹 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=200",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "6c33ce55c7f8e7a433f91eafc6413f08630fab367dc224cd8b1640c06ae2d199",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-021",
+      "name": "성북장애인복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.broso.or.kr/hp/svc/selectAgencySeach.do?pageIndex=214",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "4cafc7facf33f3a12d9b14ea2c8dde38df78b2dc53591c3c236ce1d118c9390d",
+      "pageTitle": "지원 기관찾기 | 중앙센터",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-022",
+      "name": "늘푸른나무복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://s-win.or.kr/boarddata/view?board_data_seq=165754&board_seq=12",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원"
+      ],
+      "status": "reachable",
+      "contentHash": "7ff91fcb58bfb3c2915654ba5a920ad1510829b814dd59b02cb43eb37a5bc701",
+      "pageTitle": "서울특별시사회복지협의회",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-023",
+      "name": "마포장애인종합복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://mapowelfare.or.kr/bbs/board.php?bo_table=notice&wr_id=2910",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원"
+      ],
+      "status": "reachable",
+      "contentHash": "db7efe34bfd2d8dfc6beb116f2f01969275689d264d50bca3c4733a984ae662c",
+      "pageTitle": "마포장애인종합복지관 최중증 발달장애인 주간개별 일대일 지원사업 기간제 계약일용직 공고 > 공지사항 | 마포장애인종합복지관",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-024",
+      "name": "성동장애인종합복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.omni.or.kr/history",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "519eaec38c53b70397f8dcb31bc6d64ac130b380fd67033cb71b50a03f3e4180",
+      "pageTitle": "연혁 1 페이지 | 성동장애인종합복지관",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-025",
+      "name": "원광장애인종합복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://data.seoul.go.kr/dataList/OA-23027/S/1/datasetView.do",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "971da4d9b324d787434d899ebd78190f44ce9ec00d253afd3e62a5ac6d845551",
+      "pageTitle": "서울 열린데이터광장",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "seoul-026",
+      "name": "다운복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.seoil.ac.kr/bbs/sw/790/402063/artclView.do",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "1cc915aa115c90036a7a83b875b921f58efc8ec7504f63db328b8bab2e84e5c9",
+      "pageTitle": "서일대학교",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-027",
+      "name": "서대문장애인종합복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.welfare-center.or.kr/organization",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원"
+      ],
+      "status": "reachable",
+      "contentHash": "da66b8aef89e1b970a56f0dc0a666159b7f1129503952bebf11ae06d552fd8bf",
+      "pageTitle": "복지관 소개 > 조직도 : 서대문장애인종합복지관",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-028",
+      "name": "정립회관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.yna.co.kr/view/AKR20241018107200004",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "1823b2a31d51926d2c46556ed9560379b039ef9da3e964cf653fa6c2eb92fa72",
+      "pageTitle": "50년 역사 '정립회관', 장애인종합복지관으로 새출발 | 연합뉴스",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "candidate-yongsan",
+      "name": "구립용산장애인복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://www.50plus.or.kr/appView.do?ANN_NO=1293&setPageIndex=1",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "fe4580e4f5844c062222c0081f3120a993c710353dcb8ba94c074b6cec2e0d98",
+      "pageTitle": "가치동행일자리 | 2025년 서울시50플러스재단 권역 가치동행일자리 사업(중부권) 장애인동행(1차 공동모집) 자세히 보기",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "candidate-sungmin",
+      "name": "성민복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://xn--o39a94xuxfdrev3b02a7il0df4ec51a07g.kr/post_file_download.cm?c=YTo1OntzOjEwOiJib2FyZF9jb2RlIjtzOjIyOiJiMjAyMDA0MDZiNTQxNmY2YzYzODVmIjtzOjk6InBvc3RfY29kZSI7czoyMjoicDIwMjUwMzI0MWY0OTJiZDMxNmIyZSI7czo5OiJmaWxlX2NvZGUiO3M6MjI6InAyMDI1MDMyNDExNjFkOGU2YTVmNjUiO3M6MTk6InBvc3RfZG93bmxvYWRfdG9rZW4iO3M6MTM6IjY5YzFjYmE2MTIwNTIiO3M6MTE6Im1lbWJlcl9jb2RlIjtOO30%3D",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "pageTitle": "",
+      "mentionsOrganization": false
+    },
+    {
+      "id": "candidate-yangcheon-20261115",
+      "name": "양천해누리복지관",
+      "type": "주간 개별 1:1",
+      "sourceUrl": "https://ycsupport.or.kr/organization",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원"
+      ],
+      "status": "reachable",
+      "contentHash": "b8b08b8645b03a135a540272f9e6cd2a4440bbe53d65a0331601a48c190dc012",
+      "pageTitle": "담당자 안내 1 페이지 | 양천해누리복지관",
+      "mentionsOrganization": true
+    },
+    {
+      "id": "seoul-032",
+      "name": "사회복지법인 한국재활재단",
+      "type": "24시간형",
+      "sourceUrl": "https://www.krfund.or.kr/sub/notice.asp?URL=%2Fsub%2Fnotice.asp&idx=1&num=394&page=1&page_code=3",
+      "missing": [
+        "이용인 정원",
+        "이용인 현원",
+        "종사자 정원",
+        "종사자 현원",
+        "담당팀 연락처"
+      ],
+      "status": "reachable",
+      "contentHash": "ae1bb89c3a08fe02493549a044596b1aa02959710b2e2be679a723a74b7f376a",
+      "pageTitle": "사회복지법인 한국재활재단",
+      "mentionsOrganization": true
+    }
+  ]
+}
