@@ -123,14 +123,28 @@ def enrich(row):
         return None
     row["organization"] = infer_organization(row["title"], text, row.get("organization", "기관명 확인 필요"))
 
+    # 접수기간 표기 변형(접수기간/원서접수/모집기간, 요일 괄호, 날짜 사이 공백)을 폭넓게 처리
     period = re.search(
-        r"(?:접수|모집)(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")(?:\.?\s*\([^)]*\))?\.?\s*[~〜～-]\s*(" + DATE_TOKEN + r")(?:\.?\s*\([^)]*\))?\.?",
-        text
+        r"(?:접수\s*기간|접수\s*일정|모집\s*기간|모집\s*일정|원서\s*접수|지원\s*기간|채용\s*기간)[^0-9]{0,35}(" + DATE_TOKEN + r")[^0-9]{0,30}[~〜～부터-]+[^0-9]{0,10}(" + DATE_TOKEN + r")",
+        text,
+        re.IGNORECASE
     )
-    if not period:
-        return None
-    row["openDate"] = parse_date(period.group(1))
-    row["closeDate"] = parse_date(period.group(2))
+    if period:
+        row["openDate"] = parse_date(period.group(1))
+        row["closeDate"] = parse_date(period.group(2))
+    else:
+        dates = list(re.finditer(DATE_TOKEN, text))
+        found = None
+        for i in range(len(dates) - 1):
+            between = text[dates[i].end():dates[i+1].start()]
+            before = text[max(0, dates[i].start()-100):dates[i].start()]
+            if re.search(r"[~〜～-]", between) and re.search(r"접수|모집|원서|지원", before):
+                found = (dates[i].group(), dates[i+1].group())
+                break
+        if not found:
+            return None
+        row["openDate"] = parse_date(found[0])
+        row["closeDate"] = parse_date(found[1])
     if not row["openDate"] or not row["closeDate"]:
         return None
     if date.fromisoformat(row["closeDate"]) < date.today():
@@ -210,7 +224,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256((row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v2|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
