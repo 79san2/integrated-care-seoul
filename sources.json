@@ -1,6 +1,6 @@
 {
   "updatedAt": "2026-11-20",
-  "policy": "기관 공식 홈페이지의 채용 게시판 또는 홈페이지에서 연결되는 채용 메뉴만 수집합니다. 외부 구인사이트는 기본 수집 대상에서 제외합니다.",
+  "policy": "기관 공식 채용게시판과 등록된 사회복지 전문 채용게시판(복지넷, 한국사회복지사협회, 서울시장애인복지관협회)을 함께 확인합니다. 외부 게시판은 통합돌봄서비스 관련 원문 공고만 선별합니다.",
   "sources": [
     {
       "organization": "늘푸른나무복지관",
@@ -39,6 +39,27 @@
       "organization": "양천해누리복지관",
       "url": "https://ycsupport.or.kr/recruitment",
       "mode": "listing"
+    },
+    {
+      "organization": "복지넷",
+      "url": "https://www.bokji.net/job/off/01.bokji",
+      "mode": "listing",
+      "allowExternalLinks": true,
+      "note": "외부 전문 채용게시판 구인정보. 통합돌봄 관련 공고만 선별"
+    },
+    {
+      "organization": "한국사회복지사협회",
+      "url": "https://www.welfare.net/communication/recruitment/job-offer/offer-list",
+      "mode": "listing",
+      "allowExternalLinks": true,
+      "note": "외부 전문 채용게시판 채용정보. 로그인·접근 제한 시 수집상태로 기록"
+    },
+    {
+      "organization": "서울시장애인복지관협회",
+      "url": "https://www.together-seoul.org/recruit",
+      "mode": "listing",
+      "allowExternalLinks": true,
+      "note": "복지관 채용정보 게시판. 통합돌봄 관련 공고만 선별"
     }
   ]
 }
