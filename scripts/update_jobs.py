@@ -97,7 +97,7 @@ def enrich(row):
     row["organization"] = infer_organization(row["title"], text, row.get("organization", "기관명 확인 필요"))
 
     period = re.search(
-        r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")(?:\s*\([^)]*\))?\s*[~〜～-]\s*(" + DATE_TOKEN + r")(?:\s*\([^)]*\))?",
+        r"접수(?:기간|일정)\s*[:：]?\s*(" + DATE_TOKEN + r")(?:\.?\s*\([^)]*\))?\.?\s*[~〜～-]\s*(" + DATE_TOKEN + r")(?:\s*\([^)]*\))?",
         text
     )
     if not period:
