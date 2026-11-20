@@ -27,7 +27,7 @@ def infer_organization(title, context, fallback):
     if match:
         return clean(match.group(1))
     prefix = re.split(r"(?:직원)?(?:채용|모집|구인)", title, maxsplit=1)[0].strip(" []()【】-_:：")
-    if 2 <= len(prefix) <= 35 and not any(x in prefix for x in ("공고", "긴급", "재공고", "직원")):
+    if 2 <= len(prefix) <= 35 and not any(x in prefix for x in ("공고", "긴급", "재공고", "직원", "통합돌봄", "최중증", "발달장애인", "제공인력")):
         return prefix
     m = re.search(r"(?:기관명|시설명|복지관명)\s*[:：]\s*([^,|]{2,40})", context[:1800])
     return clean(m.group(1)) if m else fallback
