@@ -1,36 +1,17 @@
-const CACHE='integrated-care-seoul-v2';
-const FILES=['./','./index.html','./data.json','./jobs.html','./jobs.json','./manifest.json','./icon.svg'];
-self.addEventListener('install',event=>{
- event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(FILES);await self.skipWaiting()})());
-});
-self.addEventListener('activate',event=>{
- event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('integrated-care-seoul-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})());
-});
-self.addEventListener('fetch',event=>{
- if(event.request.method!=='GET')return;
- const url=new URL(event.request.url);
- const inApp=url.pathname.startsWith('/integrated-care-seoul/');
- if(!inApp)return;
- const isPage=event.request.mode==='navigate'||url.pathname.endsWith('/index.html')||url.pathname==='/integrated-care-seoul/';
- const isData=url.pathname.endsWith('/data.json')||url.pathname.endsWith('/jobs.json');
- if(isPage||isData){
-  event.respondWith((async()=>{
-   try{const response=await fetch(event.request,{cache:'no-store'});if(response.ok){const cache=await caches.open(CACHE);await cache.put(event.request,response.clone())}return response}
-   catch(error){return (await caches.match(event.request,{ignoreSearch:true}))||(await caches.match('./index.html'))||Response.error()}
-  })());return;
- }
- event.respondWith((async()=>{const cached=await caches.match(event.request);if(cached)return cached;try{const response=await fetch(event.request);if(response.ok){const cache=await caches.open(CACHE);await cache.put(event.request,response.clone())}return response}catch(error){return Response.error()}})());
-});
-self.addEventListener('push',event=>{
- let data={title:'새 채용공고',body:'새로운 채용정보가 등록되었습니다.',url:'./jobs.html'};
- try{if(event.data)data={...data,...event.data.json()}}catch(e){}
- event.waitUntil(self.registration.showNotification(data.title||'새 채용공고',{body:data.body||'새로운 채용정보가 등록되었습니다.',icon:'./icon.svg',badge:'./icon.svg',data:{url:data.url||'./jobs.html'}}));
-});
-self.addEventListener('notificationclick',event=>{
- event.notification.close();
- const target=event.notification.data&&event.notification.data.url?event.notification.data.url:'./jobs.html';
- event.waitUntil(clients.matchAll({type:'window',includeUncontrolled:true}).then(list=>{
-  for(const client of list){if('focus'in client)return client.focus().then(()=>client.navigate(target))}
-  if(clients.openWindow)return clients.openWindow(target);
- }));
-});
+const CACHE='integrated-care-seoul-v3';
+importScripts('./firebase-config.js');
+importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js');
+if(self.FIREBASE_CONFIG && self.FIREBASE_CONFIG.apiKey && !self.FIREBASE_CONFIG.apiKey.startsWith('여기에')){
+ firebase.initializeApp(self.FIREBASE_CONFIG);
+ const messaging=firebase.messaging();
+ messaging.onBackgroundMessage(payload=>{
+  const d=payload.data||{};
+  self.registration.showNotification(d.title||'새 통합돌봄 채용공고',{body:d.body||'새로운 채용공고가 등록되었습니다.',icon:'./icon.svg',badge:'./icon.svg',tag:d.jobId||'integrated-care-job',data:{url:d.url||'./jobs.html'}});
+ });
+}
+const FILES=['./','./index.html','./data.json','./jobs.html','./jobs.json','./manifest.json','./icon.svg','./push-setup.html','./firebase-config.js'];
+self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(FILES);await self.skipWaiting()})()));
+self.addEventListener('activate',e=>e.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('integrated-care-seoul-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim()})()));
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(!u.pathname.startsWith('/integrated-care-seoul/'))return;const page=e.request.mode==='navigate'||u.pathname.endsWith('/index.html')||u.pathname==='/integrated-care-seoul/';const data=u.pathname.endsWith('/data.json')||u.pathname.endsWith('/jobs.json');if(page||data){e.respondWith((async()=>{try{const r=await fetch(e.request,{cache:'no-store'});if(r.ok){const c=await caches.open(CACHE);await c.put(e.request,r.clone())}return r}catch(err){return(await caches.match(e.request,{ignoreSearch:true}))||(await caches.match('./index.html'))||Response.error()}})());return}e.respondWith((async()=>{const c=await caches.match(e.request);if(c)return c;try{const r=await fetch(e.request);if(r.ok){const ca=await caches.open(CACHE);await ca.put(e.request,r.clone())}return r}catch(err){return Response.error()}})())});
+self.addEventListener('notificationclick',e=>{e.notification.close();const target=e.notification.data&&e.notification.data.url?e.notification.data.url:'./jobs.html';e.waitUntil(clients.matchAll({type:'window',includeUncontrolled:true}).then(list=>{for(const c of list){if('focus'in c)return c.focus().then(()=>c.navigate(target))}if(clients.openWindow)return clients.openWindow(target)}))});
