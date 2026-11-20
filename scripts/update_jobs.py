@@ -4,7 +4,7 @@ import re
 import time
 from datetime import date, datetime
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlunsplit
 
 import requests
 from bs4 import BeautifulSoup
