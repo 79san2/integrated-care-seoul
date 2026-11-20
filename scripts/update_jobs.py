@@ -56,7 +56,8 @@ def parse_date(text):
         return ""
 
 def looks_like_post(title):
-    return any(word in title for word in POST_WORDS) and not any(word in title for word in RESULT_WORDS)
+    recruitment_title = any(word in title for word in POST_WORDS) or is_target_notice(title)
+    return recruitment_title and not any(word in title for word in RESULT_WORDS)
 
 def find_board_links(soup, base):
     found = []
