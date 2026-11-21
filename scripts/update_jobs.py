@@ -58,10 +58,30 @@ def canonicalize_url(url):
     return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query, doseq=True), ""))
 
 def fetch(url):
-    response = SESSION.get(url, headers=HEADERS, timeout=(10, 25))
-    response.raise_for_status()
-    response.encoding = response.apparent_encoding or response.encoding
-    return response.text
+    # 공개 채용게시판은 사이트별 접속 실패를 구분해 재시도합니다.
+    from requests.exceptions import ConnectTimeout, ReadTimeout, SSLError
+    candidates = [url]
+    if "bokji.net" in urlparse(url).netloc:
+        candidates.append(url.replace("https://www.bokji.net", "https://bokji.net"))
+    last_error = None
+    for candidate in dict.fromkeys(candidates):
+        for attempt in range(2):
+            try:
+                response = SESSION.get(candidate, headers=HEADERS, timeout=(12, 25))
+                response.raise_for_status()
+                response.encoding = response.apparent_encoding or response.encoding
+                return response.text
+            except (ConnectTimeout, ReadTimeout) as exc:
+                last_error = exc
+                if attempt == 0:
+                    time.sleep(1)
+            except SSLError as exc:
+                # 인증서 검증은 유지하며, 오류를 수집상태에 남깁니다.
+                last_error = exc
+                break
+    if last_error:
+        raise last_error
+    raise RuntimeError("No accessible recruitment listing URL")
 
 def is_same_site(base, link):
     return urlparse(base).netloc.lower().removeprefix("www.") == urlparse(link).netloc.lower().removeprefix("www.")
