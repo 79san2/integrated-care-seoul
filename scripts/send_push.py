@@ -20,7 +20,7 @@ def main():
   return 1
  old=load(BEFORE);new=load(CURRENT)
  known={str(j.get("id")) for j in old.get("jobs",[]) if j.get("id")}
- fresh=[j for j in new.get("jobs",[]) if j.get("id") and str(j["id"]) not in known]
+ fresh=[j for j in new.get("jobs",[]) if j.get("id") and str(j["id"]) not in known and j.get("postedAt","") >= "2026-11-21"]
  sent=0
  for j in fresh:
   data={"title":f"새 채용공고: {j.get('organization','기관명 확인')}"[:100],"body":j.get("title","새로운 통합돌봄서비스 채용공고")[:200],"url":j.get("url") or "https://79san2.github.io/integrated-care-seoul/jobs.html","jobId":str(j.get("id",""))}
