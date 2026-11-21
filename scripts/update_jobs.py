@@ -272,6 +272,23 @@ def main():
         if posted and posted >= "2026-11-01" and old.get("id"):
             active_jobs.setdefault(old["id"], old)
 
+    # 기관에서 확인된 채용공고: 게시일 확인 전에도 초기 목록에서 누락하지 않습니다.
+    seed_url = "http://www.egreen.or.kr/hire/517"
+    if not any(j.get("url", "").split("?")[0] == seed_url for j in active_jobs.values()):
+        seed = {
+            "organization": "늘푸른나무복지관",
+            "title": "최중증 발달장애인 통합돌봄서비스 채용공고 (원문 확인)",
+            "url": seed_url,
+            "postedAt": "",
+            "openDate": "",
+            "closeDate": "",
+            "position": "공고 원문 확인",
+            "source": "http://www.egreen.or.kr/hire",
+            "id": hashlib.sha256(("늘푸른나무복지관|" + seed_url).encode("utf-8")).hexdigest()[:18],
+            "verifiedPostingDate": False,
+        }
+        active_jobs[seed["id"]] = seed
+
     jobs = sorted(active_jobs.values(), key=lambda x: (x.get("postedAt", ""), x["organization"]), reverse=True)
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
