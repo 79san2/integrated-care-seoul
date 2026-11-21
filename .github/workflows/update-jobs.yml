@@ -41,5 +41,16 @@ jobs:
             echo "No recruitment data changes."
           else
             git commit -m "Update official institution recruitment notices"
-            git push
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then
+                echo "Failed to publish updated jobs after 3 attempts."
+                exit 1
+              fi
+              sleep 3
+            done
           fi
