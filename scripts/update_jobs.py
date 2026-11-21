@@ -259,7 +259,10 @@ def main():
             print("상세페이지 조회 실패:", url, str(exc)[:120])
         time.sleep(0.1)
 
-    # 각 공고의 검사 결과를 진단에 남겨 누락 원인을 추적합니다.\n    print("중요 공고 진단:", json.dumps({u: checked.get(u) for u in checked if "/hire/517" in u}, ensure_ascii=False))\n\n    # 캐시가 과도하게 커지지 않도록 최근 2,000개 항목만 유지합니다.
+    # 주요 공고의 수집 여부를 기록하여 누락 원인을 점검합니다.
+    print("중요 공고 진단:", json.dumps({u: checked.get(u) for u in checked if "/hire/517" in u}, ensure_ascii=False))
+
+    # 캐시가 과도하게 커지지 않도록 최근 2,000개 항목만 유지합니다.
     if len(checked) > 2000:
         checked = dict(list(checked.items())[-2000:])
 
