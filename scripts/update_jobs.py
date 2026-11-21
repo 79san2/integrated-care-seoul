@@ -154,9 +154,8 @@ def enrich(row):
     if not any(k in title_compact for k in ("채용", "구인", "모집", "재공고")):
         REJECTIONS["not_recruitment"] += 1
         return None
-    if not any(k in title_compact for k in ("통합돌봄", "최중증", "제공인력")):
-        REJECTIONS["not_target_title"] += 1
-        return None
+    # 제목이 일반 '사회복지사 채용'이어도 본문에 서비스명이 명시되면 인정합니다.
+    # 기관 소개나 다른 직종 공고는 제목의 채용 여부 및 본문 검증으로 걸러냅니다.
     if not is_target_notice(combined):
         REJECTIONS["not_target"] += 1
         return None
@@ -165,6 +164,18 @@ def enrich(row):
     # 접수기간은 필수 조건이 아닙니다. 게시일을 우선하며, 없으면 미확인으로 표시합니다.
     row["openDate"] = ""
     row["closeDate"] = ""
+    # 공고 본문에서 접수 마감일을 찾을 수 있으면 이미 마감된 공고는 제외합니다.
+    deadline_match = re.search(
+        r"(?:접수기간|채용기간|모집기간|원서접수|서류접수|접수마감|마감일)[^\\n]{0,110}",
+        soup.get_text("\\n", strip=True)
+    )
+    if deadline_match:
+        dates = re.findall(DATE_TOKEN, deadline_match.group())
+        if dates:
+            row["closeDate"] = parse_date(dates[-1])
+            if row["closeDate"] and row["closeDate"] < date.today().isoformat():
+                REJECTIONS["application_closed"] += 1
+                return None
     # 오래된 게시물은 제외합니다. 신규 공고 확인을 위한 최근 45일 기준.
     if row.get("postedAt"):
         try:
@@ -250,7 +261,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v11|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v12|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
