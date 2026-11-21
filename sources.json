@@ -66,6 +66,18 @@
       "mode": "listing",
       "allowExternalLinks": true,
       "note": "공식 채용게시판(표준 도메인). 통합돌봄 관련 공고만 선별"
+    },
+    {
+      "organization": "정립회관",
+      "url": "http://www.jeongnip.or.kr/",
+      "mode": "discover",
+      "note": "외부 공공·채용자료에서 확인한 기관 홈페이지. 채용게시판 탐색 및 접속 검증 필요"
+    },
+    {
+      "organization": "도봉장애인종합복지관",
+      "url": "http://www.dbwc2017.or.kr/",
+      "mode": "discover",
+      "note": "외부 공공·채용자료에서 확인한 기관 홈페이지. 채용게시판 탐색 및 접속 검증 필요"
     }
   ],
   "organizations": [
