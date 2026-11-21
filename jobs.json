@@ -1,5 +1,5 @@
 {
-  "lastChecked": "2026-11-21T00:04:18+00:00",
+  "lastChecked": "2026-11-21T00:06:58+00:00",
   "sourcePolicy": "기관 공식 채용게시판과 등록된 사회복지 전문 채용게시판(복지넷, 한국사회복지사협회, 서울시장애인복지관협회)을 함께 확인합니다. 외부 게시판은 통합돌봄서비스 관련 원문 공고만 선별합니다.",
   "filterPolicy": "공식 기관 홈페이지 및 등록된 사회복지 전문 채용게시판의 원문에서 통합돌봄 관련 문구와 접수기간 시작일·마감일이 모두 확인되고, 마감일이 지나지 않은 채용공고만 표시",
   "sourceCount": 10,
@@ -1824,8 +1824,8 @@
   },
   "stats": {
     "candidateCount": 179,
-    "detailPagesFetched": 179,
-    "cachedCandidatesSkipped": 0
+    "detailPagesFetched": 0,
+    "cachedCandidatesSkipped": 179
   },
   "jobs": []
 }
