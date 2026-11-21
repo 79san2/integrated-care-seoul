@@ -1,8 +1,8 @@
 {
-  "lastChecked": "2026-11-21T00:52:55+00:00",
+  "lastChecked": "2026-11-21T00:56:59+00:00",
   "sourcePolicy": "기관 공식 채용게시판과 등록된 사회복지 전문 채용게시판(복지넷, 한국사회복지사협회, 서울시장애인복지관협회)을 함께 확인합니다. 외부 게시판은 통합돌봄서비스 관련 원문 공고만 선별합니다.",
   "filterPolicy": "공식 기관 홈페이지 및 등록된 사회복지 전문 채용게시판의 원문에서 통합돌봄 관련 문구와 접수기간 또는 게시일과 명시된 마감일이 확인되고, 마감일이 지나지 않은 채용공고만 표시",
-  "sourceCount": 10,
+  "sourceCount": 11,
   "sources": [
     {
       "organization": "늘푸른나무복지관",
@@ -21,6 +21,12 @@
       "url": "https://www.omni.or.kr/",
       "status": "ok",
       "itemsFound": 34
+    },
+    {
+      "organization": "다운복지관",
+      "url": "https://www.down.or.kr/",
+      "status": "error",
+      "message": "HTTPSConnectionPool(host='www.down.or.kr', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate"
     },
     {
       "organization": "성민복지관",
@@ -1824,14 +1830,9 @@
   },
   "stats": {
     "candidateCount": 179,
-    "detailPagesFetched": 179,
-    "cachedCandidatesSkipped": 0,
-    "rejectionReasons": {
-      "not_target": 121,
-      "implausible_period": 4,
-      "date_not_found": 9,
-      "closed_or_not_started": 45
-    }
+    "detailPagesFetched": 0,
+    "cachedCandidatesSkipped": 179,
+    "rejectionReasons": {}
   },
   "jobs": []
 }
