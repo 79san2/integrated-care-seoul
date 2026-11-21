@@ -1851,18 +1851,6 @@
   },
   "jobs": [
     {
-      "organization": "성동장애인종합복지관",
-      "sourceOrganization": "성동장애인종합복지관",
-      "title": "[채용공고] 아동청소년지원팀 육아휴직 대체직 작업치료사 채용 공고",
-      "url": "https://www.omni.or.kr/recruit2/617",
-      "postedAt": "2026-11-17",
-      "source": "https://www.omni.or.kr/recruit2",
-      "openDate": "",
-      "closeDate": "",
-      "position": "작업치료사",
-      "id": "41b2b2cc6248e888ee"
-    },
-    {
       "organization": "늘푸른나무복지관",
       "sourceOrganization": "늘푸른나무복지관",
       "title": "사회복지사 채용 재공고 (통합돌봄서비스)",
@@ -1873,30 +1861,6 @@
       "closeDate": "",
       "position": "사회복지사",
       "id": "65741c341ae02a6976"
-    },
-    {
-      "organization": "성동장애인종합복지관",
-      "sourceOrganization": "성동장애인종합복지관",
-      "title": "행사/모집",
-      "url": "https://www.omni.or.kr/event",
-      "postedAt": "",
-      "source": "https://www.omni.or.kr/recruit2?page=5",
-      "openDate": "",
-      "closeDate": "",
-      "position": "공고 원문 확인",
-      "id": "6247691352cb2ae16a"
-    },
-    {
-      "organization": "서울특별시립 남부장애인종합복지관",
-      "sourceOrganization": "서울특별시립 남부장애인종합복지관",
-      "title": "최중증발달장애인통합돌봄팀",
-      "url": "https://ilovenambu.or.kr/bbs/content.php?co_id=020113",
-      "postedAt": "",
-      "source": "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&page=3",
-      "openDate": "",
-      "closeDate": "",
-      "position": "공고 원문 확인",
-      "id": "081df6b8703191bd2a"
     }
   ]
 }
