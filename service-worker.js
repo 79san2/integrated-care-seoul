@@ -1,4 +1,4 @@
-const CACHE='integrated-care-seoul-v3';
+const CACHE='integrated-care-seoul-v4';
 importScripts('./firebase-config.js');
 importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js');
