@@ -134,59 +134,17 @@ def enrich(row):
         return None
     row["organization"] = infer_organization(row["title"], text, row.get("organization", "기관명 확인 필요"))
 
-    # 접수기간 표기 변형(접수기간/원서접수/모집기간, 요일 괄호, 날짜 사이 공백)을 폭넓게 처리
-    period = re.search(
-        r"(?:접수\s*기간|접수\s*일정|모집\s*기간|모집\s*일정|원서\s*접수|지원\s*기간|채용\s*기간)[^0-9]{0,35}(" + DATE_TOKEN + r")[^0-9]{0,30}[~〜～부터-]+[^0-9]{0,10}(" + DATE_TOKEN + r")",
-        text,
-        re.IGNORECASE
-    )
-    if period:
-        row["openDate"] = parse_date(period.group(1))
-        row["closeDate"] = parse_date(period.group(2))
-    else:
-        dates = list(re.finditer(DATE_TOKEN, text))
-        found = None
-        for i in range(len(dates) - 1):
-            between = text[dates[i].end():dates[i+1].start()]
-            before = text[max(0, dates[i].start()-100):dates[i].start()]
-            if re.search(r"[~〜～-]", between) and re.search(r"접수|모집|원서|지원", before):
-                found = (dates[i].group(), dates[i+1].group())
-                break
-        if found:
-            row["openDate"] = parse_date(found[0])
-            row["closeDate"] = parse_date(found[1])
-        else:
-            # 시작일이 생략된 공고는 명시된 마감일과 게시일이 모두 있을 때만 인정
-            deadline = re.search(
-                r"(?:접수\s*마감|모집\s*마감|지원\s*마감|마감\s*일(?:시)?|접수\s*기한|제출\s*기한)[^0-9]{0,35}(" + DATE_TOKEN + r")",
-                text, re.IGNORECASE
-            )
-            if not deadline or not row.get("postedAt"):
-                REJECTIONS["date_not_found"] += 1
-                return None
-            row["openDate"] = row["postedAt"]
-            row["closeDate"] = parse_date(deadline.group(1))
-    if not row["openDate"] or not row["closeDate"]:
-        REJECTIONS["invalid_date"] += 1
-        return None
-    start = date.fromisoformat(row["openDate"])
-    end = date.fromisoformat(row["closeDate"])
-    # Reject dates from unrelated annual schedules, archives or malformed notices.
-    # Recruitment periods should be plausible relative to the notice's posting date.
-    if end < start or (end - start).days > 120:
-        REJECTIONS["implausible_period"] += 1
-        return None
-    if end < date.today() or start > date.today():
-        REJECTIONS["closed_or_not_started"] += 1
-        return None
+    # 접수기간은 필수 조건이 아닙니다. 게시일을 우선하며, 없으면 미확인으로 표시합니다.
+    row["openDate"] = ""
+    row["closeDate"] = ""
+    # 오래된 게시물은 제외합니다. 신규 공고 확인을 위한 최근 45일 기준.
     if row.get("postedAt"):
         try:
-            posted = date.fromisoformat(row["postedAt"])
-            if start < posted.replace(year=posted.year - 1) or (start - posted).days > 90:
+            if (date.today() - date.fromisoformat(row["postedAt"])).days > 45:
+                REJECTIONS["older_than_45_days"] += 1
                 return None
         except ValueError:
             pass
-
     row["position"] = "공고 원문 확인"
     for word in ("사회복지사", "제공인력", "활동지원사", "생활재활교사", "작업치료사", "물리치료사", "언어재활사", "간호사", "조리사"):
         if word in row["title"] or word in text[:1200]:
@@ -264,7 +222,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v6|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v7|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -281,7 +239,7 @@ def main():
             skipped_count += 1
             if cached_job:
                 try:
-                    if date.fromisoformat(cached_job["closeDate"]) >= today:
+                    if not cached_job.get("postedAt") or (today - date.fromisoformat(cached_job["postedAt"])).days <= 45:
                         active_jobs[cached_job["id"]] = cached_job
                 except (KeyError, ValueError):
                     pass
@@ -309,7 +267,7 @@ def main():
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sourcePolicy": CONFIG["policy"],
-        "filterPolicy": "공식 기관 홈페이지 및 등록된 사회복지 전문 채용게시판의 원문에서 통합돌봄 관련 문구와 접수기간 또는 게시일과 명시된 마감일이 확인되고, 마감일이 지나지 않은 채용공고만 표시",
+        "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 게시일이 확인된 경우 최근 45일 이내 공고를 우선 표시합니다.",
         "sourceCount": len(CONFIG["sources"]),
         "sources": source_status,
         "checkedCandidates": checked,
