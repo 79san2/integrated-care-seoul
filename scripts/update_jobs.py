@@ -129,9 +129,9 @@ def enrich(row):
     soup = BeautifulSoup(fetch(row["url"]), "html.parser")
     text = clean(soup.get_text(" ", strip=True))
     combined = row["title"] + " " + text
-    # 일반 메뉴·소개 페이지와 무관한 직종 공고는 수집하지 않습니다.
-    title_compact = re.sub(r"[\\s·ㆍ_\\-]", "", row["title"])
-    if not any(k in title_compact for k in ("채용", "구인", "모집", "통합돌봄", "최중증", "제공인력")):
+    # 제목에서 채용 여부와 통합돌봄 관련성을 모두 확인합니다.
+    title_compact = re.sub(r"[\s·ㆍ_\-]", "", row["title"])
+    if not any(k in title_compact for k in ("채용", "구인", "모집", "재공고")):
         REJECTIONS["not_recruitment"] += 1
         return None
     if not any(k in title_compact for k in ("통합돌봄", "최중증", "제공인력")):
@@ -230,7 +230,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v10|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v11|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
