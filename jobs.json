@@ -1,5 +1,5 @@
 {
-  "lastChecked": "2026-11-21T01:19:42+00:00",
+  "lastChecked": "2026-11-21T01:23:48+00:00",
   "sourcePolicy": "기관 공식 채용게시판과 등록된 사회복지 전문 채용게시판(복지넷, 한국사회복지사협회, 서울시장애인복지관협회)을 함께 확인합니다. 외부 게시판은 통합돌봄서비스 관련 원문 공고만 선별합니다.",
   "filterPolicy": "공식 기관 홈페이지 및 등록된 사회복지 전문 채용게시판의 원문에서 통합돌봄 관련 문구와 접수기간 또는 게시일과 명시된 마감일이 확인되고, 마감일이 지나지 않은 채용공고만 표시",
   "sourceCount": 13,
@@ -13,14 +13,14 @@
     {
       "organization": "마포장애인종합복지관",
       "url": "https://mapowelfare.or.kr/recruitment",
-      "status": "error",
-      "message": "HTTPSConnectionPool(host='mapowelfare.or.kr', port=443): Max retries exceeded with url: /recruitment (Caused by ConnectTimeoutError(<HTTPSConnection(host='mapowelfare.or.kr', port="
+      "status": "ok",
+      "itemsFound": 30
     },
     {
       "organization": "성동장애인종합복지관",
       "url": "https://www.omni.or.kr/",
-      "status": "error",
-      "message": "HTTPSConnectionPool(host='www.omni.or.kr', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.omni.or.kr', port=443) at 0x7f924d2"
+      "status": "ok",
+      "itemsFound": 34
     },
     {
       "organization": "다운복지관",
@@ -37,8 +37,8 @@
     {
       "organization": "서대문장애인종합복지관",
       "url": "https://welfare-center.or.kr/recruitment",
-      "status": "error",
-      "message": "HTTPSConnectionPool(host='welfare-center.or.kr', port=443): Max retries exceeded with url: /recruitment (Caused by ConnectTimeoutError(<HTTPSConnection(host='welfare-center.or.kr',"
+      "status": "ok",
+      "itemsFound": 43
     },
     {
       "organization": "서울특별시립 남부장애인종합복지관",
@@ -49,8 +49,8 @@
     {
       "organization": "양천해누리복지관",
       "url": "https://ycsupport.or.kr/recruitment",
-      "status": "error",
-      "message": "HTTPSConnectionPool(host='ycsupport.or.kr', port=443): Max retries exceeded with url: /recruitment (Caused by ConnectTimeoutError(<HTTPSConnection(host='ycsupport.or.kr', port=443)"
+      "status": "ok",
+      "itemsFound": 24
     },
     {
       "organization": "복지넷",
@@ -61,25 +61,25 @@
     {
       "organization": "한국사회복지사협회",
       "url": "https://www.welfare.net/communication/recruitment/job-offer/offer-list",
-      "status": "ok",
+      "status": "no_candidates",
       "itemsFound": 0
     },
     {
       "organization": "서울시장애인복지관협회",
       "url": "https://together-seoul.org/recruit",
       "status": "error",
-      "message": "HTTPSConnectionPool(host='together-seoul.org', port=443): Max retries exceeded with url: /recruit (Caused by ConnectTimeoutError(<HTTPSConnection(host='together-seoul.org', port=44"
+      "message": "HTTPSConnectionPool(host='together-seoul.org', port=443): Max retries exceeded with url: /recruit (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] "
     },
     {
       "organization": "정립회관",
       "url": "http://www.jeongnip.or.kr/",
       "status": "error",
-      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x7f9"
+      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x772"
     },
     {
       "organization": "도봉장애인종합복지관",
       "url": "http://www.dbwc2017.or.kr/",
-      "status": "board_not_found",
+      "status": "no_candidates",
       "itemsFound": 0
     }
   ],
@@ -1841,9 +1841,9 @@
     }
   },
   "stats": {
-    "candidateCount": 71,
+    "candidateCount": 179,
     "detailPagesFetched": 0,
-    "cachedCandidatesSkipped": 71,
+    "cachedCandidatesSkipped": 179,
     "rejectionReasons": {}
   },
   "jobs": []
