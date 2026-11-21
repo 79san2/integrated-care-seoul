@@ -58,7 +58,7 @@ def canonicalize_url(url):
     return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query, doseq=True), ""))
 
 def fetch(url):
-    response = SESSION.get(url, headers=HEADERS, timeout=25)
+    response = SESSION.get(url, headers=HEADERS, timeout=(7, 12))
     response.raise_for_status()
     response.encoding = response.apparent_encoding or response.encoding
     return response.text
@@ -229,6 +229,9 @@ def main():
             listing_pages = [source["url"]]
             if source.get("mode") == "discover":
                 listing_pages = find_board_links(soup, source["url"])[:5]
+                if not listing_pages:
+                    # 홈페이지에 채용 메뉴가 없더라도 첫 화면의 공고 링크는 검사합니다.
+                    listing_pages = [source["url"]]
             # 게시판의 다음 페이지도 확인해 최근 공고 누락을 줄입니다.
             page_limit = int(source.get("maxPages", 5))
             expanded_pages = []
@@ -250,7 +253,7 @@ def main():
                 time.sleep(0.1)
             source_status.append({
                 "organization": source["organization"], "url": source["url"],
-                "status": "ok" if listing_pages else "board_not_found", "itemsFound": count
+                "status": "ok" if count else "no_candidates", "itemsFound": count
             })
         except Exception as exc:
             source_status.append({"organization": source["organization"], "url": source["url"], "status": "error", "message": str(exc)[:180]})
