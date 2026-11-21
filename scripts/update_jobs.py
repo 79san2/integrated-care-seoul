@@ -147,7 +147,16 @@ def extract_rows(soup, page_url, org, allow_external=False):
 
 def enrich(row):
     soup = BeautifulSoup(fetch(row["url"]), "html.parser")
-    text = clean(soup.get_text(" ", strip=True))
+    # 공통 메뉴·푸터·사이드바를 제외하고 게시물 본문을 우선 분석합니다.
+    for element in soup.select("header, footer, nav, aside, script, style, .gnb, .lnb, .snb, .sidebar, .footer, .header"):
+        element.decompose()
+    article = None
+    for selector in (".board_view", ".view_content", ".bo_v_con", ".bbs_view", ".article-content", "article", "main"):
+        candidate = soup.select_one(selector)
+        if candidate and len(clean(candidate.get_text(" ", strip=True))) >= 40:
+            article = candidate
+            break
+    text = clean((article or soup).get_text(" ", strip=True))
     combined = row["title"] + " " + text
     # 제목에서 채용 여부와 통합돌봄 관련성을 모두 확인합니다.
     title_compact = re.sub(r"[\s·ㆍ_\-]", "", row["title"])
