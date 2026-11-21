@@ -129,6 +129,14 @@ def enrich(row):
     soup = BeautifulSoup(fetch(row["url"]), "html.parser")
     text = clean(soup.get_text(" ", strip=True))
     combined = row["title"] + " " + text
+    # 일반 메뉴·소개 페이지와 무관한 직종 공고는 수집하지 않습니다.
+    title_compact = re.sub(r"[\\s·ㆍ_\\-]", "", row["title"])
+    if not any(k in title_compact for k in ("채용", "구인", "모집", "통합돌봄", "최중증", "제공인력")):
+        REJECTIONS["not_recruitment"] += 1
+        return None
+    if not any(k in title_compact for k in ("통합돌봄", "최중증", "제공인력")):
+        REJECTIONS["not_target_title"] += 1
+        return None
     if not is_target_notice(combined):
         REJECTIONS["not_target"] += 1
         return None
@@ -222,7 +230,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v9|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v10|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -268,6 +276,9 @@ def main():
 
     # 11월 개발기간에 확인된 공고도 목록에 유지합니다.
     for old in old_jobs.values():
+        old_title = re.sub(r"[\\s·ㆍ_\\-]", "", old.get("title", ""))
+        if not any(k in old_title for k in ("통합돌봄", "최중증", "제공인력")):
+            continue
         posted = old.get("postedAt", "")
         if posted and posted >= "2026-11-01" and old.get("id"):
             active_jobs.setdefault(old["id"], old)
