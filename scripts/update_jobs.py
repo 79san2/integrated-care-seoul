@@ -180,8 +180,8 @@ def enrich(row):
     row["closeDate"] = ""
     # 공고 본문에서 접수 마감일을 찾을 수 있으면 이미 마감된 공고는 제외합니다.
     deadline_match = re.search(
-        r"(?:접수기간|채용기간|모집기간|원서접수|서류접수|접수마감|마감일)[^\\n]{0,110}",
-        soup.get_text("\\n", strip=True)
+        r"(?:접수기간|채용기간|모집기간|원서접수|서류접수|접수마감|마감일)[^\n]{0,110}",
+        soup.get_text("\n", strip=True)
     )
     if deadline_match:
         dates = re.findall(DATE_TOKEN, deadline_match.group())
@@ -275,7 +275,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v12|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v17|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -287,7 +287,7 @@ def main():
                 recent_negative_cache = (today - date.fromisoformat(cache_date)).days < 3
             except ValueError:
                 recent_negative_cache = False
-        cache_hit = cache_fingerprint == fingerprint and (cache_has_job or recent_negative_cache)
+        cache_hit = cache_fingerprint == fingerprint and recent_negative_cache and not cache_has_job
         if cache_hit:
             skipped_count += 1
             if cached_job:
@@ -322,23 +322,6 @@ def main():
     # 11월 개발기간에 확인된 공고도 목록에 유지합니다.
     # 이전 수집 결과를 무조건 재등록하지 않습니다.
     # 매 실행에서 공고의 적합성 및 마감 여부를 다시 검증한 결과만 유지합니다.
-
-    # 기관에서 확인된 채용공고: 게시일 확인 전에도 초기 목록에서 누락하지 않습니다.
-    seed_url = "http://www.egreen.or.kr/hire/517"
-    if not any(j.get("url", "").split("?")[0] == seed_url for j in active_jobs.values()):
-        seed = {
-            "organization": "늘푸른나무복지관",
-            "title": "최중증 발달장애인 통합돌봄서비스 채용공고 (원문 확인)",
-            "url": seed_url,
-            "postedAt": "",
-            "openDate": "",
-            "closeDate": "",
-            "position": "공고 원문 확인",
-            "source": "http://www.egreen.or.kr/hire",
-            "id": hashlib.sha256(("늘푸른나무복지관|" + seed_url).encode("utf-8")).hexdigest()[:18],
-            "verifiedPostingDate": False,
-        }
-        active_jobs[seed["id"]] = seed
 
     jobs = sorted(active_jobs.values(), key=lambda x: (x.get("postedAt", ""), x["organization"]), reverse=True)
     payload = {
