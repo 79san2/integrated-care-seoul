@@ -154,11 +154,6 @@ def enrich(row):
     if not any(k in title_compact for k in ("채용", "구인", "모집", "재공고")):
         REJECTIONS["not_recruitment"] += 1
         return None
-    # 임시 안전장치: 사이트 공통 메뉴의 서비스 소개 문구로 오탐하지 않도록
-    # 공고 제목에 통합돌봄 또는 최중증 발달장애인 관련 표현을 요구합니다.
-    if not any(k in title_compact for k in ("통합돌봄", "최중증발달장애인", "최중증", "제공인력")):
-        REJECTIONS["unverified_target_title"] += 1
-        return None
     # 제목이 일반 '사회복지사 채용'이어도 본문에 서비스명이 명시되면 인정합니다.
     # 기관 소개나 다른 직종 공고는 제목의 채용 여부 및 본문 검증으로 걸러냅니다.
     if not is_target_notice(combined):
@@ -171,8 +166,8 @@ def enrich(row):
     row["closeDate"] = ""
     # 공고 본문에서 접수 마감일을 찾을 수 있으면 이미 마감된 공고는 제외합니다.
     deadline_match = re.search(
-        r"(?:접수기간|채용기간|모집기간|원서접수|서류접수|접수마감|마감일)[^\\n]{0,110}",
-        soup.get_text("\\n", strip=True)
+        r"(?:접수기간|채용기간|모집기간|원서접수|서류접수|접수마감|마감일)[^\n]{0,110}",
+        soup.get_text("\n", strip=True)
     )
     if deadline_match:
         dates = re.findall(DATE_TOKEN, deadline_match.group())
@@ -266,7 +261,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v12|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v13|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -311,8 +306,13 @@ def main():
         checked = dict(list(checked.items())[-2000:])
 
     # 11월 개발기간에 확인된 공고도 목록에 유지합니다.
-    # 이전 수집 결과를 무조건 재등록하지 않습니다.
-    # 매 실행에서 공고의 적합성 및 마감 여부를 다시 검증한 결과만 유지합니다.
+    for old in old_jobs.values():
+        old_title = re.sub(r"[\\s·ㆍ_\\-]", "", old.get("title", ""))
+        if not any(k in old_title for k in ("통합돌봄", "최중증", "제공인력")):
+            continue
+        posted = old.get("postedAt", "")
+        if posted and posted >= "2026-11-01" and old.get("id"):
+            active_jobs.setdefault(old["id"], old)
 
     # 기관에서 확인된 채용공고: 게시일 확인 전에도 초기 목록에서 누락하지 않습니다.
     seed_url = "http://www.egreen.or.kr/hire/517"
