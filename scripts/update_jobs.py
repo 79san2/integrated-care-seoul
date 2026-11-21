@@ -311,13 +311,8 @@ def main():
         checked = dict(list(checked.items())[-2000:])
 
     # 11월 개발기간에 확인된 공고도 목록에 유지합니다.
-    for old in old_jobs.values():
-        old_title = re.sub(r"[\s·ㆍ_\-]", "", old.get("title", ""))
-        if not any(k in old_title for k in ("통합돌봄", "최중증", "제공인력")):
-            continue
-        posted = old.get("postedAt", "")
-        if posted and posted >= "2026-11-01" and old.get("id"):
-            active_jobs.setdefault(old["id"], old)
+    # 이전 수집 결과를 무조건 재등록하지 않습니다.
+    # 매 실행에서 공고의 적합성 및 마감 여부를 다시 검증한 결과만 유지합니다.
 
     # 기관에서 확인된 채용공고: 게시일 확인 전에도 초기 목록에서 누락하지 않습니다.
     seed_url = "http://www.egreen.or.kr/hire/517"
