@@ -21,7 +21,7 @@ TARGET_WORDS = ("통합돌봄서비스", "최중증 발달장애인 통합돌봄
 def is_target_notice(text):
     compact = re.sub(r"[\s·ㆍ_\-]", "", text or "")
     # '통합돌봄'과 '최중증' 또는 '발달장애인'이 함께 확인되는 공고만 대상
-    return "통합돌봄" in compact and ("최중증" in compact or "발달장애인" in compact)
+    return ("통합돌봄" in compact and ("최중증" in compact or "발달장애인" in compact)) or "최중증발달장애인" in compact
 
 def infer_organization(title, context, fallback):
     combined = clean(title + " " + context[:5000])
@@ -222,7 +222,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v7|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v8|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
