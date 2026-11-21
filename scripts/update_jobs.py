@@ -154,6 +154,11 @@ def enrich(row):
     if not any(k in title_compact for k in ("채용", "구인", "모집", "재공고")):
         REJECTIONS["not_recruitment"] += 1
         return None
+    # 임시 안전장치: 사이트 공통 메뉴의 서비스 소개 문구로 오탐하지 않도록
+    # 공고 제목에 통합돌봄 또는 최중증 발달장애인 관련 표현을 요구합니다.
+    if not any(k in title_compact for k in ("통합돌봄", "최중증발달장애인", "최중증", "제공인력")):
+        REJECTIONS["unverified_target_title"] += 1
+        return None
     # 제목이 일반 '사회복지사 채용'이어도 본문에 서비스명이 명시되면 인정합니다.
     # 기관 소개나 다른 직종 공고는 제목의 채용 여부 및 본문 검증으로 걸러냅니다.
     if not is_target_notice(combined):
@@ -307,7 +312,7 @@ def main():
 
     # 11월 개발기간에 확인된 공고도 목록에 유지합니다.
     for old in old_jobs.values():
-        old_title = re.sub(r"[\\s·ㆍ_\\-]", "", old.get("title", ""))
+        old_title = re.sub(r"[\s·ㆍ_\-]", "", old.get("title", ""))
         if not any(k in old_title for k in ("통합돌봄", "최중증", "제공인력")):
             continue
         posted = old.get("postedAt", "")
