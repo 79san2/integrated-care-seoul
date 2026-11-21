@@ -58,7 +58,7 @@ def canonicalize_url(url):
     return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query, doseq=True), ""))
 
 def fetch(url):
-    response = SESSION.get(url, headers=HEADERS, timeout=(7, 12))
+    response = SESSION.get(url, headers=HEADERS, timeout=(10, 25))
     response.raise_for_status()
     response.encoding = response.apparent_encoding or response.encoding
     return response.text
