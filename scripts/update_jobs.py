@@ -140,7 +140,7 @@ def enrich(row):
     # 오래된 게시물은 제외합니다. 신규 공고 확인을 위한 최근 45일 기준.
     if row.get("postedAt"):
         try:
-            if (date.today() - date.fromisoformat(row["postedAt"])).days > 45:
+            if date.fromisoformat(row["postedAt"]) < date(2026, 11, 1):
                 REJECTIONS["older_than_45_days"] += 1
                 return None
         except ValueError:
@@ -222,7 +222,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v8|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v9|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -239,7 +239,7 @@ def main():
             skipped_count += 1
             if cached_job:
                 try:
-                    if not cached_job.get("postedAt") or (today - date.fromisoformat(cached_job["postedAt"])).days <= 45:
+                    if not cached_job.get("postedAt") or date.fromisoformat(cached_job["postedAt"]) >= date(2026, 11, 1):
                         active_jobs[cached_job["id"]] = cached_job
                 except (KeyError, ValueError):
                     pass
@@ -266,11 +266,17 @@ def main():
     if len(checked) > 2000:
         checked = dict(list(checked.items())[-2000:])
 
+    # 11월 개발기간에 확인된 공고도 목록에 유지합니다.
+    for old in old_jobs.values():
+        posted = old.get("postedAt", "")
+        if posted and posted >= "2026-11-01" and old.get("id"):
+            active_jobs.setdefault(old["id"], old)
+
     jobs = sorted(active_jobs.values(), key=lambda x: (x.get("postedAt", ""), x["organization"]), reverse=True)
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sourcePolicy": CONFIG["policy"],
-        "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 게시일이 확인된 경우 최근 45일 이내 공고를 우선 표시합니다.",
+        "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 2026년 11월 1일부터 등록된 공고를 표시하며, 11월 21일 이전 공고는 초기 자료로 구분합니다.",
         "sourceCount": len(CONFIG["sources"]),
         "sources": source_status,
         "checkedCandidates": checked,
