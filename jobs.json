@@ -1851,5 +1851,18 @@
       "closed_or_not_started": 45
     }
   },
-  "jobs": []
+  "jobs": [
+    {
+      "id": "egreen-hire-517",
+      "organization": "늘푸른나무복지관",
+      "title": "최중증 발달장애인 통합돌봄서비스 채용공고 (원문 확인)",
+      "url": "http://www.egreen.or.kr/hire/517",
+      "postedAt": "",
+      "openDate": "",
+      "closeDate": "",
+      "position": "공고 원문 확인",
+      "source": "http://www.egreen.or.kr/hire",
+      "verifiedPostingDate": false
+    }
+  ]
 }
