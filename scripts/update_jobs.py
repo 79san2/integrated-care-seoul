@@ -1,4 +1,5 @@
 import hashlib
+from collections import Counter
 import json
 import re
 import time
@@ -41,7 +42,8 @@ def infer_organization(title, context, fallback):
         return prefix
     m = re.search(r"(?:기관명|시설명|복지관명)\s*[:：]\s*([^,|]{2,40})", context[:1800])
     return clean(m.group(1)) if m else fallback
-DATE_TOKEN = r"20\d{2}[.년/-]\s*\d{1,2}[.월/-]\s*\d{1,2}"
+DATE_TOKEN = r"20\d{2}\s*[.년/-]\s*\d{1,2}\s*[.월/-]\s*\d{1,2}"
+REJECTIONS = Counter()
 SESSION = requests.Session()
 
 def clean(text):
@@ -128,6 +130,7 @@ def enrich(row):
     text = clean(soup.get_text(" ", strip=True))
     combined = row["title"] + " " + text
     if not is_target_notice(combined):
+        REJECTIONS["not_target"] += 1
         return None
     row["organization"] = infer_organization(row["title"], text, row.get("organization", "기관명 확인 필요"))
 
@@ -159,18 +162,22 @@ def enrich(row):
                 text, re.IGNORECASE
             )
             if not deadline or not row.get("postedAt"):
+                REJECTIONS["date_not_found"] += 1
                 return None
             row["openDate"] = row["postedAt"]
             row["closeDate"] = parse_date(deadline.group(1))
     if not row["openDate"] or not row["closeDate"]:
+        REJECTIONS["invalid_date"] += 1
         return None
     start = date.fromisoformat(row["openDate"])
     end = date.fromisoformat(row["closeDate"])
     # Reject dates from unrelated annual schedules, archives or malformed notices.
     # Recruitment periods should be plausible relative to the notice's posting date.
     if end < start or (end - start).days > 120:
+        REJECTIONS["implausible_period"] += 1
         return None
     if end < date.today() or start > date.today():
+        REJECTIONS["closed_or_not_started"] += 1
         return None
     if row.get("postedAt"):
         try:
@@ -254,7 +261,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v4|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v5|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -299,15 +306,16 @@ def main():
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sourcePolicy": CONFIG["policy"],
-        "filterPolicy": "공식 기관 홈페이지 및 등록된 사회복지 전문 채용게시판의 원문에서 통합돌봄 관련 문구와 접수기간 시작일·마감일이 모두 확인되고, 마감일이 지나지 않은 채용공고만 표시",
+        "filterPolicy": "공식 기관 홈페이지 및 등록된 사회복지 전문 채용게시판의 원문에서 통합돌봄 관련 문구와 접수기간 또는 게시일과 명시된 마감일이 확인되고, 마감일이 지나지 않은 채용공고만 표시",
         "sourceCount": len(CONFIG["sources"]),
         "sources": source_status,
         "checkedCandidates": checked,
-        "stats": {"candidateCount": len(unique_rows), "detailPagesFetched": checked_count, "cachedCandidatesSkipped": skipped_count},
+        "stats": {"candidateCount": len(unique_rows), "detailPagesFetched": checked_count, "cachedCandidatesSkipped": skipped_count, "rejectionReasons": dict(REJECTIONS)},
         "jobs": jobs
     }
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("기관 홈페이지", len(CONFIG["sources"]), "곳 확인 / 신규·변경 상세페이지", checked_count, "건 / 캐시 활용", skipped_count, "건 / 유효 공고", len(jobs), "건")
+    print("공고 제외 사유:", json.dumps(dict(REJECTIONS), ensure_ascii=False))
     print("기관별 확인 결과:", json.dumps(source_status, ensure_ascii=False))
 
 if __name__ == "__main__":
