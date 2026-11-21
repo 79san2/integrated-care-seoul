@@ -149,10 +149,19 @@ def enrich(row):
             if re.search(r"[~〜～-]", between) and re.search(r"접수|모집|원서|지원", before):
                 found = (dates[i].group(), dates[i+1].group())
                 break
-        if not found:
-            return None
-        row["openDate"] = parse_date(found[0])
-        row["closeDate"] = parse_date(found[1])
+        if found:
+            row["openDate"] = parse_date(found[0])
+            row["closeDate"] = parse_date(found[1])
+        else:
+            # 시작일이 생략된 공고는 명시된 마감일과 게시일이 모두 있을 때만 인정
+            deadline = re.search(
+                r"(?:접수\s*마감|모집\s*마감|지원\s*마감|마감\s*일(?:시)?|접수\s*기한|제출\s*기한)[^0-9]{0,35}(" + DATE_TOKEN + r")",
+                text, re.IGNORECASE
+            )
+            if not deadline or not row.get("postedAt"):
+                return None
+            row["openDate"] = row["postedAt"]
+            row["closeDate"] = parse_date(deadline.group(1))
     if not row["openDate"] or not row["closeDate"]:
         return None
     start = date.fromisoformat(row["openDate"])
