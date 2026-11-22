@@ -18,23 +18,92 @@ body{background:#f5f7f8}button,a{-webkit-tap-highlight-color:transparent}button:
 <body>
 <header class="hero"><div class="hero-inner"><a class="back" href="./">← 통합돌봄서비스 기관정보로</a><h1>서울지역 통합돌봄 채용공고</h1><p>최중증 발달장애인 통합돌봄서비스 종사자 채용정보</p></div></header>
 <main>
- <div class="job-summary"><strong>서울 통합돌봄 채용정보</strong><p>11월 기존 공고를 먼저 보여주고, 11월 21일부터 새로 올라온 공고는 신규로 표시합니다.</p></div>
+ <div class="job-summary"><strong>서울 통합돌봄 채용정보</strong><p>최근 30일 게시 공고를 확인할 수 있습니다.</p></div>
  <div class="toolbar"><span class="meta" id="checked">공고 자료 확인 중</span><div></div></div>
  <div class="source-status"><details><summary id="sourceSummary">기관별 수집 현황 확인 중</summary><div class="source-status-body"><div class="status-counts" id="sourceCounts"></div><div class="status-list" id="sourceList"></div><div class="status-extra"><div class="status-extra-title">외부 채용정보 게시판</div><div class="status-list" id="externalSourceList"></div></div><p class="foot">‘조건에 맞는 공고 미검출’은 자동 수집에서 발견되지 않았다는 뜻이며, 실제 공고가 없음을 보장하지 않습니다. ‘미연결’은 아직 수집 대상에 연결되지 않은 기관입니다.</p></div></details></div>
- <div class="filters"><input id="q" placeholder="기관명 또는 모집직종 검색"><select id="status"><option value="all">전체 공고</option><option value="new">최근 7일</option></select></div>
+ <div class="filters"><input id="q" aria-label="기관명 또는 모집직종 검색" placeholder="기관명 또는 모집직종 검색"><select id="status" aria-label="게시 기간"><option value="all">최근 30일</option><option value="new">최근 7일</option></select></div>
  <div class="list" id="list"><div class="empty">채용공고 자료를 불러오고 있습니다.</div></div>
- <p class="foot">최중증 발달장애인 통합돌봄 관련 최근 채용공고를 표시합니다. 접수기간은 자동 확인하지 않으므로 모집 여부는 원문에서 확인해 주세요.</p>
+ <p class="foot">최중증 발달장애인 통합돌봄 관련 최근 채용공고를 표시합니다. 마감일이 확인된 공고는 마감 후 목록에서 제외합니다. 마감일 미확인 공고는 원문에서 확인해 주세요.</p>
 <nav class="mobile-bottom-nav" aria-label="하단 주요 메뉴"><a href="./"><span class="nav-icon" aria-hidden="true">⌕</span>기관 찾기</a><a href="./?view=statistics"><span class="nav-icon" aria-hidden="true">▥</span>운영현황</a><a class="active" href="./jobs.html" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span>채용공고</a></nav>
 </main>
 <script>
-const $=s=>document.querySelector(s);let jobs=[],seen=new Set();
+const $=s=>document.querySelector(s);let jobs=[],loading=false;
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function dateText(s){if(!s)return '미확인';const d=new Date(s+'T00:00:00');return Number.isNaN(d.getTime())?s:d.toLocaleDateString('ko-KR')}
 function normOrg(s){return String(s||'').replace(/\s+/g,'').replace(/[·ㆍ()（）]/g,'').replace('서울특별시립','서울시립').toLowerCase()}
-function renderSources(data){const orgs=Array.isArray(data.organizations)?data.organizations:[];const sources=Array.isArray(data.sources)?data.sources:[];const externalNames=['복지넷','한국사회복지사협회','서울시장애인복지관협회'];const institutionSources=sources.filter(s=>!externalNames.includes(s.organization));const external=sources.filter(s=>externalNames.includes(s.organization));const findSource=name=>institutionSources.find(s=>{const a=normOrg(s.organization),b=normOrg(name);return a===b||a.includes(b)||b.includes(a)});let connected=0,errors=0,unconnected=0,noPostings=0;const html=orgs.map(name=>{const s=findSource(name);if(!s){unconnected++;return '<div class="status-item"><div class="status-name">'+esc(name)+'</div><div class="status-state pending">미연결 · 수집 대상에 추가 필요</div></div>'}if(s.status==='error'||s.status==='board_not_found'){errors++;return '<div class="status-item"><div class="status-name">'+esc(name)+'</div><div class="status-state error">수집 오류 · 홈페이지 연결 확인 필요</div></div>'}connected++;const has=jobs.some(j=>normOrg(j.organization)===normOrg(name));if(!has)noPostings++;return '<div class="status-item"><div class="status-name">'+esc(name)+'</div><div class="status-state ok">'+(has?'정상 연결 · 관련 공고 표시 중':'연결 확인 · 조건에 맞는 공고 미검출')+'</div></div>'}).join('');$('#sourceSummary').textContent='기관별 수집 현황 · '+orgs.length+'개 기관';$('#sourceCounts').innerHTML='<span class="status-count">정상 연결 '+connected+'개</span><span class="status-count">수집 오류 '+errors+'개</span><span class="status-count">미연결 '+unconnected+'개</span><span class="status-count">관련 공고 없음 '+noPostings+'개</span>';$('#sourceList').innerHTML=html;$('#externalSourceList').innerHTML=external.map(s=>{const state=s.status==='error'?'수집 오류':Number(s.itemsFound||0)===0?'정상 연결 · 확인된 게시물 0건':'정상 연결';const cls=s.status==='error'?'error':'ok';return '<div class="status-item"><div class="status-name">'+esc(s.organization)+'</div><div class="status-state '+cls+'">'+state+'</div></div>'}).join('')||'<div class="status-item">등록된 외부 게시판이 없습니다.</div>'}
-function render(){const q=$('#q').value.trim().toLowerCase(),mode=$('#status').value;const now=new Date();const sorted=[...jobs].sort((a,b)=>String(b.postedAt||'').localeCompare(String(a.postedAt||'')));const latestByOrg=new Map();sorted.forEach(j=>{const org=normOrg(j.organization||'기관 미확인');if(!latestByOrg.has(org))latestByOrg.set(org,j)});const arr=[...latestByOrg.values()].filter(j=>(!q||[j.organization,j.title,j.position].join(' ').toLowerCase().includes(q))).filter(j=>{if(mode!=='new')return true;if(!j.postedAt)return false;const age=(now-new Date(j.postedAt+'T00:00:00'))/86400000;return age>=0&&age<=7});
-$('#list').innerHTML=arr.length?arr.map(j=>{const isNew=j.postedAt&&j.postedAt>='2026-11-21'&&(Date.now()-new Date(j.postedAt).getTime()<7*86400000);return '<article class="job"><div class="jobtop"><h2>'+esc(j.organization)+' · '+esc(j.title)+'</h2>'+(isNew?'<span class="new">NEW</span>':'')+'</div><div class="detail">모집직종: '+esc(j.position||'공고 원문 확인')+'<br>게시일: '+dateText(j.postedAt)+'</div><a class="source" href="'+esc(j.url)+'" target="_blank" rel="noopener">공고 원문 보기 ↗</a></article>'}).join(''):'<div class="empty">현재 수집된 최근 통합돌봄서비스 채용공고가 없습니다.<br>공고 수집 결과를 확인 중입니다.</div>'}
-async function load(){try{const r=await fetch('./jobs.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('자료 요청 실패');const data=await r.json();const incoming=Array.isArray(data.jobs)?data.jobs:[];let sourceConfig={organizations:[],sources:[]};try{const sr=await fetch("./sources.json?ts="+Date.now(),{cache:"no-store"});if(sr.ok)sourceConfig=await sr.json()}catch(e){}jobs=incoming;renderSources({organizations:sourceConfig.organizations||[],sources:Array.isArray(data.sources)?data.sources:[]});const key='integrated-care-seoul-seen-jobs-v1';let known=[];try{known=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}const initialized=localStorage.getItem(key+'-ready')==='1';const fresh=initialized?incoming.filter(j=>j.id&&!known.includes(j.id)&&j.postedAt>='2026-11-21'):[];const merged=[...new Set([...known,...incoming.map(j=>j.id).filter(Boolean)])].slice(-1000);localStorage.setItem(key,JSON.stringify(merged));localStorage.setItem(key+'-ready','1');$('#checked').textContent='자료 확인일: '+(data.lastChecked||'아직 수집 전');render();if(fresh.length&&'Notification'in window&&Notification.permission==='granted'){fresh.forEach(j=>new Notification('새 채용공고: '+j.organization,{body:j.title,icon:'./icon.svg'}))}}catch(e){$('#checked').textContent='공고 자료 연결 확인 필요';$('#list').innerHTML='<div class="empty">채용공고 자료를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</div>'}}
+function renderSources(data){const orgs=Array.isArray(data.organizations)?data.organizations:[];const sources=Array.isArray(data.sources)?data.sources:[];const externalNames=['복지넷','한국사회복지사협회','서울시장애인복지관협회'];const institutionSources=sources.filter(s=>!externalNames.includes(s.organization));const external=sources.filter(s=>externalNames.includes(s.organization));const findSource=name=>institutionSources.find(s=>{const a=normOrg(s.organization),b=normOrg(name);return a===b||a.includes(b)||b.includes(a)});let connected=0,errors=0,unconnected=0,noPostings=0;const html=orgs.map(name=>{const s=findSource(name);if(!s){unconnected++;return '<div class="status-item"><div class="status-name">'+esc(name)+'</div><div class="status-state pending">미연결 · 수집 대상에 추가 필요</div></div>'}if(s.status==='error'||s.status==='board_not_found'){errors++;return '<div class="status-item"><div class="status-name">'+esc(name)+'</div><div class="status-state error">수집 오류 · 홈페이지 연결 확인 필요</div></div>'}connected++;const has=jobs.some(j=>normOrg(j.organization)===normOrg(name));if(!has)noPostings++;return '<div class="status-item"><div class="status-name">'+esc(name)+'</div><div class="status-state ok">'+(has?'정상 연결 · 관련 공고 표시 중':'연결 확인 · 조건에 맞는 공고 미검출')+'</div></div>'}).join('');$('#sourceSummary').textContent='기관별 수집 현황 · '+orgs.length+'개 기관';$('#sourceCounts').innerHTML='<span class="status-count">정상 연결 '+connected+'개</span><span class="status-count">수집 오류 '+errors+'개</span><span class="status-count">미연결 '+unconnected+'개</span><span class="status-count">관련 공고 미검출 '+noPostings+'개</span>';$('#sourceList').innerHTML=html;$('#externalSourceList').innerHTML=external.map(s=>{const state=['error','board_not_found'].includes(s.status)?'수집 오류':Number(s.itemsFound||0)===0?'정상 연결 · 확인된 게시물 0건':'정상 연결';const cls=['error','board_not_found'].includes(s.status)?'error':'ok';return '<div class="status-item"><div class="status-name">'+esc(s.organization)+'</div><div class="status-state '+cls+'">'+state+'</div></div>'}).join('')||'<div class="status-item">등록된 외부 게시판이 없습니다.</div>'}
+const seoulDate=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'});
+const dayMs=86400000;
+function ageInDays(date,today){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date||''))return NaN;
+ return (Date.parse(today)-Date.parse(date))/dayMs;
+}
+function visibleJobs(incoming,today){
+ const latest=new Map();
+ const sorted=incoming.filter(j=>{
+  const age=ageInDays(j.postedAt,today);
+  return age>=0&&age<30&&!(ageInDays(j.closeDate,today)>0);
+ }).sort((a,b)=>b.postedAt.localeCompare(a.postedAt));
+ for(const job of sorted){
+  const org=normOrg(job.organization);
+  if(!latest.has(org))latest.set(org,job);
+ }
+ return [...latest.values()];
+}
+function render(){
+ const query=$('#q').value.trim().toLowerCase();
+ const recent=$('#status').value==='new';
+ const today=seoulDate.format(new Date());
+ const list=jobs.filter(j=>(!recent||ageInDays(j.postedAt,today)<7)
+  &&[j.organization,j.title,j.position].join(' ').toLowerCase().includes(query));
+ $('#list').innerHTML=list.length?list.map(j=>{
+  const isNew=ageInDays(j.postedAt,today)<7;
+  const link=/^https?:\/\//i.test(j.url||'')?'<a class="source" href="'+esc(j.url)+'" target="_blank" rel="noopener">공고 원문 보기 ↗</a>':'';
+  return '<article class="job"><div class="jobtop"><h2>'+esc(j.organization)+' · '+esc(j.title)+'</h2>'
+   +(isNew?'<span class="new">최근 7일</span>':'')+'</div><div class="detail">모집직종: '+esc(j.position||'공고 원문 확인')
+   +'<br>게시일: '+esc(dateText(j.postedAt))+'<br>마감일: '+esc(dateText(j.closeDate))+'</div>'+link+'</article>';
+ }).join(''):'<div class="empty">'+(query||recent?'선택한 조건에 맞는 공고가 없습니다.':'최근 30일간 수집된 표시 대상 공고가 없습니다.')+'</div>';
+}
+async function load(){
+ if(loading)return;
+ loading=true;
+ try{
+  const r=await fetch('./jobs.json',{cache:'no-store'});
+  if(!r.ok)throw Error('자료 요청 실패');
+  const data=await r.json();
+  if(!Array.isArray(data.jobs))throw Error('공고 자료 형식 오류');
+  const today=seoulDate.format(new Date());
+  jobs=visibleJobs(data.jobs,today);
+  const checked=new Date(data.lastChecked||'');
+  $('#checked').textContent='자료 확인일: '+(Number.isNaN(checked.getTime())?'미확인':checked.toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}));
+  render();
+  let sourceConfig={};
+  try{
+   const sr=await fetch('./sources.json',{cache:'no-store'});
+   if(sr.ok)sourceConfig=await sr.json();
+  }catch{}
+  renderSources({organizations:sourceConfig.organizations||[],sources:Array.isArray(data.sources)?data.sources:[]});
+  try{
+   const key='integrated-care-seoul-seen-jobs-v1';
+   const stored=JSON.parse(localStorage.getItem(key)||'[]');
+   const known=new Set(Array.isArray(stored)?stored:[]);
+   const fresh=localStorage.getItem(key+'-ready')==='1'
+    ?jobs.filter(j=>j.id&&!known.has(j.id)&&ageInDays(j.postedAt,today)<7):[];
+   for(const job of jobs)if(job.id)known.add(job.id);
+   localStorage.setItem(key,JSON.stringify([...known].slice(-1000)));
+   localStorage.setItem(key+'-ready','1');
+   if(fresh.length&&'Notification'in window&&Notification.permission==='granted'){
+    const registration=await navigator.serviceWorker?.getRegistration();
+    if(registration)await Promise.all(fresh.map(j=>registration.showNotification('새 채용공고: '+j.organization,{
+     body:j.title,icon:'./icon.svg',tag:j.id,data:{url:'./jobs.html'}
+    })));
+   }
+  }catch{}
+ }catch{
+  $('#checked').textContent='공고 자료 연결 확인 필요';
+  if(!jobs.length)$('#list').innerHTML='<div class="empty">채용공고 자료를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</div>';
+ }finally{loading=false}
+}
 $('#q').addEventListener('input',render);$('#status').addEventListener('change',render);
 load();setInterval(load,5*60*1000);
 window.addEventListener('pageshow',load);
