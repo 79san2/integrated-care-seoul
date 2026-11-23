@@ -38,6 +38,42 @@ input,select{width:100%;border:1px solid #dce5e1;background:white;border-radius:
 /* 2026 mobile dashboard redesign */
 :root{--green:#166b5c;--deep:#143f37;--mint:#e8f5ef}body{background:#f3f6f5}.hero{background:#103f37;color:#fff;border:0;padding:24px max(18px,calc((100vw - 1120px)/2)) 34px}.hero h1{font-size:23px;letter-spacing:-.8px}.hero p{color:#d2e6df}.brandmark{background:#ffffff20;color:#fff}.topmeta{display:none}.dashboard{position:relative;margin:-23px 0 18px;background:#fff;border-radius:24px;padding:20px;box-shadow:0 10px 30px #113e3614}.dashboard-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.dashboard-eyebrow{font-size:11px;font-weight:800;letter-spacing:.3px;color:#16806b}.dashboard h2{font-size:22px;letter-spacing:-.9px;margin:5px 0 5px;color:#143f37}.dashboard-desc{font-size:12px;color:#7a8a84;margin:0}.dashboard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}.dashboard-stat{background:#f2f7f5;border-radius:15px;padding:13px 11px}.dashboard-stat span{display:block;font-size:11px;color:#72857d}.dashboard-stat strong{display:block;margin-top:6px;font-size:23px;letter-spacing:-.8px;color:#164d42}.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:19px}.quick-action{border:1px solid #e5ece9;border-radius:17px;background:#fff;min-height:92px;padding:15px 10px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:9px;font-size:12px;font-weight:800;color:#24483f;box-shadow:0 3px 12px #173b3508}.quick-action .quick-icon{display:grid;place-items:center;background:#e8f5ef;border-radius:13px;width:39px;height:39px;font-size:22px;color:#166b5c}.quick-action:nth-child(2) .quick-icon{background:#eef1fc;color:#5765a2}.quick-action:nth-child(3) .quick-icon{background:#fff1e5;color:#a86b30}.type-chips{display:flex;gap:7px;overflow-x:auto;padding:1px 0 11px;scrollbar-width:none}.type-chip{white-space:nowrap;border:1px solid #dfe9e5;background:#fff;border-radius:100px;padding:11px 14px;font-size:12px;font-weight:750;color:#547269}.type-chip.active{background:#176b5d;border-color:#176b5d;color:#fff}.search-heading{font-size:17px;font-weight:850;letter-spacing:-.4px;margin:13px 0 11px}.app-intro{display:none}.nav{display:none}.section-head{margin:18px 2px 11px}.filters{grid-template-columns:minmax(200px,1.6fr) repeat(2,minmax(130px,1fr))}.filters #type{display:none}.orgcard{border:1px solid #e7eeea;box-shadow:0 3px 15px #123e3509}.orgcard h3{font-size:17px}.mobile-bottom-nav{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;z-index:90;bottom:0;left:0;right:0;padding:8px 12px calc(9px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e3ebe7}.mobile-bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:0;background:transparent;color:#7a8b85;font-size:11px;font-weight:700;min-height:49px;border-radius:12px}.mobile-bottom-nav button.active{color:#176b62;background:#e9f5ef}.mobile-bottom-nav .nav-icon{font-size:21px}.mobile-bottom-nav button:focus-visible,.quick-action:focus-visible,.type-chip:focus-visible{outline:3px solid #75b8a9;outline-offset:2px}main{padding-bottom:110px}
 @media(max-width:760px){.hero{padding:24px 18px 39px}.dashboard{margin-top:-24px;padding:19px 17px}.dashboard h2{font-size:21px}.dashboard-stat{padding:12px 9px}.dashboard-stat strong{font-size:22px}.quick-actions{gap:8px}.quick-action{min-height:88px;padding:12px 5px;font-size:11px}.filters{grid-template-columns:1fr 1fr}.filters #search{grid-column:1/-1}.filters #sort{display:none}.section-head h2{font-size:18px}}
+
+:root{--deep:#103832;--green:#176655;--muted:#526962;--line:#dce8e2}
+body{background:#f3f7f5;color:#132f29}
+.hero{background:#103832;color:#fff;border:0}
+.hero h1{letter-spacing:-.035em}
+.hero p,.hero .back{color:#d3e8e0}
+input,select{min-height:46px;border-color:var(--line)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #438b79;outline-offset:2px}
+@media(max-width:760px){
+ .mobile-bottom-nav{background:#103832;border-top:0;box-shadow:0 -4px 20px #10383224}
+ .mobile-bottom-nav :is(a,button){color:#d3e8e0}
+ .mobile-bottom-nav :is(a,button).active{color:#103832;background:#dbf2e8}
+ .mobile-bottom-nav .nav-icon{font-size:20px}
+ input,select,.filters input{font-size:16px}
+}
+.hero{padding-bottom:38px}
+.dashboard{padding:14px 18px;border:1px solid var(--line);border-radius:18px;margin-bottom:18px}
+.dashboard-stats{margin-top:11px}
+.dashboard-stat{padding:8px 10px;border-radius:9px}
+.dashboard-stat span,.dashboard-desc{color:var(--muted)}
+.dashboard-stat strong{font-size:20px;margin-top:3px}
+.search-heading{font-size:20px;font-weight:800;margin-bottom:10px}
+.type-chips{margin-bottom:9px}
+.type-chips button{min-height:42px}
+.orgcard{border-radius:16px;box-shadow:0 4px 16px #1038320a}
+.orgcard h3{font-size:17px;line-height:1.4}
+.orgcard .addressline,.orgcard .contactline>div{background:#f0f6f2}
+.contactline a{display:inline-flex;align-items:center;min-height:42px}
+.orgcard .actions>a{display:inline-flex;align-items:center;min-height:44px;font-weight:750}
+@media(max-width:760px){
+ .hero{padding:20px 16px 33px}
+ .hero h1{font-size:21px}
+ .dashboard{margin:-20px 0 15px;padding:12px}
+ .filters{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .filters #sort{display:block}
+}
 </style>
 </head>
 <body>
@@ -48,10 +84,10 @@ input,select{width:100%;border:1px solid #dce5e1;background:white;border-radius:
  <button class="active" data-view="directory">기관 찾기</button><button data-view="statistics">통계</button><button type="button" id="jobsNav">채용공고</button>
 </nav>
 
-<section class="dashboard" aria-label="앱 홈 요약"><div class="dashboard-head"><div><span class="dashboard-eyebrow">SEOUL INTEGRATED CARE</span><h2>서울 통합돌봄 한눈에</h2><p class="dashboard-desc" id="dashboardUpdated">기관 정보 불러오는 중</p></div><button id="installQuick" class="install-app" type="button" hidden>설치</button></div><div class="dashboard-stats"><div class="dashboard-stat"><span>등록 기관</span><strong id="homeTotal">—</strong></div><div class="dashboard-stat"><span>주간 개별</span><strong id="homeIndividual">—</strong></div><div class="dashboard-stat"><span>확인된 연락처</span><strong id="homePhones">—</strong></div></div></section><div class="quick-actions"><button class="quick-action" type="button" id="quickFind"><span class="quick-icon">⌕</span>기관 검색</button><button class="quick-action" type="button" id="quickStats"><span class="quick-icon">▥</span>운영현황</button><button class="quick-action" type="button" id="quickJobs"><span class="quick-icon">▤</span>채용공고</button></div><div class="app-intro"><div><strong>필요한 기관 정보를 빠르게 찾아보세요</strong><p>기관 연락처 · 위치 · 이용인 현황</p></div><span class="intro-icon" aria-hidden="true">⌕</span></div>
+<section class="dashboard" aria-label="앱 홈 요약"><div class="dashboard-head"><div><p class="dashboard-desc" id="dashboardUpdated">기관 정보 불러오는 중</p></div><button id="installQuick" class="install-app" type="button" hidden>설치</button></div><div class="dashboard-stats"><div class="dashboard-stat"><span>등록 기관</span><strong id="homeTotal">—</strong></div><div class="dashboard-stat"><span>주간 개별</span><strong id="homeIndividual">—</strong></div><div class="dashboard-stat"><span>확인된 연락처</span><strong id="homePhones">—</strong></div></div></section>
 <section class="view active" id="directory">
  <div class="section-head"><div><h2>기관 찾기</h2><p id="resultCount">기관 정보를 검색하고 연락처와 위치를 확인합니다.</p></div></div>
- <div class="search-heading">기관 검색</div><div class="type-chips" aria-label="서비스 유형 빠른 선택"><button class="type-chip active" type="button" data-type="">전체</button><button class="type-chip" type="button" data-type="24시간형">24시간형</button><button class="type-chip" type="button" data-type="주간 개별 1:1">주간 개별 1:1</button><button class="type-chip" type="button" data-type="주간 그룹 1:1">주간 그룹 1:1</button></div><div class="filters"><input id="search" placeholder="기관명·주소·자치구 검색"><select id="type"><option value="">전체 서비스 유형</option><option>24시간형</option><option>주간 개별 1:1</option><option>주간 그룹 1:1</option></select><select id="district"><option value="">서울 전체 자치구</option></select><select id="sort"><option value="name">기관명순</option><option value="district">자치구순</option></select></div>
+ <div class="search-heading">기관 검색</div><div class="type-chips" aria-label="서비스 유형 빠른 선택"><button class="type-chip active" type="button" data-type="">전체</button><button class="type-chip" type="button" data-type="24시간형">24시간형</button><button class="type-chip" type="button" data-type="주간 개별 1:1">주간 개별 1:1</button><button class="type-chip" type="button" data-type="주간 그룹 1:1">주간 그룹 1:1</button></div><div class="filters"><input id="search" type="search" aria-label="기관명·주소·자치구 검색" placeholder="기관명·주소·자치구 검색"><select id="type" aria-label="서비스 유형"><option value="">전체 서비스 유형</option><option>24시간형</option><option>주간 개별 1:1</option><option>주간 그룹 1:1</option></select><select id="district" aria-label="자치구"><option value="">서울 전체 자치구</option></select><select id="sort" aria-label="정렬 순서"><option value="name">기관명순</option><option value="district">자치구순</option></select></div>
  <div class="cards" id="orgList"></div>
 </section>
 <section class="view" id="statistics">
@@ -102,7 +138,6 @@ function render(){
 }
 ['#search','#type','#district','#sort'].forEach(s=>$(s).addEventListener('input',render));
 document.querySelectorAll('.type-chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.type-chip').forEach(x=>x.classList.toggle('active',x===b));$('#type').value=b.dataset.type;render()}));
-document.getElementById('quickFind').addEventListener('click',()=>{switchView('directory');document.getElementById('search').focus()});document.getElementById('quickStats').addEventListener('click',()=>switchView('statistics'));document.getElementById('quickJobs').addEventListener('click',()=>location.href='./jobs.html');
 fetch('./auto-update-report.json?ts='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(a=>{const d=document.getElementById('autoUpdateSummary');if(!d)return;const date=a.checkedAt?new Date(a.checkedAt).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}):'미확인';d.textContent='자동 수집 '+date+' · 확인 후 반영 '+(a.updated||[]).length+'건 · 수치 검증 대기 '+(a.candidates||[]).length+'건 · 출처 확인 보류 '+(a.skipped||[]).length+'건';}).catch(()=>{});
 fetch('./audit-report.json?ts='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(a=>{const d=document.getElementById('auditSummary');if(!d)return;d.textContent='최근 점검: '+new Date(a.checkedAt).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'})+' · 점검 '+a.totalRecords+'건 · 공식 출처 접속 '+a.reachable+'건 · 접속 오류 '+a.errors+'건. 확인되지 않은 기관별 수치는 임의로 변경하지 않습니다.'}).catch(()=>{});
 setup();
