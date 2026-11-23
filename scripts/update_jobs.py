@@ -178,6 +178,10 @@ def enrich(row):
     # 접수기간은 필수 조건이 아닙니다. 게시일을 우선하며, 없으면 미확인으로 표시합니다.
     row["openDate"] = ""
     row["closeDate"] = ""
+    # 공고 자체가 마감/종료되었다고 명시한 경우 제외합니다.
+    if re.search(r"(?:채용|모집|접수|공고)\\s*(?:이|가)?\\s*(?:마감|종료|완료)", text[:3500]):
+        REJECTIONS["explicitly_closed"] += 1
+        return None
     # 공고 본문에서 접수 마감일을 찾을 수 있으면 이미 마감된 공고는 제외합니다.
     deadline_match = re.search(
         r"(?:접수기간|채용기간|모집기간|원서접수|서류접수|접수마감|마감일)[^\n]{0,110}",
@@ -275,7 +279,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v17|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v18|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -289,13 +293,8 @@ def main():
                 recent_negative_cache = False
         cache_hit = cache_fingerprint == fingerprint and recent_negative_cache and not cache_has_job
         if cache_hit:
+            # 최근 부적합 판정만 재조회 생략하며, 기존 공고는 되살리지 않습니다.
             skipped_count += 1
-            if cached_job:
-                try:
-                    if not cached_job.get("postedAt") or date.fromisoformat(cached_job["postedAt"]) >= date(2026, 11, 1):
-                        active_jobs[cached_job["id"]] = cached_job
-                except (KeyError, ValueError):
-                    pass
             continue
 
         try:
