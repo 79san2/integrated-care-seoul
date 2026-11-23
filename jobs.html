@@ -13,16 +13,36 @@
 /* Native-like mobile presentation */
 body{background:#f5f7f8}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #75b8a9;outline-offset:2px}.hero{background:#fff;color:#143c36;border-bottom:1px solid #e4ebe8}.hero p,.back{color:#6b8079}.hero h1{font-size:21px}.job,.source-status,.notice{border-radius:18px;box-shadow:0 3px 18px #173b350a}.job{padding:18px}.job h2{font-size:16px}.source{min-height:43px;display:inline-flex;align-items:center}.toolbar .btn{min-height:42px}.mobile-bottom-nav{display:none}.job-summary{background:#eaf4f0;border-radius:16px;padding:15px 17px;margin:0 0 14px}.job-summary strong{color:#194d42;font-size:14px}.job-summary p{color:#668078;font-size:11px;margin:5px 0 0}.status-item{border-radius:12px}.filters input,.filters select{min-height:46px}
 @media(max-width:760px){.hero{padding:17px 18px}.back{margin-bottom:10px}.hero h1{font-size:20px}main{padding:15px 14px 105px}.toolbar{align-items:flex-start}.toolbar>div{display:flex;gap:6px}.toolbar .btn{font-size:11px;padding:9px}.mobile-bottom-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:fixed;z-index:90;bottom:0;left:0;right:0;padding:8px 12px calc(9px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e3ebe7;box-shadow:0 -5px 25px #143c3612}.mobile-bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:#7a8b85;font-size:11px;font-weight:700;min-height:49px;border-radius:12px}.mobile-bottom-nav a.active{color:#176b62;background:#e9f5ef}.mobile-bottom-nav .nav-icon{font-size:21px;line-height:1}.filters{grid-template-columns:1fr}}
+
+:root{--deep:#103832;--green:#176655;--muted:#526962;--line:#dce8e2}
+body{background:#f3f7f5;color:#132f29}
+.hero{background:#103832;color:#fff;border:0}
+.hero h1{letter-spacing:-.035em}
+.hero p,.hero .back{color:#d3e8e0}
+input,select{min-height:46px;border-color:var(--line)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #438b79;outline-offset:2px}
+@media(max-width:760px){
+ .mobile-bottom-nav{background:#103832;border-top:0;box-shadow:0 -4px 20px #10383224}
+ .mobile-bottom-nav :is(a,button){color:#d3e8e0}
+ .mobile-bottom-nav :is(a,button).active{color:#103832;background:#dbf2e8}
+ .mobile-bottom-nav .nav-icon{font-size:20px}
+ input,select,.filters input{font-size:16px}
+}
+.hero{padding-bottom:24px}
+.job{border-radius:16px}
+.detail{color:var(--muted);font-size:13px}
+.source{min-height:44px;background:#176655;color:#fff}
+.toolbar{margin-top:12px}
+.source-status{margin-top:18px}
 </style>
 </head>
 <body>
 <header class="hero"><div class="hero-inner"><a class="back" href="./">← 통합돌봄서비스 기관정보로</a><h1>서울지역 통합돌봄 채용공고</h1><p>최중증 발달장애인 통합돌봄서비스 종사자 채용정보</p></div></header>
 <main>
- <div class="job-summary"><strong>서울 통합돌봄 채용정보</strong><p>최근 30일 게시 공고를 확인할 수 있습니다.</p></div>
  <div class="toolbar"><span class="meta" id="checked">공고 자료 확인 중</span><div></div></div>
- <div class="source-status"><details><summary id="sourceSummary">기관별 수집 현황 확인 중</summary><div class="source-status-body"><div class="status-counts" id="sourceCounts"></div><div class="status-list" id="sourceList"></div><div class="status-extra"><div class="status-extra-title">외부 채용정보 게시판</div><div class="status-list" id="externalSourceList"></div></div><p class="foot">‘조건에 맞는 공고 미검출’은 자동 수집에서 발견되지 않았다는 뜻이며, 실제 공고가 없음을 보장하지 않습니다. ‘미연결’은 아직 수집 대상에 연결되지 않은 기관입니다.</p></div></details></div>
  <div class="filters"><input id="q" aria-label="기관명 또는 모집직종 검색" placeholder="기관명 또는 모집직종 검색"><select id="status" aria-label="게시 기간"><option value="all">최근 30일</option><option value="new">최근 7일</option></select></div>
  <div class="list" id="list"><div class="empty">채용공고 자료를 불러오고 있습니다.</div></div>
+ <div class="source-status"><details><summary id="sourceSummary">기관별 수집 현황 확인 중</summary><div class="source-status-body"><div class="status-counts" id="sourceCounts"></div><div class="status-list" id="sourceList"></div><div class="status-extra"><div class="status-extra-title">외부 채용정보 게시판</div><div class="status-list" id="externalSourceList"></div></div><p class="foot">‘조건에 맞는 공고 미검출’은 자동 수집에서 발견되지 않았다는 뜻이며, 실제 공고가 없음을 보장하지 않습니다. ‘미연결’은 아직 수집 대상에 연결되지 않은 기관입니다.</p></div></details></div>
  <p class="foot">최중증 발달장애인 통합돌봄 관련 최근 채용공고를 표시합니다. 마감일이 확인된 공고는 마감 후 목록에서 제외합니다. 마감일 미확인 공고는 원문에서 확인해 주세요.</p>
 <nav class="mobile-bottom-nav" aria-label="하단 주요 메뉴"><a href="./"><span class="nav-icon" aria-hidden="true">⌕</span>기관 찾기</a><a href="./?view=statistics"><span class="nav-icon" aria-hidden="true">▥</span>운영현황</a><a class="active" href="./jobs.html" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span>채용공고</a></nav>
 </main>
