@@ -3,7 +3,7 @@ from collections import Counter
 import json
 import re
 import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from urllib.parse import urljoin, urlparse, urlunsplit
 
@@ -62,19 +62,19 @@ def fetch(url):
     from requests.exceptions import ConnectTimeout, ReadTimeout, SSLError, ConnectionError
     candidates = [url]
     if "bokji.net" in urlparse(url).netloc:
-        candidates.append(url.replace("https://www.bokji.net", "https://bokji.net"))
+        candidates.extend([url.replace("https://www.bokji.net", "https://bokji.net"), url.replace("https://", "http://"), url.replace("https://www.bokji.net", "http://bokji.net")])
     last_error = None
     for candidate in dict.fromkeys(candidates):
         for attempt in range(2):
             try:
-                response = SESSION.get(candidate, headers=HEADERS, timeout=(12, 25))
+                response = SESSION.get(candidate, headers=HEADERS, timeout=(20, 35))
                 response.raise_for_status()
                 response.encoding = response.apparent_encoding or response.encoding
                 return response.text
             except SSLError as exc:
                 last_error = exc
                 break
-            except (ConnectTimeout, ReadTimeout, ConnectionError) as exc:
+            except requests.RequestException as exc:
                 last_error = exc
                 if attempt == 0:
                     time.sleep(1)
@@ -165,7 +165,7 @@ def enrich(row):
         return None
     # 임시 안전장치: 사이트 공통 메뉴의 서비스 소개 문구로 오탐하지 않도록
     # 공고 제목에 통합돌봄 또는 최중증 발달장애인 관련 표현을 요구합니다.
-    if not any(k in title_compact for k in ("통합돌봄", "최중증발달장애인", "최중증", "제공인력")):
+    if not any(k in title_compact for k in ("통합돌봄", "최중증발달장애인", "최중증", "제공인력")) and not (article is not None and is_target_notice(text)):
         REJECTIONS["unverified_target_title"] += 1
         return None
     # 제목이 일반 '사회복지사 채용'이어도 본문에 서비스명이 명시되면 인정합니다.
@@ -197,7 +197,7 @@ def enrich(row):
     # 오래된 게시물은 제외합니다. 신규 공고 확인을 위한 최근 45일 기준.
     if row.get("postedAt"):
         try:
-            if date.fromisoformat(row["postedAt"]) < date(2026, 11, 1):
+            if date.fromisoformat(row["postedAt"]) < (date.today() - timedelta(days=45)):
                 REJECTIONS["older_than_45_days"] += 1
                 return None
         except ValueError:
@@ -279,7 +279,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v19|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v20|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
@@ -326,7 +326,7 @@ def main():
     payload = {
         "lastChecked": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sourcePolicy": CONFIG["policy"],
-        "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 2026년 11월 1일부터 등록된 공고를 표시하며, 11월 21일 이전 공고는 초기 자료로 구분합니다.",
+        "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 최근 45일 이내 등록된 공고를 표시합니다.",
         "sourceCount": len(CONFIG["sources"]),
         "sources": source_status,
         "checkedCandidates": checked,
