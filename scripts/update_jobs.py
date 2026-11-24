@@ -59,7 +59,7 @@ def canonicalize_url(url):
 
 def fetch(url):
     # 공개 채용게시판은 사이트별 접속 실패를 구분해 재시도합니다.
-    from requests.exceptions import ConnectTimeout, ReadTimeout, SSLError
+    from requests.exceptions import ConnectTimeout, ReadTimeout, SSLError, ConnectionError
     candidates = [url]
     if "bokji.net" in urlparse(url).netloc:
         candidates.append(url.replace("https://www.bokji.net", "https://bokji.net"))
@@ -71,14 +71,14 @@ def fetch(url):
                 response.raise_for_status()
                 response.encoding = response.apparent_encoding or response.encoding
                 return response.text
-            except (ConnectTimeout, ReadTimeout) as exc:
+            except SSLError as exc:
+                last_error = exc
+                break
+            except (ConnectTimeout, ReadTimeout, ConnectionError) as exc:
                 last_error = exc
                 if attempt == 0:
                     time.sleep(1)
-            except SSLError as exc:
-                # 인증서 검증은 유지하며, 오류를 수집상태에 남깁니다.
-                last_error = exc
-                break
+
     if last_error:
         raise last_error
     raise RuntimeError("No accessible recruitment listing URL")
@@ -179,7 +179,7 @@ def enrich(row):
     row["openDate"] = ""
     row["closeDate"] = ""
     # 공고 자체가 마감/종료되었다고 명시한 경우 제외합니다.
-    if re.search(r"(?:채용|모집|접수|공고)\\s*(?:이|가)?\\s*(?:마감|종료|완료)", text[:3500]):
+    if re.search(r"(?:채용|모집|접수|공고)\s*(?:이|가)?\s*(?:마감|종료|완료)", text[:3500]):
         REJECTIONS["explicitly_closed"] += 1
         return None
     # 공고 본문에서 접수 마감일을 찾을 수 있으면 이미 마감된 공고는 제외합니다.
@@ -279,7 +279,7 @@ def main():
     today = date.today()
 
     for url, row in unique_rows.items():
-        fingerprint = hashlib.sha256(("parser-v18|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
+        fingerprint = hashlib.sha256(("parser-v19|" + row["title"] + "|" + url).encode("utf-8")).hexdigest()
         cached_job = old_jobs.get(url)
         cache_entry = checked.get(url)
         cache_fingerprint = cache_entry.get("fingerprint") if isinstance(cache_entry, dict) else cache_entry
