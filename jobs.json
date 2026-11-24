@@ -1,5 +1,5 @@
 {
-  "lastChecked": "2026-11-23T02:15:16+00:00",
+  "lastChecked": "2026-11-24T02:15:06+00:00",
   "sourcePolicy": "기관 공식 채용게시판과 등록된 사회복지 전문 채용게시판(복지넷, 한국사회복지사협회, 서울시장애인복지관협회)을 함께 확인합니다. 외부 게시판은 통합돌봄서비스 관련 원문 공고만 선별합니다.",
   "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 2026년 11월 1일부터 등록된 공고를 표시하며, 11월 21일 이전 공고는 초기 자료로 구분합니다.",
   "sourceCount": 13,
@@ -74,7 +74,7 @@
       "organization": "정립회관",
       "url": "http://www.jeongnip.or.kr/",
       "status": "error",
-      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x7a2"
+      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x715"
     },
     {
       "organization": "도봉장애인종합복지관",
@@ -891,7 +891,7 @@
     },
     "http://www.egreen.or.kr/hire/517": {
       "fingerprint": "4b45c059399af5a48962ab8f930581bc44d16de6b45d0d89052831daf752b514",
-      "checkedAt": "2026-11-23",
+      "checkedAt": "2026-11-24",
       "hasJob": true
     },
     "http://www.egreen.or.kr/hire/514": {
@@ -1838,13 +1838,20 @@
       "fingerprint": "b78e335a70cd8d861362e0b7dfa00b4f90e9ed1790b27192966ef460c367cf75",
       "checkedAt": "2026-11-23",
       "hasJob": false
+    },
+    "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1239": {
+      "fingerprint": "8ec46690174c8ffe4e5283a1543db6fcf16d663f371cfc63e1ead0cbcaa33424",
+      "checkedAt": "2026-11-24",
+      "hasJob": false
     }
   },
   "stats": {
     "candidateCount": 179,
-    "detailPagesFetched": 1,
-    "cachedCandidatesSkipped": 178,
-    "rejectionReasons": {}
+    "detailPagesFetched": 2,
+    "cachedCandidatesSkipped": 177,
+    "rejectionReasons": {
+      "not_target": 1
+    }
   },
   "jobs": [
     {
