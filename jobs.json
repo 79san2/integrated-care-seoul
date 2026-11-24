@@ -1,7 +1,7 @@
 {
-  "lastChecked": "2026-11-24T21:22:09+00:00",
+  "lastChecked": "2026-11-24T21:31:15+00:00",
   "sourcePolicy": "기관 공식 채용게시판과 등록된 사회복지 전문 채용게시판(복지넷, 한국사회복지사협회, 서울시장애인복지관협회)을 함께 확인합니다. 외부 게시판은 통합돌봄서비스 관련 원문 공고만 선별합니다.",
-  "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 2026년 11월 1일부터 등록된 공고를 표시하며, 11월 21일 이전 공고는 초기 자료로 구분합니다.",
+  "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 최근 45일 이내 등록된 공고를 표시합니다.",
   "sourceCount": 13,
   "sources": [
     {
@@ -56,7 +56,7 @@
       "organization": "복지넷",
       "url": "https://www.bokji.net/job/off/01.bokji",
       "status": "error",
-      "message": "HTTPSConnectionPool(host='bokji.net', port=443): Max retries exceeded with url: /job/off/01.bokji (Caused by ConnectTimeoutError(<HTTPSConnection(host='bokji.net', port=443) at 0x7"
+      "message": "HTTPConnectionPool(host='bokji.net', port=80): Max retries exceeded with url: /job/off/01.bokji (Caused by ConnectTimeoutError(<HTTPConnection(host='bokji.net', port=80) at 0x79e90"
     },
     {
       "organization": "한국사회복지사협회",
@@ -74,7 +74,7 @@
       "organization": "정립회관",
       "url": "http://www.jeongnip.or.kr/",
       "status": "error",
-      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x7d4"
+      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x79e"
     },
     {
       "organization": "도봉장애인종합복지관",
@@ -85,27 +85,27 @@
   ],
   "checkedCandidates": {
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=567": {
-      "fingerprint": "4cdab045a6767eeedbca4f589fa5e4fdd43601ad5f1e004c5ad6ebe9815c3054",
+      "fingerprint": "16be613b9510023e8aea5bb4ab3951b9ef16ddc8b307f0d722d9239bfb20d361",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=565": {
-      "fingerprint": "2b3a8058621d03e785c5e57e031ef39a7c856c66abd6eabb21c1357747600919",
+      "fingerprint": "a5d0066c886b2e1669815e235e43639970cffc9b6a71c1fe0f094b292730985a",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=563": {
-      "fingerprint": "d395f301be41459e5479ec2bcd270a1e4a14d29aea2df454fb9ea99ccec318e4",
+      "fingerprint": "6f690c9d87a0c3a97d93abc8e2a3ab39213f944b71319e409a8a0181d946bfff",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=560": {
-      "fingerprint": "07acb79c227ad42ed9dd0b527856ef496228764d54267a269e13ee778437bba7",
+      "fingerprint": "6f811214c699167c5e39e1a7602f1ef2551c31019cce1482132ad136c28676de",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=558": {
-      "fingerprint": "fa9393258171c879e6cc44dd635a1d839ad6e1938a55243ced30c66ff3b11491",
+      "fingerprint": "7f7854d31ac27603fff3b800f193aed1d8347ef1c872975806589c12e32dc918",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
@@ -235,32 +235,32 @@
       "hasJob": false
     },
     "https://www.omni.or.kr/event": {
-      "fingerprint": "714a3e806af67f7d432fee80ba85e895470ed2aa4f92ee3d9301904fe6141d0e",
+      "fingerprint": "f1c06f2ab3e0d805040f79bce80685aa963c1721620bcaea1876c022f8a8884e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/619": {
-      "fingerprint": "2fdf8914e68a9dba6498f16ee441a6dc04f9e82aa8721f7e24a7db5bd64f6764",
+      "fingerprint": "342577866c043be41519244278bb5afed262c04ea78c14277a77af1e24a57b92",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/617": {
-      "fingerprint": "bb961e7d73bcc8a3bebca8fa7bcc615e50e87c4d42ec7168e1c63e0ae7b65147",
+      "fingerprint": "e7f8e997e2c7d863687e96d56994ab7b2f2ff4c865459537c64451ac9fd72465",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/611": {
-      "fingerprint": "07d5ddaba0bf8d964355aec1435a9d8f5db61b20099452a25b129f8c9ed36f56",
+      "fingerprint": "031dafd081dff39555bc686267ebcf950b7f510ab8b307b67a81ca6838efd56e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/608": {
-      "fingerprint": "bdc3bbfc2dd79f42d9dd84c76490382a700adb9cd0cbd319e88a81a505487aed",
+      "fingerprint": "e1c646d58b26c9ab9a87a8e0d66d93c5da086d1bea7ea24e5a14b355b0dd45dc",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/607": {
-      "fingerprint": "661aa0fff6118d0552c0f529c1353d2e7402cec7f041cdce9afddd26cde0e5f9",
+      "fingerprint": "90f7d922321e40ed7bcee909e382902e349a2deeb49fdc76a202b3894ffc74e2",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
@@ -385,42 +385,42 @@
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1237": {
-      "fingerprint": "e1e413414046d57adcbaedc6d9cff93c6c42c5cbe62f6eb8a9ae30c7db558293",
+      "fingerprint": "65403c6da32f956fc35f6d26ae3af4397c69a70c8ec38039a4f62f269f8a4279",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1236": {
-      "fingerprint": "82ac8bed447b4c86de8a45e1e3bf614b4c1b55ad91b0d3712bcf4ae39d81186e",
+      "fingerprint": "14b062cbed1b15118396df9047d9a319143d0ac9692e9878e8626a42c548e8d4",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1233": {
-      "fingerprint": "ad1c8a24b3ecbdd44692d70ab731c7135451b50b59840b08c783b931dd47304d",
+      "fingerprint": "d8825eb89de6320a1740a6df92e81d9a812f64b60ec6a2d97dbe52c2c37b695f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1231": {
-      "fingerprint": "76d415562a14e3f02b14b37520aa7d300f1dca367ee74c6a5281075f0c837840",
+      "fingerprint": "12d6c04238ab1e216bedb478485781a3e2c7d3b0ca025a3f5084159469bdd177",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1230": {
-      "fingerprint": "ba95ce3510cf77b20c45ce842fd98380e738b5cb426e2acb98c884f073d7c6b3",
+      "fingerprint": "1e67cc19ec3ad513fa379f2ece25ca295f64a74020f70511cfdf4413a8d3237e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1227": {
-      "fingerprint": "89d3e515e34bf1d80d84903356fafd09e914589ba3879f59121b8f1eda3a5bf8",
+      "fingerprint": "81e80d74c8e1e893cbc2a54aacebb6e3392aeb43612c7bceef005c0306cd3432",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1225": {
-      "fingerprint": "63ee73647c8cf631760b3447813ff8d7608be958dbf351efad56dedf138cb92c",
+      "fingerprint": "258440c620ebb4c29c48b7d2feecae85d591613b22901a8c7609606658410660",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1224": {
-      "fingerprint": "b5eb24f903cc4b177a918dad2eb6caaa3bb45e5c837446aa9f03354ee6da4ba0",
+      "fingerprint": "d172699a10abcabe78184b20369013e133d9b6b38b621d8d034bd173676fe3c0",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
@@ -600,37 +600,37 @@
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/content.php?co_id=020113": {
-      "fingerprint": "7c52c592e9873b4f2801543ce910c6018da569f928c7c2170b0f470f9cb34510",
+      "fingerprint": "e29a35a682f7ed027907d40bbfea418bbbfe677c16fc6c57ab690b969119f51d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=366": {
-      "fingerprint": "5f42caa078fdf9419b4eec5817d88557f7bd33565f5c8dd6196a61979426e040",
+      "fingerprint": "a6a9cc30f1a223357f92f301c45d2f76b33338716feedf9fafb6420aeb8bfea9",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=362": {
-      "fingerprint": "10cbd9269b0e8d26d21560c15a3856c5f1a169a8b5bc82d60516ee2181573f51",
+      "fingerprint": "3dd1a1a2989aed50d75b4dfe94be099316946064925c1038d3719247c1bfe86f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=360": {
-      "fingerprint": "e536c656be85f5295f7be4aa22ab1b0ed67876ecdcaca89fb626398ecfdc5c4e",
+      "fingerprint": "76d55065724249c964fbe222e46da7b6203a3cd350119815cc4925c60bd745a5",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=358": {
-      "fingerprint": "aa1c0c55ec64c52d1247d289eb180e1cd68d3db62e15b904bfe092dcd0eaf49b",
+      "fingerprint": "f0da52f6ad7f2fa29e0f83de29eb377395424ce595c78135ce820cfb915a6416",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=357": {
-      "fingerprint": "f0a328da4b4041564b913f2961106a07f545b4567666e0bd0e363934a0e5d1fc",
+      "fingerprint": "5e73d7ba1ba7cc22c5c4a90872146a3c63918c1fc44a94ed2ecac75a7ec99262",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=354": {
-      "fingerprint": "3c13642eaa9b3adcea319b6b5fa75b8e4d80f4f16199df7b4326ab17fd9640ba",
+      "fingerprint": "8c084cdc9afba1f21f6587085bc05c92bb7bd14cf07224ce62bffa26eb1e9f60",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
@@ -765,27 +765,27 @@
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1046": {
-      "fingerprint": "b5dc725d918471d3c990fe73ed9cc6db2e35fdb16b597373fd7a047b201c4160",
+      "fingerprint": "2cb302a5ab3a8c4756ac7721a9d221ff861ca1ae648a239e9d903e0b350c0c65",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1045": {
-      "fingerprint": "e1f4e198fd617f3b9678996d470b75ec9bbaadb6078c88e9c6e6456c20b140eb",
+      "fingerprint": "fe62d9b7266491c5a2d67f1c59ba7c39eb0ecf13b1bf5c0053b0812a7db90405",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1044": {
-      "fingerprint": "744ebb523c3e275569aaf7fbc22d5cf31a0c73650c8e2b5c633c60367dc53925",
+      "fingerprint": "3c74db502ca87bef65cdedd7a08376cc48a4534e6fd39a56ff897f574d8eb687",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1039": {
-      "fingerprint": "5e25d1a960b62d9d4287a8469aa46426cc210b0683d7eac5fe428acdc6617951",
+      "fingerprint": "888aa146ca312ce24c314dc05ddbbdce70380e95a22b65df55638c73337e4af9",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1038": {
-      "fingerprint": "d3445c45b1213d8f34dd95e503dcafe2fa973cb490bd71799abae6241164d34f",
+      "fingerprint": "21ecdfd536f998f0bc19cd902247c8efd797d85ddf3b24c3fd225f1535892144",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
@@ -885,57 +885,57 @@
       "hasJob": false
     },
     "http://www.egreen.or.kr/user": {
-      "fingerprint": "c2494dcaf6d9cb275b2629487744822c6c6721f7aebdd5a8827930fc4787e6c1",
+      "fingerprint": "52aa43a4204c9bce2cbec3fb5880d883cd3e1ca9d86c1839b0583a51dba6eb39",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/517": {
-      "fingerprint": "ab2814793944f156158467af8bf1afb815e13be6d4555784d36c79889860ddf5",
+      "fingerprint": "56d6d9bd651173467ae30024bf4c1ca31b89ee3de3abfd946e24ba66c136b1e8",
       "checkedAt": "2026-11-24",
       "hasJob": true
     },
     "http://www.egreen.or.kr/hire/514": {
-      "fingerprint": "6f70dd7d80b6f831b91a7b8204b78ca0df0c633334437c1381312346f95bcb38",
+      "fingerprint": "3897d5e7c40c3c41c759aaa259b2dec9d90ae6c2c104ba280fd25d4aa60948a4",
       "checkedAt": "2026-11-24",
-      "hasJob": false
+      "hasJob": true
     },
     "http://www.egreen.or.kr/hire/513": {
-      "fingerprint": "bde42fd737f62aae34d935b40ef41ce69f45845a5d991d3ded29bafbae2b96fe",
+      "fingerprint": "d7a4569acf6bd3848108ecac6e54cee79c1128f638302052644da3af2867afe1",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/512": {
-      "fingerprint": "40d6c6ced1788da6ef9e05838573e1745c1f4369de00ea1dcbf53333691d3408",
+      "fingerprint": "5b1c414f1698e4ef8195a2560500ca9215fab93bd42cb1529c58e59b9ea5fcae",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/511": {
-      "fingerprint": "7767675d9085ecc52a1897f070bb5ac3deb51f7c0662a6a4cbbba92080848cd5",
+      "fingerprint": "4cc1159b90e97e9215c80b85c6c1e88ce44d8af3ab470dc5bf4365ddc4ba4cdd",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/508": {
-      "fingerprint": "4a8c695b970e648b41031330afc5eadbe2d2fa60f08224309f051b0bfa8cda4c",
+      "fingerprint": "356ce1afab85e4540c0ca517d7f5a7204d0224c8a5f57c99022e1f3a17227410",
       "checkedAt": "2026-11-24",
-      "hasJob": false
+      "hasJob": true
     },
     "http://www.egreen.or.kr/hire/507": {
-      "fingerprint": "1abeb068a85e22df1d9510e78ad69ea73c41ea48d48db697963b2370b8db87f0",
+      "fingerprint": "eea7d47cac3d69d460bb0ebc16c639487b0a75ef79a266b454a7fde19dfcc553",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/505": {
-      "fingerprint": "52c21206154b278ca5f3963f50939c646e51e9d5c177731f65a2f807bbeaccb3",
+      "fingerprint": "cd03d2039eb149372002fb10f931cacb74afc40a7f7a8ef1ac4755c9ce3eeca8",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/503": {
-      "fingerprint": "65536dd11ddecd85a9daafc8b5008fe7390c16e1a36c6420cce5b21e3f64f2c4",
+      "fingerprint": "6ded109306cfa855c03bcb2da29911cfbb1b69b1f5f01633fef8c844a9d10a22",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/502": {
-      "fingerprint": "d40b2c694a8a617a107ab2d4a8f0c7755f845189530e10cbd672754fa8557de3",
+      "fingerprint": "54823be1f06ed613e3da358c85f9ad4c2c4f89c11db83cf7cceb0f4a0f243871",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
@@ -1155,512 +1155,512 @@
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/297": {
-      "fingerprint": "660b814c1d849ad21f2d2118267a11b138b2f5d9fa5d32ef644f55156c1b8870",
+      "fingerprint": "852f0955df88d1fe14dabe1457af90f8068ce2a9ffeaae0ad68a5dde7603c190",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/123": {
-      "fingerprint": "3d3f3f9f872e39401217e286d1cedb9d5a3ce01f78895ef1144608ae3b25e981",
+      "fingerprint": "024f0683a9e2f6f61b2bbec71336f23161b752c7f018c53009fc44c8bef54f95",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/124": {
-      "fingerprint": "1e311cfb192dcd7e2fb32f0f92c027cc957868005021f6cf80ecaf8d188e4da4",
+      "fingerprint": "1ff9e53f58ebb0ee3ff57dd932e84be6b170e269ca2b367a966153958307413d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/128": {
-      "fingerprint": "b499430cade325cceed309ea63451cf40ed18e4cd2b3188dcf87077eb27338b8",
+      "fingerprint": "342b2b5f0e0a980fae3305c5b88a8cbc2fa56d4f7e591b7042302c3171f1297d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/122": {
-      "fingerprint": "bc06bb7d506354c74fa04169d3aa30768d7c84894782327903b6f463bc55bad0",
+      "fingerprint": "0c6dc5e0d510f6e0391135c79e54490f475fa90cf6370abeaa523b7a610e2a2b",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/129": {
-      "fingerprint": "6d3fe60b9dca12f2c573c16cb4ff8443ea9ac9336c579092d5ba3dd35f5fe27d",
+      "fingerprint": "f774d56e77331b0bd5eea9e981170956917318738525e02105dc3d5effa5c663",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/193": {
-      "fingerprint": "07af97910cb045889b72f8cbff6b9725bc973b0624763104c71180e1474dc5c7",
+      "fingerprint": "92484fdc5119e203455b0bd6c207e1ad61b97724587ba654f5f9642468d206fb",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/268": {
-      "fingerprint": "94e6385f5e2d8bc9ffb938b2b36b9fc556618cfeb45e36cc65cdc5f4e6f167d3",
+      "fingerprint": "ae3de3b7fbf86b5589d223af67808bd7eb968386561c01d8411ab514dc3791ca",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/234": {
-      "fingerprint": "962ab65cc7c49d8b8c1efc0401f2b9e9b1517c10f3daaddd9f5b926a32747cd5",
+      "fingerprint": "f79c64c7fdb860ad2722244dde08ac5393b0ae27512fcc56f2713f242405194f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/171": {
-      "fingerprint": "3dcc8ae0fbcbba789a509979154c108194efb67d5826c51b92ff60ca1c2e6c9f",
+      "fingerprint": "2ab2b05dd57fa473309c3697e3930cdbc5100758423b6333b0ef17067922cbfb",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/127": {
-      "fingerprint": "f536637e12ea28d2b2d3c65982905478af583a1c9d94e87136656d9a9df0d311",
+      "fingerprint": "a7f4ec95b4dcc1e71da4e931bedbf97d1dbbd80e0152f7236b3714e7d9e48350",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/172": {
-      "fingerprint": "c653bdbd42cd1457519670eb404e1645e9227219dc12abbd81248b0e7d6ee637",
+      "fingerprint": "e0378db1dac2275c06545d73533bbe19c1f0853703f9547844e15795f8eb5a88",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/126": {
-      "fingerprint": "a3378cd6cde765eafaa386cefa7c3c664a83ee21f4733289a436bfbc40a810c5",
+      "fingerprint": "c1a8b6065e650fd79663dd9ceec00eb599e541e13bd7feb5ae22f86c4689c5eb",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/157": {
-      "fingerprint": "d523ab227d52e2e942cc1e843f229f17afbf01cf94d4775fb41309a28b1c2663",
+      "fingerprint": "86da055d651e8f5d6615e5ecc6764bcc8c395b53fa23deae3bf06916acfd8449",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/125": {
-      "fingerprint": "42a4917cdc2deb23f33ba2782e58de20a20956db45f39850553e6240f2e6cc6e",
+      "fingerprint": "c1b7c2dd8b5944862d562ba7ea2bb3920762b070e13dd9f7478d8338c28aac96",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/500": {
-      "fingerprint": "e8e88ba8419dc6644308dc7e59cadff7ee59feecda4db67ed02d24e0b715ff60",
+      "fingerprint": "21216f8a7e3b9ce4b6b2f32b6e972eb3a5b66faf457d7d26aa9e26139376d9b1",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/499": {
-      "fingerprint": "1aebc03248e3ef23dfddfc8416efc065381b5434303139ee3f8efaf72c51c42f",
+      "fingerprint": "38febc579d45fe25ac8a09f7b44ffdb81cc92c8728223f89f776fd69e691f921",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/497": {
-      "fingerprint": "ca0804fabb63ebbf159b89db8185f2556c51dbb6ca03d2a9e86051dcce305c7a",
+      "fingerprint": "837dae99b156fc2b50b00a9fc39b09dfeb4cf604c373908eba7363d0f7dab07c",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/496": {
-      "fingerprint": "6b0e717aeaf629596108a4c83043c2c3780fa4f03969045203b24218e2a2b8d9",
+      "fingerprint": "295ef880306483f92fd4b2f05b7d566f6da73f43ba588a3c725425d635644beb",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/494": {
-      "fingerprint": "2ec2f99c31e9eb467089994d9496cae27dc03a61d165f399a4eaf3120ee31ff0",
+      "fingerprint": "3eac207f5a9e7f38beb72fc4b2729e40eec6f8e34aab7581b28be4ab51316ae9",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/493": {
-      "fingerprint": "04284840ad725e9bf7d5195c0dee2eaf5601a96235e1826981a53f0e8d6f31bf",
+      "fingerprint": "1021da722f61a51c90433a2dcc6a337c1bf0e35d2ee4f7d98ef89f2187b51e1d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/490": {
-      "fingerprint": "f750de9400e4ecb1c0932b36d2f5cf8bbde899094f673da3a47d88fde2981737",
+      "fingerprint": "9f358869128f52413754315f933e2ba6fd6e58672e59414d04852ca84f01c049",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/488": {
-      "fingerprint": "3772755bd2dd16151507b926891ca133c4f19a14b859aeec573a34168f24ec96",
+      "fingerprint": "c4980d2325ef0a2a620f431ed6642a882bff73137cfea0e362b2a45407fa3433",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/487": {
-      "fingerprint": "1d5faa440ec66b7af2d1f268867f072bdecf82c5cfe22415b4174dde2aea4f78",
+      "fingerprint": "1fbe325ac3d6659455d3f0c47bd1b1c4861316df172a6268eea30ea3888249e3",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/484": {
-      "fingerprint": "ddcfa1064d13b669c07c963b8363c8b32a37e4f0bbd252f41c5074d6b5d31907",
+      "fingerprint": "32aeabdf445ade71295ed7fabdab35160814467be115326168ecb3458121191c",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/483": {
-      "fingerprint": "28482a5b7a09b28a5b9a04561046dbaef1c662faf1c8df123aecaaf9cb16b39f",
+      "fingerprint": "9309cd44c7c7c56ac21efd94565e90a94322ec760eddb2f8f2b72e94d221f199",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/481": {
-      "fingerprint": "fe8b7324e65263922e9a685815933ca360f66a7fdce2f3d30d0164ca6c4d44d2",
+      "fingerprint": "4653b600c86a838262dd5e593943def033d3de0fe73003faae17b342c857b3d1",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/479": {
-      "fingerprint": "3c11f2607f7cca24867cc71ef9670c3ce92c61911bf151c9cb2bba7ab6d9dcf7",
+      "fingerprint": "94215384edd5a4c72bb01832939ec8573d0566e9359fcd786dc758ce5a7e6a2b",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/477": {
-      "fingerprint": "d3c708cbf25d727c29a1040ed65734c9daa33ea2271b17d5eeb955f4f266f9da",
+      "fingerprint": "9748172af64e0a40e8e48d037acc1b2c4616640b8b1a5bbd6a438f284766ee5b",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/476": {
-      "fingerprint": "b5d3f7d97164957ae52937eeff88bda7f1f453dce7942c80f9f40e669bd593bb",
+      "fingerprint": "7c721c9b5d3443fba8193aa7dbe5aa3535dcfe9794f0aa6cbdd844d19d113fa8",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/474": {
-      "fingerprint": "1829a415cbd6c9ee052b267e03c5f737ab0048b60c810b6a52137d33f4813cb4",
+      "fingerprint": "2ea60280e5781fa03a80c136c1bc3b82a897976a2cddbf52c82fbddad440ddcb",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/473": {
-      "fingerprint": "93103064ff01a9c8cd6d13afadbcb6172078452247bbec2f816ca05c4271398b",
+      "fingerprint": "5411fd22c42a492c0c61a2a6a4dc93640adb1a3dab602a914795c4da23a6ea3e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "http://www.egreen.or.kr/hire/472": {
-      "fingerprint": "78ad38b8f82d4446fecf0383ac8b1a77f85e87299d219ba1d9101e0c0f4b49a0",
+      "fingerprint": "a6f7431856c6004644c6dc7956d3907e2c47995d534a1bbab423a52fb50b97f0",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=397": {
-      "fingerprint": "30d160da34f94c01f80ff25e2bc40b379f7ee3bd9bf23c5d1a573644d7d9068e",
+      "fingerprint": "daef9bacddff363b128d2ac3904772fa87dab5a246a9a3cdcafb4f1564a2cb5e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=303": {
-      "fingerprint": "54650782d56af0ba026b83f1d5be99f6cb20d9ddef671b894e4dc8062be01c3b",
+      "fingerprint": "7ab414062cf69aa8fc952d207427fd18df122511748223f6456fff0963d7bcaf",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=381": {
-      "fingerprint": "c4274d9837db3ad6a6b9945d0563b5cc9f8d9d2dc2abd00a5034b8eb8e8271cc",
+      "fingerprint": "18500bb253610a04589a5b35ebaf6dca5f1422fe6afc1410d28a828706b7df30",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=386": {
-      "fingerprint": "ff4d93921481c51d49bb48c93a5d5311c1794c8dc0168b5206fad69081f8c359",
+      "fingerprint": "ef45bc2aef03e1baf6910a0478d71bf70399def90e0a4e32c0ee1add7022e561",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=374": {
-      "fingerprint": "9fbd3651aedc0066ad4dee3ec00ee1d41ec7cc63742b5ad5b9675f8bb25abf1c",
+      "fingerprint": "fb62af014e07d6547077eb0635dc374ad6ee906fb516b8ccd20d9d750fac5d31",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=322": {
-      "fingerprint": "5aaae0f5cd7d1e5ef38b9821cab327e3b62370692557c1638d628b3429933f02",
+      "fingerprint": "0c33742368c1626b31e29d67ef46818eaa565e6babf7954161fb28dd62d6a925",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=354": {
-      "fingerprint": "5f786db7616d856e6c335cd594c9591cf8260bf7c1f91e87ba3683a90acdf295",
+      "fingerprint": "3d84256b710560e0decf5ecd4ddd31cfdc0181da1bd8c401d79fb2fcb4576f86",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=394": {
-      "fingerprint": "b79cbb49d9ab0cfd80e472733bf068af8df07774f5a2b34fa4645bce209ba18e",
+      "fingerprint": "5958585425eac8dc305ef0169547357e799ab543b43d19e3733587e7d903f6d8",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=392": {
-      "fingerprint": "017d19ae33003ddac30f169fc4fc9b53dfcc7c61c3bab2e5b3e912d63d62129e",
+      "fingerprint": "4c82664113e768b7d4a588477f783aedc44ef5f9a9e1ef57ffa4bdab0b6b7cdf",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=207": {
-      "fingerprint": "d3823ec13011dfdfe903f50328625749d190ba92b79eefb81e7315a2b744c31f",
+      "fingerprint": "c35512c1b12e8a4ade8907501ff15501fa37ba106210b2a3e5dcb284106a07ea",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=554": {
-      "fingerprint": "2ee262f3425b9c6295cd309ff37452f76edf4c5710cfd9e4c0cbc8312294fbb6",
+      "fingerprint": "2b0d438b29e3feda666744c21afaaada942370162d7f9cb710aa7dbce611c705",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=552": {
-      "fingerprint": "e0e6a10fd5f3a413f9b52b247ddb7a61b4dfb0f2adeac26747e912827e21944e",
+      "fingerprint": "66bc9396a725c0353b4d82f6735dc4d1801c73add19b2868e6e1c47fb257a6a1",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=549": {
-      "fingerprint": "4bc46504ef6767beccca766b31abbfa3e474f66e75030feab100a3188f7fce63",
+      "fingerprint": "a6cea5149d02a2d7445c82cb63e088f343a0504ec0dc34fa9b9856ef18bf5c62",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=545": {
-      "fingerprint": "33bac2c9e2281c46ed1fb1e09f1e3b9b530129546f25fb88575d64f6272c4f82",
+      "fingerprint": "22e3a0052fdcc6b287e88e3cef71aca11b67c21e00bce0a2ffc30dace4a80c5d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=543": {
-      "fingerprint": "61dd3c70759bfa57df696d60a318ac0939bb73ee0916571833033856390e9ba5",
+      "fingerprint": "96ee73c20cdd7a2ff05b78251a7fa741cdbc0e7255409806cee31d1bf601170f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=537": {
-      "fingerprint": "ce38d7f38ca6b007d9ec6ff9f54449820e9638be0af7cf0bfa157b4bc18eb632",
+      "fingerprint": "9dc2ba8c9ab722d8f4e5cda74d9e8bbbd6107568c4da6048ae3189ef4a1d83c5",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=536": {
-      "fingerprint": "d47632ae2d97ce2b9150f03d4ea065674a84dc6d38bfec962ea6aa47ce05ba76",
+      "fingerprint": "5b991163bb401c700743bd7ee2e8e9e234a230dd6db3f9242c862b753dc26d56",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=535": {
-      "fingerprint": "c3d11d31dfc539e83e7debd6343425070f2c53e32a77c35de4be9d51dd652f16",
+      "fingerprint": "deb211b7ab7693ed81e806d8eae3361b21f7f1a2e364622397310e0d5a1416cd",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://mapowelfare.or.kr/bbs/board.php?bo_table=recruitment&wr_id=532": {
-      "fingerprint": "d8f1de858eb43228c09a78ec08594d123c9b5593bb685a04c6d7adacdb2503a5",
+      "fingerprint": "41cb59b5c93fc8f03640f7118e6913cab933388b9b20d92faf09b59277e35bf8",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/601": {
-      "fingerprint": "8a82e9226e148b7b8a36cd9052387184ff9e444947605660610565f63ac84775",
+      "fingerprint": "94b2b680076d8c1d6c263db5f5068dc33c96c54bd1a9defc1fb742d620a86bfb",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/600": {
-      "fingerprint": "b925aba8735381a739a3f26ef8ddb69496788ab7da3040dd950b55a5f10276c6",
+      "fingerprint": "f864ab2da7fb6b739de774d8d0998ee9b32f432e9b3c29aeb008850fd278a9b5",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/599": {
-      "fingerprint": "ee91b4a4ff2ca8c4c8770fa34c77c8da64d2b302df0a4ce562a78644e04fab5c",
+      "fingerprint": "dd772aeee04d9aa3ae4784b9703f5bbf9092276f049db975b46887a71014e13e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/597": {
-      "fingerprint": "1a5f02fe609c1f81f152c78d1ec6d137d51d220894fa75e131732c6eaa314755",
+      "fingerprint": "013d5dafa48eea3b4c146ba25d79ab792f657f867841d46a7dfe0ebadc50e090",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/593": {
-      "fingerprint": "813f991db7be52a505a4361dd701dd39407fdc0145a7fc8956650dd448b9c7c9",
+      "fingerprint": "c095228d0a7394f9f0eaf8bfa72ecbda2da55dde0e1d2569cc4dedb5f880a51d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/589": {
-      "fingerprint": "e6a5acf786d9705f4394bfb1382e505d395a40a3cace1631356dc487b8c1e9eb",
+      "fingerprint": "e6b4aff6b227772199873ae569cf95e88632eeb2785b8372fb994b02dec98bd3",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/588": {
-      "fingerprint": "cd1fcf0b869b5b7eebd51ab98e151fe5a9a0d5c9734378c614b85bffe074fae0",
+      "fingerprint": "b5776dc47282e74b1fbee871ef35421b320b6a30df6617e30a8255be4015358b",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/587": {
-      "fingerprint": "576ca7a202bcbe07068b88e07f6f556e598b7299767758a0168bcf0825887dc4",
+      "fingerprint": "b5ead652406361395d9517c3ee0fb17973eecc61b813be2d729abdc5209e5dc0",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/586": {
-      "fingerprint": "045528fba194df9d817bab073e1b02cd933372dbe8830e173843bcd56cdcd334",
+      "fingerprint": "002eb5c98c9a4109f900900e4d4bd3aac39ef424916add25a54a4cb9f93adba0",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/582": {
-      "fingerprint": "c12fa0fd1204eaf0793fb944bb577d99bb1b0e186400d46706c54b9d57567b3b",
+      "fingerprint": "0671c925ca8fea9c1f72b296b93606ee62ee94031008e603d3a0be9a508d3f15",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/579": {
-      "fingerprint": "90ec60830cf2c376ed651f22fe71e051e3d90d0bb69759e014ebc53e3ab212d6",
+      "fingerprint": "c19da1f5ff643ccd6d8286d5796700b0c6c96219e696a6d205c5f7fcd528f50a",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/578": {
-      "fingerprint": "de93c6aab2ffdf0f71e6b626edea14065d818cff453c10bf5fb70c91d6325668",
+      "fingerprint": "aea50b0e669fc85b36d62307798cae4b6ed3079e6a81d7d64017b0b1612f3a3e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/573": {
-      "fingerprint": "08f911291e012535d09e89015f2174839a2f6ae4f6d348b48488043bb908edf8",
+      "fingerprint": "8b9df77c41741e6a280e7a6658d8372665a4fdd677706d68fe2fedd1ab9f3378",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/572": {
-      "fingerprint": "48d353ca2cfa43d1487021d7b238d565287bcadf6be82bad6c297ad1573ad5f3",
+      "fingerprint": "f716c685b9ec6aaf78c0ed405eb48a76b352f4fc126347c65d6c20849fc0f4f6",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/571": {
-      "fingerprint": "39b60a3d8011597d42046ada007a4b24bc58b816c895be29f2d7eaf83f9c955c",
+      "fingerprint": "1d2e5e488cc02bf586028fcf2a62d1751d294c6fc93a0a8108f27cecb454d485",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/566": {
-      "fingerprint": "f55748bd15a6180f029f08dddfd534c29e6f16c48e083de5fbeb4197c23b75c9",
+      "fingerprint": "39f27fa28b27ddb13c15d500c627a950a0485b6dc6688c34f4fedfac535ce4ce",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/563": {
-      "fingerprint": "efd6131c16e14b2f66e34ebb13a4f6c58fbbcb37efeb553dc7b461fda6c68895",
+      "fingerprint": "0005446107e1c23d7f2232535a17de482a05e68b0ae8d774854e536744fbe1ef",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/562": {
-      "fingerprint": "32ee94e25e7e21c4d9a0c89118f98a60a1f98047251f6a71e9732f27d530c09c",
+      "fingerprint": "b0c7e22980ad8dbd5386419f9145b71488c71cc0b1b73140dc696c0603c0a1d1",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/560": {
-      "fingerprint": "b7b5ec3e11f8d46eed6f6ac724d89ae3674eaee0a083212205ff17953da007d6",
+      "fingerprint": "eabfce093304d68ab8ded8ad2dc43c72f317466ed304e3503179ce13a229979b",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/549": {
-      "fingerprint": "d0688220b221a363fe6e9caa137e16f6e9cb71cb8c15d078a9ee04aa94628093",
+      "fingerprint": "6994206d362c20ac17db50ef6ae96a11cc45ddf00ce07890c1529913ea6d3532",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/548": {
-      "fingerprint": "530a7fbd881de845124ad4466d358e90e57dc9e9d3b21a1dcbee33e8090372dc",
+      "fingerprint": "17a7518e9c5a87c021a12bb7f1e7021bea32fb99e9039e97bb5f6a787a8286c3",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/547": {
-      "fingerprint": "70fba263d9d8b35f37126f6c02de5b7f1493439742e1eafd348affa2d1823b6a",
+      "fingerprint": "5fa839bb9ae7fdf49fa98240b08b7d5fbbab66f859fac0c6390097ebf47c6f6a",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/546": {
-      "fingerprint": "4d66cc540164e0c22bf8e7b148ecf73dde7de76f8106cc4c1498b98729c0e48b",
+      "fingerprint": "c6282095306b9f2407d8f36af099160d3ed55058f3646a3f897ca248b0e16d1d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://www.omni.or.kr/recruit2/543": {
-      "fingerprint": "a0d0c80e01ec7fb69541ef250ef3348103bbe2c7851a47063ade7c16315527f5",
+      "fingerprint": "84a700c854f4b2c7757373bf319df5d15f87c79e2c6f34771d610e759a7750a1",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=722": {
-      "fingerprint": "69d994bdf0f8a8a8a40b0f683f5146787568ba26696f6454385a3b3911e4d455",
+      "fingerprint": "b5270bc6f545eb51547cd6e45ffd64cd5ed277021b0ed6ff499de39958758f17",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=648": {
-      "fingerprint": "5e1a4f2886cc4a1ca7e3619ee48fdef853a9e9c4bf03709ebb1900fec7466bbe",
+      "fingerprint": "c70a0487a35ecce12159dd3ea79a8d5374bdceb0539f278f68d492275eca450c",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=689": {
-      "fingerprint": "47183718f6c4ab835add4ab10232db69f81b438d0a9b5a2a82a700e822ec5770",
+      "fingerprint": "9cc49c3475c70f208e06ef0fb6c71e96e0e4a835dc600169c5e917974ed33276",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=741": {
-      "fingerprint": "8c68fadd56d67c9a35f3b49ec831ee5575edaa2b62c77f0a58ca36e5ec1528dd",
+      "fingerprint": "f1c6676a7f675b3829d8bd5d7892e91e790f568f22b0501f1e01bafffd0b2e8d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=641": {
-      "fingerprint": "9f6bd7e73e7e5888659bcbb082384d5c0aa09dba3530e1c5855079e1fab1b2a0",
+      "fingerprint": "2fb5afdf2c245550aa3a61445ac960e7fa2430e374d323941d06ee5180cb9300",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=714": {
-      "fingerprint": "2ace4e834f3d1f23b4545ba363dedccf84efa60ae4249d93315f284a8e6fc662",
+      "fingerprint": "95cf4eabfa529781b819ffd76658ffa5a9ce114fea7d1b4db2cc5ee0a592d3f0",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=739": {
-      "fingerprint": "b75dac479e8589e10a24af9c0e4cc74b03b17187f97fecb5265b2d6eafab2ff3",
+      "fingerprint": "2e8377deb8549302cc1b19f290f8f289c13e0e7516b29b2a2cf83c8ea9b3e147",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=732": {
-      "fingerprint": "ad81e3663157f9c3d0f8891a94c4857556da9016c70448faa67e2f46f219fa4c",
+      "fingerprint": "5961887f7a1f37bfc00a5d50d13b7ee7299dec0be6024718720d8663c74d904a",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=677": {
-      "fingerprint": "e5c0fb6b9925993d8bb55df2a342d1d4cfc91ad44713ac75a1ad3e91e4fbd7e7",
+      "fingerprint": "005805c98e0e81c3ba979b226d10809c928bb302e65af2e0304f14c8c8acc57e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=778": {
-      "fingerprint": "5083f8a499936b6f06cd45b1f88267c6dd1ce2e69a3505c1fbf4bdd7c9cd8f33",
+      "fingerprint": "6522e14e54608381882792dd231ae6ad044fb699f171f41bb727cd352ae0c28d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=669": {
-      "fingerprint": "b3b4f93b9ac606c27262ad7e257f79445c5878a20fe8938e424645289ad395c0",
+      "fingerprint": "7d693d3c085b050c61412946a6f17633deaac14d0deeaf150df8e2ed6358143e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=856": {
-      "fingerprint": "3074cceb9b55417149f582c3eb84b0df4f549c1bb7da0ab0ce488ee270cd4c21",
+      "fingerprint": "06061635421b1dcc0df2675ad3e1a940d0cd7a2c486c6df4c51c395864142404",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1223": {
-      "fingerprint": "5ca9f8b306a56e3669dcc9a98b3f0da802f4bb88eb558f1f596a18a233bf88e4",
+      "fingerprint": "7d943f980b574d76614ddbbd57bd1eb3b317ced269abb658ec874a9a477e74d3",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1222": {
-      "fingerprint": "3ef277d91cb3352dfb1cb3144be4d64dcc0ff6c60c81537cc4755c2c686b8c60",
+      "fingerprint": "39eecc1cb0bf7151affe4b99fd59767344da62f0079304691fed1ef210e3f580",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1220": {
-      "fingerprint": "32e747a92285f2c9e0c4f8b8722e46421927fa1e579fb8bc757651cee31ae790",
+      "fingerprint": "5d0efe90d71bfe804c69a5b0060e1342295dfb933e92f9c77cfba5554840007b",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1218": {
-      "fingerprint": "2f3469c47ab1c6c11a06e6faba5a6db03cdb29b809468973cc37469af58805da",
+      "fingerprint": "82e65913dbfcf153255eaeb80cb504c4bb707109e6622bdbca06b90832dc241e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1211": {
-      "fingerprint": "069d86ae80384675031cbbb5f6869f0aa99b5e539a395c619884bf9e8de5dca6",
+      "fingerprint": "f64c8cd80075a632eff22e0eb6572afbff4feb0ba2aada6ab235363f7850b120",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1205": {
-      "fingerprint": "93f439ff48810b73a7ec1efd3a9e946e90f93c284190ec4123be8951406394e5",
+      "fingerprint": "0b0b968b76d380cb77dbc1ecb7ea73b96e8f31e6699895875788923e4ac3f316",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1204": {
-      "fingerprint": "f3b77e0b64a04721b8d1437b0d12d70693d1c316f06ba341932ea44f48debd51",
+      "fingerprint": "2330836b27142f95d019b14558fd5adf25c29b1a5d75db06d08de828263bacd2",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1203": {
-      "fingerprint": "41548cdea86aae70ef750fdb10b0ec795c3da10e7c302486f297131b8b970f3f",
+      "fingerprint": "fb2858ccf63500fa8f4236dc8dafb95d657b79bad226575c7dcc7697f5ad1c3d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1202": {
-      "fingerprint": "20e0d0161ee584dfde10af9bbd73c8c27d12a39e380bee53198b43f76d357d66",
+      "fingerprint": "6536596f08b463199976811e30023eef14603d220b4e812923b725e3d6b3c6e0",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1201": {
-      "fingerprint": "74e2f592de7ec32b651ccc121f6ed76938839e5ed1e3d0e57fd2567a475b0423",
+      "fingerprint": "5c2dac965ff7a600f52c98fec832f728388075ee60f99fcbf173a9daa607efa8",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1198": {
-      "fingerprint": "6a83b5985dc4912f10235663be6aa1074850ae05b895d9dd04cb955a9d139a57",
+      "fingerprint": "b0e297e7a4c996205c43ad772ece886bec93541f0cd5bfbe2818b6b5948e677f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1194": {
-      "fingerprint": "04bb652fdd3b3067ebe90de3665e7a5eabd43842fdf54a5e6663c7b9d55c8de0",
+      "fingerprint": "f5ce9c6cf9e41f31d4d5d599af8b4e515716ff7cfead03d65ac8c810bdef9c06",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1192": {
-      "fingerprint": "34ea9687d35b84762193210b3aa7a61f42f97b051679a7498d715e3d90e5c4c9",
+      "fingerprint": "121e7f55d75818228f635a5ec973212b7e359e4146e9f093983dab0e308b5f0a",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1189": {
-      "fingerprint": "5fa093b0e2b1de0b9aab61210eb9b938d6c745496624fd77ce64c11982faa4ef",
+      "fingerprint": "4e413cad1f11c68837a174996f175d12b512794e8521a6bf427fbd69a41c2789",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
@@ -1670,182 +1670,182 @@
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=60": {
-      "fingerprint": "d83e0705da5867a35bad371192492beb80cca2238aa5eda6ed4fde520cf0668a",
+      "fingerprint": "67dcc6c138d64b8bc9d9216d855b664c34bfde9e1208b08f8c9a3850ff20f819",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=188": {
-      "fingerprint": "0915227598d49077d0244afa4fba1530961e815039eddc01f6ea024ddf2a90a9",
+      "fingerprint": "c840ec1c79044d326ccbb47c2160ac75e6ce242b9baa23c18e78a43d6c51d149",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=164": {
-      "fingerprint": "9f7b1ae23addcb3aaa512d765a08ebe50a089cdd4d43ce2ad96636e8cc8474fb",
+      "fingerprint": "8a9ed2b4359bce77e1bc544bc3fc7329a18c9e08885b1aef1458767d4279a17f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=182": {
-      "fingerprint": "6204289572e108bb8e13c612e9bf76f42e566d46bdc53ca70257d5be9cdffd2c",
+      "fingerprint": "f54cb64dbf8f7f87f65ee1fc2f01282ff8b2c6e9e2165002697fbfb567c6433c",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=216": {
-      "fingerprint": "feb429e300f1fa52711ddbcbca11f7dee4d4fe31f4772aac61a01f9fee170ed3",
+      "fingerprint": "a4a4f2200a1d43052063ddad76362a621f3e74260fa8120c9cd7fea9e98bbe7f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=150": {
-      "fingerprint": "e17c00acf39c095e358613ba3e18bb4276575824bd75e1c8fda5bf481745984a",
+      "fingerprint": "a78fa77a538548df2938d093c19f6264d4c24f8ce6617cc8fd8695f0f820f992",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=197": {
-      "fingerprint": "622e80f21487931274af697a4e6d5a06d7a4965353e0371552b8e80cdf9853e0",
+      "fingerprint": "11fe4db89dd892ec6b9c04fe2f5c3371737498d004d98e2a1c024c75482d2629",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=166": {
-      "fingerprint": "e4974aa2561803a8bcf07e26257ff423938921b1063722ca4efd6edb2df5450a",
+      "fingerprint": "65dd3e1bb9efac0bc408abd8f03201d705a81645f56c8619d4d6378cee9bde91",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=95": {
-      "fingerprint": "e82c58e661327f5e21dd6c4bd9a37efd06e58eabe79d3d61418669350ed5913f",
+      "fingerprint": "d625df66f7f0dc583e4137dba82afada18b3f484393311e7b7d032d86ac9de90",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=351": {
-      "fingerprint": "55289c67055ae60318888ab0b1fcb3e9c2ebd19bcd9231dea2e1ad6c7b9d955a",
+      "fingerprint": "aac21e54750b0f651df5c752d0a6c76835b3e0246490c9dd09e7831f73a76057",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=347": {
-      "fingerprint": "e6e1064fa72f329e465f57ba7399a71fbf32c3bbdc63285d1b31d7bf2d85563d",
+      "fingerprint": "264ae5e8fe579dbc08ceb845f00350e2cbedcd530dccfa9f49fceb3345220f92",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=344": {
-      "fingerprint": "86f701c4913023798f85191f79e897cec2a4f85377fbba39440a26becd180c2b",
+      "fingerprint": "25cfaeb476a4201c702c34273caba48c31382826b2d2683c0128e73b6b67dc8c",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=341": {
-      "fingerprint": "b8fd61d0ceaaeeea296d66254ebbf8ea4a6411f0a04b95afd6f00b7dcb6a5432",
+      "fingerprint": "d64a85004a38680f073deee889abdb19658a6a81c5f3bed9fa9f96956c25e38d",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=339": {
-      "fingerprint": "df89c09d1147b848d7c6aa611ff0ec6f9845b3f6ff7d39e504cfdff7cb98d6b7",
+      "fingerprint": "2f15c22f2b90fbf44debdbf38ceb9f19db2d9d27e78c47b4a7c2ccb3f3bf661e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=337": {
-      "fingerprint": "d4634eab18100b3c3ac58091ab675cfa5952f7132d091abbc271689a1c110a6d",
+      "fingerprint": "4315859704a1ad0b93d2c3f28657060c8c6199ff32b69ca264ca6357a0e0d867",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=335": {
-      "fingerprint": "b54fd2d31cef832c5a3cb8da09392bc10d105661946444c5f4f604ef7050a366",
+      "fingerprint": "4bd4b45926a6e4112ea8875ce10aedccdeecd3c0b3b4c48d66f641196e645eb2",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=333": {
-      "fingerprint": "a460a35bee697429f39336d564bbf9f76896a7f22e067e95e60341441e7c2c1c",
+      "fingerprint": "d6a3704b56068a0e9c78b6875ccff985afc5ed68c7b0e2c7b7768ba91b62c1de",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=331": {
-      "fingerprint": "f70a495e87a7c518e3316c1dc04748b6b39bd517c73d3c4e1856110d91e64db8",
+      "fingerprint": "097117aea747a81ad37cb6b3c09b4fa08f1a03bcb254225a662ea8312119d345",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=328": {
-      "fingerprint": "12215b818a277735a2990ab5f6f28ef4161d4db120b82db4ed72179049544062",
+      "fingerprint": "a42d0d1fcc5f957348afcd41f49681ed4945ed6c3e29967a4bad507d6819e78c",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=325": {
-      "fingerprint": "fcbad7d8ac4cdc1b0843d71a5a8b208e49a269dfef780ec31021133af33b2601",
+      "fingerprint": "f22fad0544b5d20935b8ba7b3e332e1f0ef9b4d16af8bcee080155f9dec5d76f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=168": {
-      "fingerprint": "af751754ba89f9fccee4a142d104e3c1514a6ab9a4cbfd38b968e9443368073c",
+      "fingerprint": "a9abc71a082831a781f36185dc839875ec2ef3da6acd2e8150f1155806df6c5f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=222": {
-      "fingerprint": "0daef72137e85cf9d49976b4deac2b266718387523e3b290db92f509fcd60300",
+      "fingerprint": "3512c79f2c0cdb57b2b0d9fe56d578a85e9893ef68c0c29ade2aa56e1a150df2",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=397": {
-      "fingerprint": "2125c6044213762af88338c8402c8e22f6aee2e2cc568d53ca359ac661d862b4",
+      "fingerprint": "d1a0a0738d3aff24bada46fea16dfafb7bcd582a29df8ac23091b4d12fd4956e",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=293": {
-      "fingerprint": "37c8379a6ba0584b9fb711fcfbb8af5e2b9ebe44f4d260cf5e094f84abb535c4",
+      "fingerprint": "17e38553b489965edeffaadbf8629e4d207d8e1286aacf36c4a80a67c2f34c12",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=284": {
-      "fingerprint": "92c7266ca6cf5f660d13c42adfe76933ee4c03b718771eede23d46344e2ecf50",
+      "fingerprint": "8fb12623d59244b6b4f92af050b21e66c5a92e9e0adea26086d9095e16f548aa",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=395": {
-      "fingerprint": "13f2914ff0fa349d29f6ac0959bf853a21b2e264e65ef0a203d0faf5977652ed",
+      "fingerprint": "656f1de86c62e788323f846ff308e14639108ab86b5c911c95cbaf3cd2e48f12",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=245": {
-      "fingerprint": "13cc93f835fb3aed0108b2dd0949021d1406fa06e65f626f4db1a51e87da9bef",
+      "fingerprint": "921d28ecc430d30ee88587550e11e014ec3d032461a88d66bbc89f475522a55f",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=492": {
-      "fingerprint": "d04ce610acd93255dcaa1e3188d29db5de7b4756919987dcd1183e73244e3f4c",
+      "fingerprint": "ae4f46bcd7fdb31961a282b5f1fddaaa4eeda88a4d619f16c20b09a9d4682102",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=272": {
-      "fingerprint": "fa6d314411265e2569e1ebf56290a4edf85f3658ec86a2d7dd019a582525b950",
+      "fingerprint": "a663dcd5702791bca222c6e9bdc926c335b3810e345b3f62d82771a2063555df",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1033": {
-      "fingerprint": "a6f477d913baa280db7d7f16bb2c51b12c5bc364dad5a1e1246efd1642bd5d20",
+      "fingerprint": "4d4545b2c3e12e98861db71361e4d9574138e070d18bd1a75b16abc93c0e3dd3",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1032": {
-      "fingerprint": "8558beb3bb3c51184f12a5daf49fa1d4fd5c454cfdb6a862d083c27350d14ef0",
+      "fingerprint": "d361c77c59a41eb3dae66a557efc8986374720fbe2726573627abbe9ba7ecbc2",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1031": {
-      "fingerprint": "cbd3388784db2ae332dc24dea179ad9c76cb60b6b515b2ff99b0c031fa248f78",
+      "fingerprint": "10819520502c485f8c3f82b2da73d633e3f59237af421159c21fbc374efbedd4",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1028": {
-      "fingerprint": "45171980b959ba751b37ffd7bcf50be6a70f12f456a52469f14f5c0fdfc00919",
+      "fingerprint": "450c247ff3d2cc7d000c8df92960cbeafccae2fc24611ddae3bb6025d3002b7a",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ycsupport.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1025": {
-      "fingerprint": "34a7827ae989ccaa29f4b59978be1507901720ad39e744d0ca13d5b8bbb97750",
+      "fingerprint": "39827f0eebe555960d9f9cbc47d841d5c8381b4f9ccb08d12f2eb3814f753369",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://welfare-center.or.kr/bbs/board.php?bo_table=recruitment&wr_id=1239": {
-      "fingerprint": "face9f25841ad420c01a1a60016ebd88bf265b91ab99f9ac8f54aba602401c8d",
+      "fingerprint": "6ae7cfe7584ef8e756dfd5775777378734831882ab9d9c0775186962dd0b50ea",
       "checkedAt": "2026-11-24",
       "hasJob": false
     },
     "https://ilovenambu.or.kr/bbs/board.php?bo_table=050402&wr_id=371": {
-      "fingerprint": "edaca2c52218f5762728080664ba5f1511ca2d6bef5c92419e633a3528d74f6e",
+      "fingerprint": "52365eab567812220affdacae91e08d638dbdff9e15a817f04496d0bbe51b7a1",
       "checkedAt": "2026-11-24",
       "hasJob": false
     }
@@ -1855,10 +1855,10 @@
     "detailPagesFetched": 180,
     "cachedCandidatesSkipped": 0,
     "rejectionReasons": {
-      "unverified_target_title": 165,
-      "older_than_45_days": 5,
+      "unverified_target_title": 149,
       "not_target": 7,
-      "explicitly_closed": 1,
+      "older_than_45_days": 16,
+      "explicitly_closed": 4,
       "not_recruitment": 1
     }
   },
@@ -1874,6 +1874,30 @@
       "closeDate": "",
       "position": "사회복지사",
       "id": "65741c341ae02a6976"
+    },
+    {
+      "organization": "늘푸른나무복지관",
+      "sourceOrganization": "늘푸른나무복지관",
+      "title": "사회복지사 채용 공고 (통합돌봄서비스)",
+      "url": "http://www.egreen.or.kr/hire/514",
+      "postedAt": "2026-10-27",
+      "source": "http://www.egreen.or.kr/bbs/board.php?bo_table=hire&sop=and&sst=wr_datetime&sod=desc&sfl=&stx=&sca=&page=1",
+      "openDate": "",
+      "closeDate": "",
+      "position": "사회복지사",
+      "id": "b9918ec683ca0750b9"
+    },
+    {
+      "organization": "늘푸른나무복지관",
+      "sourceOrganization": "늘푸른나무복지관",
+      "title": "통합돌봄서비스 유급 자원봉사자(지원인력) 채용 공고 (통합돌봄서비스팀)",
+      "url": "http://www.egreen.or.kr/hire/508",
+      "postedAt": "2026-10-13",
+      "source": "http://www.egreen.or.kr/bbs/board.php?bo_table=hire&sop=and&sst=wr_datetime&sod=desc&sfl=&stx=&sca=&page=1",
+      "openDate": "",
+      "closeDate": "",
+      "position": "공고 원문 확인",
+      "id": "c7e04da8e5c9585d62"
     }
   ]
 }
