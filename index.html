@@ -74,6 +74,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
  .filters{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
  .filters #sort{display:block}
 }
+.mobile-bottom-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
 </style>
 </head>
 <body>
@@ -81,7 +82,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <main>
 <div class="topmeta"><span class="tag">서울 제공기관 통합현황</span><span class="updated" id="updated">자료 확인일 확인 중</span><button id="installApp" class="install-app" hidden type="button">앱 설치</button></div>
 <nav class="nav" aria-label="주요 메뉴">
- <button class="active" data-view="directory">기관 찾기</button><button data-view="statistics">통계</button><button type="button" id="jobsNav">채용공고</button>
+ <button class="active" data-view="directory">기관 찾기</button><button data-view="statistics">통계</button>
 </nav>
 
 <section class="dashboard" aria-label="앱 홈 요약"><div class="dashboard-head"><div><p class="dashboard-desc" id="dashboardUpdated">기관 정보 불러오는 중</p></div><button id="installQuick" class="install-app" type="button" hidden>설치</button></div><div class="dashboard-stats"><div class="dashboard-stat"><span>등록 기관</span><strong id="homeTotal">—</strong></div><div class="dashboard-stat"><span>주간 개별</span><strong id="homeIndividual">—</strong></div><div class="dashboard-stat"><span>확인된 연락처</span><strong id="homePhones">—</strong></div></div></section>
@@ -102,7 +103,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
  <div id="supportContacts" class="cards"></div>
 </section>
 
-<nav class="mobile-bottom-nav" aria-label="하단 주요 메뉴"><button type="button" class="active" data-view="directory"><span class="nav-icon" aria-hidden="true">⌕</span>기관 찾기</button><button type="button" data-view="statistics"><span class="nav-icon" aria-hidden="true">▥</span>운영현황</button><button type="button" id="mobileJobsNav"><span class="nav-icon" aria-hidden="true">▤</span>채용공고</button></nav>
+<nav class="mobile-bottom-nav" aria-label="하단 주요 메뉴"><button type="button" class="active" data-view="directory"><span class="nav-icon" aria-hidden="true">⌕</span>기관 찾기</button><button type="button" data-view="statistics"><span class="nav-icon" aria-hidden="true">▥</span>운영현황</button></nav>
 <footer>통합돌봄서비스(서울) · 기관 정보는 확인일과 출처를 함께 관리합니다.</footer>
 </main>
 <script>
@@ -120,7 +121,7 @@ function setup(){['#district','#formDistrict'].forEach(sel=>{const el=$(sel);if(
 function saveLocal(){localStorage.setItem('careSeoulRecords',JSON.stringify(records.map(cleanRecord)));render()}
 function switchView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button,.mobile-bottom-nav button[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.nav button[data-view],.mobile-bottom-nav button[data-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
-document.getElementById('jobsNav')?.addEventListener('click',()=>{window.location.href='./jobs.html'});document.getElementById('mobileJobsNav')?.addEventListener('click',()=>{window.location.href='./jobs.html'});
+
 document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.goto)));
 function card(r,manage=false){const lv=level(r),base=baseRecords.find(x=>x.id===r.id)||baseRecords.find(x=>x.name===r.name),rawAddress=String(r.address||'').trim(),addr=(rawAddress&&rawAddress!=='주소 미등록'?rawAddress:(base&&base.address?base.address:'주소 미등록')),addrSource=r.addressSource||(base&&base.addressSource)||'';return '<article class="orgcard"><div class="orgtop"><h3>'+esc(r.name)+'</h3><span class="status '+lv[1]+'">'+lv[0]+'</span></div><div class="orgmeta">'+esc(r.district||'자치구 미확인')+' · '+esc(r.type||'유형 미확인')+'</div><div class="addressline"><span class="pin">⌖</span><span class="address-text"><strong>주소</strong> · '+esc(addr)+(addrSource?'<span class="address-source">주소 출처: '+esc(addrSource)+'</span>':'')+'</span></div><div class="numbers"><div class="number"><b>'+val(r.userCapacity)+'</b><span>이용인 정원</span></div><div class="number"><b>'+val(r.userCurrent)+'</b><span>이용인 현원</span></div></div>'+(Array.isArray(r.publicFigures)&&r.publicFigures.length?'<div class="notice"><strong>공개자료 참고 수치</strong>'+r.publicFigures.map(item=>'<div>'+esc(item.label)+' '+esc(item.count)+'명 · '+esc(item.period)+' · '+(/^https:\/\//.test(item.url||'')?'<a target="_blank" rel="noopener" href="'+esc(item.url)+'">'+esc(item.source)+'</a>':esc(item.source))+'</div>').join('')+'</div>':'')+'<div class="contactline"><div><strong>대표번호</strong><span>'+(r.phone?'<a href="tel:'+tel(r.phone)+'">'+esc(r.phone)+'</a>':'미확인')+'</span></div><div><strong>'+esc(r.teamName||"통합돌봄 담당팀")+'</strong><span>'+(r.teamPhone?'<a href="tel:'+tel(r.teamPhone)+'">'+esc(r.teamPhone)+'</a>':'미확인')+'</span></div><div><strong>담당자·팀장 직통번호</strong><span>'+(r.direct?'<a href="tel:'+tel(r.direct)+'">'+esc(r.direct)+'</a>':'미확인')+'</span></div></div><p class="orgfoot">담당자 '+esc(r.manager||'미등록')+' · 확인일 '+esc(r.verified||'미등록')+'</p><div class="actions">'+'<a target="_blank" rel="noopener" href="'+esc(mapUrl(r))+'">네이버 지도</a>'+(manage?'<button type="button" onclick="editRecord(\''+esc(r.id)+'\')">수정</button><button type="button" onclick="deleteRecord(\''+esc(r.id)+'\')">삭제</button>':'')+'</div><p class="orgfoot">'+esc(r.status||'운영 확인 상태 미기재')+(r.source?' · 출처 '+esc(r.source):'')+(r.sourceUrl?' · <a target="_blank" rel="noopener" href="'+esc(r.sourceUrl)+'">원문</a>':'')+'</p></article>'}
 function render(){
