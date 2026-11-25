@@ -1,5 +1,5 @@
 {
-  "lastChecked": "2026-11-24T21:31:15+00:00",
+  "lastChecked": "2026-11-25T02:23:46+00:00",
   "sourcePolicy": "기관 공식 채용게시판과 등록된 사회복지 전문 채용게시판(복지넷, 한국사회복지사협회, 서울시장애인복지관협회)을 함께 확인합니다. 외부 게시판은 통합돌봄서비스 관련 원문 공고만 선별합니다.",
   "filterPolicy": "최중증 발달장애인 통합돌봄 관련 최근 채용공고를 수집하며 접수기간은 필수 확인 조건이 아닙니다. 최근 45일 이내 등록된 공고를 표시합니다.",
   "sourceCount": 13,
@@ -20,7 +20,7 @@
       "organization": "성동장애인종합복지관",
       "url": "https://www.omni.or.kr/",
       "status": "ok",
-      "itemsFound": 34
+      "itemsFound": 35
     },
     {
       "organization": "다운복지관",
@@ -56,7 +56,7 @@
       "organization": "복지넷",
       "url": "https://www.bokji.net/job/off/01.bokji",
       "status": "error",
-      "message": "HTTPConnectionPool(host='bokji.net', port=80): Max retries exceeded with url: /job/off/01.bokji (Caused by ConnectTimeoutError(<HTTPConnection(host='bokji.net', port=80) at 0x79e90"
+      "message": "HTTPConnectionPool(host='bokji.net', port=80): Max retries exceeded with url: /job/off/01.bokji (Caused by ConnectTimeoutError(<HTTPConnection(host='bokji.net', port=80) at 0x78f9d"
     },
     {
       "organization": "한국사회복지사협회",
@@ -74,7 +74,7 @@
       "organization": "정립회관",
       "url": "http://www.jeongnip.or.kr/",
       "status": "error",
-      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x79e"
+      "message": "HTTPConnectionPool(host='www.jeongnip.or.kr', port=80): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPConnection(host='www.jeongnip.or.kr', port=80) at 0x78f"
     },
     {
       "organization": "도봉장애인종합복지관",
@@ -891,12 +891,12 @@
     },
     "http://www.egreen.or.kr/hire/517": {
       "fingerprint": "56d6d9bd651173467ae30024bf4c1ca31b89ee3de3abfd946e24ba66c136b1e8",
-      "checkedAt": "2026-11-24",
+      "checkedAt": "2026-11-25",
       "hasJob": true
     },
     "http://www.egreen.or.kr/hire/514": {
       "fingerprint": "3897d5e7c40c3c41c759aaa259b2dec9d90ae6c2c104ba280fd25d4aa60948a4",
-      "checkedAt": "2026-11-24",
+      "checkedAt": "2026-11-25",
       "hasJob": true
     },
     "http://www.egreen.or.kr/hire/513": {
@@ -916,7 +916,7 @@
     },
     "http://www.egreen.or.kr/hire/508": {
       "fingerprint": "356ce1afab85e4540c0ca517d7f5a7204d0224c8a5f57c99022e1f3a17227410",
-      "checkedAt": "2026-11-24",
+      "checkedAt": "2026-11-25",
       "hasJob": true
     },
     "http://www.egreen.or.kr/hire/507": {
@@ -1848,18 +1848,19 @@
       "fingerprint": "52365eab567812220affdacae91e08d638dbdff9e15a817f04496d0bbe51b7a1",
       "checkedAt": "2026-11-24",
       "hasJob": false
+    },
+    "https://www.omni.or.kr/recruit2/621": {
+      "fingerprint": "5a9190fd33619ad79a4e80864d9d496de811dab3c526f18777e1952074dd11db",
+      "checkedAt": "2026-11-25",
+      "hasJob": false
     }
   },
   "stats": {
-    "candidateCount": 180,
-    "detailPagesFetched": 180,
-    "cachedCandidatesSkipped": 0,
+    "candidateCount": 181,
+    "detailPagesFetched": 4,
+    "cachedCandidatesSkipped": 177,
     "rejectionReasons": {
-      "unverified_target_title": 149,
-      "not_target": 7,
-      "older_than_45_days": 16,
-      "explicitly_closed": 4,
-      "not_recruitment": 1
+      "unverified_target_title": 1
     }
   },
   "jobs": [
